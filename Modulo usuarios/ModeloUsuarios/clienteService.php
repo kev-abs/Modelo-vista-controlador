@@ -8,12 +8,13 @@ class ClienteService {
         return json_decode($respuesta, true);
     }
 
-    public function agregarCliente($nombre, $correo, $contrasena, $documento) {
+    public function agregarCliente($nombre, $correo, $contrasena, $documento, $telefono) {
         $datosPost = array(
             "nombre"     => $nombre,
             "correo"     => $correo,
             "contrasena" => $contrasena,
-            "documento"  => $documento
+            "documento"  => $documento,
+            "telefono" => $telefono
         );
 
         $data_json_post = json_encode($datosPost);
