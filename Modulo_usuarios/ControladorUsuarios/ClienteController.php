@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../Modelo/clienteService.php';
+require_once __DIR__ . '/../ModeloUsuarios/clienteService.php';
 
 class ClienteController {
     private $clienteService;
@@ -15,8 +15,8 @@ class ClienteController {
             $nombre     = trim($_POST["nombre"] ?? '');
             $correo     = trim($_POST["correo"] ?? '');
             $contrasena = trim($_POST["contrasena"] ?? '');
-            $documento = trim($POST["documento"] ?? '');
-            $telefono = trim($POST["telefono"] ?? '' );
+            $documento = trim($_POST["documento"] ?? '');
+            $telefono = trim($_POST["telefono"] ?? '' );
 
             if (!empty($nombre) && !empty($correo) && !empty($contrasena) && !empty($documento) && !empty($telefono)) {
                 $resultado = $this->clienteService->agregarCliente($nombre, $correo, $contrasena, $documento, $telefono);
@@ -33,6 +33,6 @@ class ClienteController {
 
         $clientes = $this->clienteService->obtenerClientes();
 
-        require __DIR__ . '/../vista/clientes.php';
+        require __DIR__ . '/../VistaUsuarios/clientes.php';
     }
 }

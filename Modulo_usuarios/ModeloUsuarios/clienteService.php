@@ -39,7 +39,7 @@ class ClienteService {
 
         curl_close($proceso);
 
-        // ✅ Retorno consistente
+        // Retorno consistente
         if ($http_code >= 200 && $http_code < 300) {
             return ["success" => true, "response" => json_decode($respuestapet, true)];
         } else {
