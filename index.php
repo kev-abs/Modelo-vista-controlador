@@ -21,3 +21,8 @@ if (method_exists($controlador, $action)) {
 } else {
     echo "La acción '$action' no existe en el controlador '$controller'.";
 }
+
+require_once __DIR__ . '/Controlador/PedidoController.php';
+
+$controller = new PedidoController();
+$controller->manejarPedido();
