@@ -1,5 +1,6 @@
 <?php 
 require_once __DIR__ . '/../Modelo/IngresoCompraService.php';
+require_once __DIR__ . "/../Confi/Confi.php";
 
 class IngresoCompraController {
     private $ingresoCompraService;
@@ -7,6 +8,11 @@ class IngresoCompraController {
     public function __construct() {
         $this->ingresoCompraService = new IngresoCompraService();
     }
+
+    public function index() {
+        require __DIR__ . '/../Vista/IngresoCompraVista.php';
+    }
+
 
     public function manejarPeticion() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -19,7 +25,7 @@ class IngresoCompraController {
     private function listarIngresos() {
         $ingresos = $this->ingresoCompraService->obtenerIngresoCompras();
         $mensaje = '';
-        require __DIR__ . '/../Vista/IngresoCompra.php';
+        require __DIR__ . '/../Vista/IngresoCompraVista.php';
     }
 
     public function nuevoingreso() {
@@ -32,8 +38,7 @@ class IngresoCompraController {
 
             $mensaje = $resultado['mensaje'] ?? '';
             $ingresos = $this->ingresoCompraService->obtenerIngresoCompras();
-
-            require __DIR__ . '/../Vista/IngresoCompra.php';
+            require __DIR__ . '/../Vista/IngresoCompraVista.php';
         }
     }
 }

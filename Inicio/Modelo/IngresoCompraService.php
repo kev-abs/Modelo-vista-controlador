@@ -1,6 +1,11 @@
 <?php 
 class IngresoCompraService{
-    private $apiUrl = "http://localhost:8080/ingresocompra";
+    private $apiUrl;
+
+    public function __construct() {
+        global $urlIngresoCompra;
+        $this->apiUrl = $urlIngresoCompra;
+    }
 
     public function obtenerIngresoCompras(){ //Get
         $response = file_get_contents($this->apiUrl);
