@@ -61,18 +61,18 @@
     <div class="container">
       <h2 class="fw-bold mb-4">Accede a los módulos</h2>
       <div class="row g-3 justify-content-center">
-        <div class="col-md-3">
-          <a href="/usuarios.php" class="btn btn-dark w-100 py-3">Usuarios</a>
-        </div>
-        <div class="col-md-3">
-          <a href="?modulo=ventas" class="btn btn-dark w-100 py-3">Ventas</a>
-        </div>
-        <div class="col-md-3">
-          <a href="?modulo=inventario" class="btn btn-dark w-100 py-3">Inventario</a>
-        </div>
-        <div class="col-md-3">
-          <a href="?modulo=productos" class="btn btn-dark w-100 py-3">Productos</a>
-        </div>
+        <?php if (!empty($modulos)): ?>
+          <?php foreach ($modulos as $modulo): ?>
+            <div class="col-md-3">
+              <a href="<?= $modulo['ruta'] ?>" class="btn btn-dark w-100 py-3">
+                <?= htmlspecialchars($modulo['label']) ?>
+              </a>
+            </div>
+          <?php endforeach; ?>
+        <?php else: ?>
+          <p>No hay módulos disponibles.</p>
+        <?php endif; ?>
+      </div>
       </div>
     </div>
   </section>

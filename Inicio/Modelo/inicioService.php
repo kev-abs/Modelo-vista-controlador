@@ -5,10 +5,22 @@ class ModeloInicio {
 
     public function __construct() {
         $this->modulos = [
-            "usuarios"   => "/../../usuarios.php",
-            "ventas"     => "ventas",
-            "inventario" => "inventario",
-            "productos"  => "productos"
+            'cliente' => [
+                'label' => 'Usuarios',
+                'ruta'  => 'index.php?Controller=cliente'
+            ],
+            'ventas' => [
+                'label' => 'Ventas',
+                'ruta'  => 'index.php?controller=ventas'
+            ],
+            'inventario' => [
+                'label' => 'Inventario',
+                'ruta'  => 'index.php?controller=inventario'
+            ],
+            'productos' => [
+                'label' => 'Productos',
+                'ruta'  => 'index.php?controller=productos'
+            ]
         ];
     }
 

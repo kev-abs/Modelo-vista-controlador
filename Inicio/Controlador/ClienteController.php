@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . "/../Modelo/clienteService.php";
-require_once __DIR__ . "/../../Confi.php";
+require_once __DIR__ . "/../Confi/Confi.php";
 
 class ClienteController {
     private $clienteService;
@@ -9,6 +9,9 @@ class ClienteController {
         $this->clienteService = new ClienteService();
     }
 
+    public function index() {
+        require './Inicio/Vista/clienteVista.php';
+    }
 
 
     public function manejarPeticion() {
