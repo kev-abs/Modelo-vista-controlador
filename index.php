@@ -18,6 +18,12 @@ switch ($controller) {
         require_once './Inicio/Controlador/IngresoCompraController.php';
         $controlador = new IngresoCompraController();
         break;
+
+     case 'ventas':
+        require_once './Inicio/Controlador/PedidoController.php';
+        $controlador = new PedidoController();
+        break;
+
 }
 
 // Ejecuta la acción
@@ -27,7 +33,3 @@ if (method_exists($controlador, $action)) {
     echo "La acción '$action' no existe en el controlador '$controller'.";
 }
 
-require_once __DIR__ . '/Controlador/PedidoController.php';
-
-$controller = new PedidoController();
-$controller->manejarPedido();
