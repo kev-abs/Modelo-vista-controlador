@@ -13,6 +13,11 @@ switch ($controller) {
         require_once './Inicio/Controlador/inicioController.php';
         $controlador = new InicioController();
         break;
+    
+    case 'inventario':
+        require_once './Inicio/Controlador/IngresoCompraController.php';
+        $controlador = new IngresoCompraController();
+        break;
 }
 
 // Ejecuta la acción

@@ -15,7 +15,7 @@ class ModeloInicio {
             ],
             'inventario' => [
                 'label' => 'Inventario',
-                'ruta'  => 'index.php?controller=inventario'
+                'ruta'  => 'index.php?Controller=inventario'
             ],
             'productos' => [
                 'label' => 'Productos',
