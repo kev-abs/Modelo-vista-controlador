@@ -9,9 +9,6 @@ class ClienteController {
         $this->clienteService = new ClienteService();
     }
 
-    public function index() {
-        require './Inicio/Vista/clienteVista.php';
-    }
 
 
     public function manejarPeticion() {
