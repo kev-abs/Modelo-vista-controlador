@@ -1,11 +1,19 @@
 <?php
 class ClienteService {
-    private $apiUrl = "http://localhost:8080/clientes";
+    private $apiUrl;
+
+    public function __construct() {
+        global $urlCliente;
+        $this->apiUrl = $urlCliente;
+    }
+
 
     public function obtenerClientes() {
-        $respuesta = @file_get_contents($this->apiUrl);
-        if ($respuesta === FALSE) return false;
-        return json_decode($respuesta, true);
+        $respuesta = file_get_contents($this->apiUrl);
+        if ($respuesta === FALSE) {
+            return ["success" => false, "error" => "Error al conectar con la API: {$this->apiUrl}"];
+        }
+        return ["success" => true, "data" => json_decode($respuesta, true)];
     }
 
     public function agregarCliente($nombre, $correo, $contrasena, $documento, $telefono) {

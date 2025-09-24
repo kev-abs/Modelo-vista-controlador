@@ -1,5 +1,6 @@
 <?php
-require_once __DIR__ . '/../ModeloUsuarios/clienteService.php';
+require_once __DIR__ . "/../Modelo/clienteService.php";
+require_once __DIR__ . "/../../Confi.php";
 
 class ClienteController {
     private $clienteService;
@@ -7,6 +8,8 @@ class ClienteController {
     public function __construct() {
         $this->clienteService = new ClienteService();
     }
+
+
 
     public function manejarPeticion() {
         $mensaje = "";
@@ -31,8 +34,10 @@ class ClienteController {
             }
         }
 
-        $clientes = $this->clienteService->obtenerClientes();
+        $resultado = $this->clienteService->obtenerClientes();
+        $clientes = $resultado["data"] ?? [];
 
-        require __DIR__ . '/../VistaUsuarios/clientes.php';
+
+        require __DIR__ . '/../Vista/clienteVista.php';
     }
 }
