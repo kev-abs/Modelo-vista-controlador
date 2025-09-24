@@ -2,12 +2,12 @@
 class IngresoCompraService{
     private $apiUrl = "http://localhost:8080/ingresocompra";
 
-    public function obtenerIngresoCompras(){
+    public function obtenerIngresoCompras(){ //Get
         $response = file_get_contents($this->apiUrl);
             return json_decode($response, true);
         }
 
-         public function nuevoingreso($idEmpleado, $idProveedor, $total) {
+         public function nuevoingreso($idEmpleado, $idProveedor, $total) { //Post
         $nuevoIngreso = array(
             "id_Empleado"   => (int)$idEmpleado,
             "id_Proveedor"  => (int)$idProveedor,
@@ -42,5 +42,10 @@ class IngresoCompraService{
             return ["error" => true, "mensaje" => "Error al registrar el ingreso de compra. Código HTTP: $http_code"];
         }
     }
+
+
+
+
+    
 
 }
