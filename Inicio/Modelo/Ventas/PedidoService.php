@@ -1,4 +1,6 @@
 <?php
+
+
 class PedidoService {
     private $apiUrl;
 
@@ -60,7 +62,7 @@ class PedidoService {
             "total"        => $total
         ]);
 
-        $url = $this->apiUrl . "/" . $id_Pedido; // http://localhost:8080/pedido/5
+        $url = $this->apiUrl . "/" . $id_Pedido;
 
         $proceso = curl_init($url);
         curl_setopt($proceso, CURLOPT_CUSTOMREQUEST, "PUT");

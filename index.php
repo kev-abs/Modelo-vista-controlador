@@ -3,8 +3,9 @@ $controller = isset($_GET['Controller']) ? $_GET['Controller'] : 'inicio';
 $action = isset($_GET['action']) ? $_GET['action'] : 'manejarPeticion';
 
 switch ($controller) {
-    case 'cliente':
-        require_once './Inicio/Controlador/ClienteController.php';
+    
+    case 'usuarios': 
+        require_once __DIR__ . '/Inicio/Controlador/Usuarios/ClienteController.php';
         $controlador = new ClienteController();
         break;
 
@@ -15,12 +16,12 @@ switch ($controller) {
         break;
     
     case 'inventario':
-        require_once './Inicio/Controlador/IngresoCompraController.php';
+        require_once './Inicio/Controlador/Inventario/IngresoCompraController.php';
         $controlador = new IngresoCompraController();
         break;
-
+    
     case 'ventas':
-        require_once './Inicio/Controlador/PedidoController.php';
+        require_once './Inicio/Controlador/Ventas/PedidoController.php';
         $controlador = new PedidoController();
         break;
 
@@ -32,4 +33,4 @@ if (method_exists($controlador, $action)) {
 } else {
     echo "La acción '$action' no existe en el controlador '$controller'.";
 }
-
+?>

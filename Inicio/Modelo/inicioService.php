@@ -5,9 +5,9 @@ class ModeloInicio {
 
     public function __construct() {
         $this->modulos = [
-            'cliente' => [
+            'usuarios' => [
                 'label' => 'Usuarios',
-                'ruta'  => 'index.php?Controller=cliente'
+                'ruta'  => 'index.php?Controller=usuarios'
             ],
             'ventas' => [
                 'label' => 'Ventas',
