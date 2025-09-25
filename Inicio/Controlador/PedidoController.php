@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../Modelo/PedidoService.php';
+require_once __DIR__ . '/../Confi/Confi.php';
 
 class PedidoController {
 

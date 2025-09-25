@@ -19,7 +19,7 @@ switch ($controller) {
         $controlador = new IngresoCompraController();
         break;
 
-     case 'ventas':
+    case 'ventas':
         require_once './Inicio/Controlador/PedidoController.php';
         $controlador = new PedidoController();
         break;

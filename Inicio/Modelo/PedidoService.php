@@ -1,11 +1,18 @@
 <?php
 class PedidoService {
-    private $apiUrl = "http://localhost:8080/pedido";
+    private $apiUrl;
+
+    public function __construct() {
+        global $urlPedido;
+        $this->apiUrl = $urlPedido;
+    }
 
     public function obtenerPedidos() {
-    $respuesta = @file_get_contents($this->apiUrl);
-    if ($respuesta === FALSE) return false;
-    return json_decode($respuesta, true);
+        $respuesta = file_get_contents($this->apiUrl);
+        if ($respuesta === FALSE) {
+            return false; 
+        }
+        return json_decode($respuesta, true); 
     }
 
     public function agregarPedidos($id_Cliente, $fecha_Pedido, $estado, $total) {
