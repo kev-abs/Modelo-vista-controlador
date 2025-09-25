@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Inicio - KSHOP</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
   <style>
     body {
@@ -18,17 +19,34 @@
 </head>
 <body>
 
-<!-- ENCABEZADO -->
+  <!-- ENCABEZADO -->
 <header class="bg-white sticky-top py-3 border-bottom shadow-sm">
   <div class="container d-flex flex-wrap justify-content-between align-items-center">
+
+    <!-- LOGO -->
     <div class="d-flex align-items-center">
-      <img src="Imagenes/logo_kshopsinfondo.png" alt="Logo K-Shop" width="83" class="me-2">
-      <a class="navbar-brand fw-bold fs-4 text-dark">K-SHOP</a>
+      <img src="../Imagenes/logo_kshopsinfondo.png" alt="Logo K-Shop" width="83" height="" class="me-2">
+      <a href="../index.php" class="text-decoration-none fs-7 fw-bold text-dark">K-SHOP</a>
     </div>
-    <nav class="nav nav-pills">
-      <a class="nav-link text-dark" href="#">Inicio</a>
-      <a class="nav-link text-dark" href="#">Nosotros</a>
-      <a class="nav-link text-dark" href="#">Contacto</a>
+
+    <!-- BARRA DE BÚSQUEDA CENTRADA (invisible en móvil) -->
+    <form class="mx-auto d-none d-md-block w-50" action="/buscar" method="GET">
+      <input type="text" class="form-control" name="q" placeholder="Buscar productos...">
+    </form>
+
+    <!-- MENÚ NAVEGACIÓN -->
+    <nav class="d-flex align-items-center gap-3">
+      <a href="./Productos.php" class="nav-link text-dark">Productos</a>
+      <a href="./servicios.php" class="nav-link text-dark">Servicios</a>
+      <!-- CARRITO -->
+      <a href="./carrito.php" class="btn btn-outline-dark border-0">
+        <i class="bi bi-cart-fill"></i>
+      </a>
+
+      <!-- INICIAR SESIÓN -->
+      <a href="./Iniciarsesion.php" class="btn btn-outline-dark border-0 text-dark">
+        <i class="bi bi-person-circle me-1"></i>Iniciar Sesión
+      </a>
     </nav>
   </div>
 </header>

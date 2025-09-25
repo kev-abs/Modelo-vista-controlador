@@ -10,7 +10,7 @@ class PedidoController {
         $this->pedidoService = new PedidoService();
     }
 
-    public function manejarPedido() {
+    public function manejarPeticion() {
     $mensaje = "";
     $Pedidos = $this->pedidoService->obtenerPedidos();
 
