@@ -1,5 +1,5 @@
 <?php
-require_once "./Inicio/Modelo/Logueo/VerificarUsuarios.php";
+require_once __DIR__ . "../../../Modelo/Logueo/VerificarUsuarios.php";
 
 class LoginController {
     public function mostrarFormulario() {

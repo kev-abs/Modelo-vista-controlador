@@ -15,8 +15,8 @@
 
     <!-- LOGO -->
     <div class="d-flex align-items-center">
-      <img src="../Imagenes/logo_kshopsinfondo.png" alt="Logo K-Shop" width="83" height="" class="me-2">
-      <a href="../../../index.php" class="text-decoration-none fs-7 fw-bold text-dark">K-SHOP</a>
+      <img src="Inicio\Public\Imagenes\logo_kshopsinfondo.png" alt="Logo K-Shop" width="83" height="" class="me-2">
+      <a href="index.php" class="text-decoration-none fs-7 fw-bold text-dark">K-SHOP</a>
     </div>
 
     <!-- BARRA DE BÚSQUEDA CENTRADA (invisible en móvil) -->
@@ -34,7 +34,7 @@
       </a>
 
       <!-- INICIAR SESIÓN -->
-      <a href="./Iniciarsesion.php" class="btn btn-outline-dark border-0 text-dark">
+      <a href="index.php?Controller=login" class="btn btn-outline-dark border-0 text-dark">
         <i class="bi bi-person-circle me-1"></i>Iniciar Sesión
       </a>
     </nav>
@@ -51,7 +51,7 @@
       <h2 class="card-title text-center mb-4 fw-bold text-dark">Iniciar Sesión</h2>
 
       <!-- Formulario -->
-      <form action="../../Controlador/Logueo/LoginController.php" method="POST" class="d-flex flex-column gap-3">
+      <form action="../../Controlador/Usuarios/Paneles/PanelController.php" method="POST" class="d-flex flex-column gap-3">
 
         <!-- Email -->
         <div class="input-group">
