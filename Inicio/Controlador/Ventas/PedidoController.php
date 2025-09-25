@@ -47,9 +47,7 @@ class PedidoController {
                 }
             }
         }
-
-    require __DIR__ . '/../../Vista/Venta/PedidoVista.php';
-
+    include __DIR__ . '/../../Vista/Venta/PedidoVista.php';
     }   
     
 }
