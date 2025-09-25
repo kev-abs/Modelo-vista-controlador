@@ -6,17 +6,6 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
-  <style>
-    body {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-    
-    main {
-      flex: 1;
-    }
-  </style>
 </head>
 <body>
 
@@ -26,7 +15,7 @@
 
     <!-- LOGO -->
     <div class="d-flex align-items-center">
-      <img src="../Public/Imagenes/logo_kshopsinfondo.png" alt="Logo K-Shop" width="83" height="" class="me-2">
+      <img src="Inicio/Public/Imagenes/logo_kshopsinfondo.png" alt="Logo K-Shop" width="83" height="" class="me-2">
       <a href="../../index.php" class="text-decoration-none fs-7 fw-bold text-dark">K-SHOP</a>
     </div>
 
@@ -58,21 +47,21 @@
 <div id="carouselKshop" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="../Public/Imagenes/ropa caballero.jpeg" class="d-block w-100 object-fit-cover" alt="Caballeros" style="height: 80vh;">
+      <img src="Inicio\Public\Imagenes\ropa caballero.jpeg" class="d-block w-100 object-fit-cover" alt="Caballeros" style="height: 80vh;">
       <div class="carousel-caption d-none d-md-block">
         <h2 class="fw-bold text-light text-shadow">Bienvenido a K-Shop</h2>
         <p class="text-light">¡Donde puedes encontrar tus gustos sin tanto andar!</p>
       </div>
     </div>
     <div class="carousel-item">
-      <img src="../Public/Imagenes/ropa dama.jpg" class="d-block w-100 object-fit-cover" alt="Damas" style="height: 80vh;">
+      <img src="Inicio\Public\Imagenes\ropa dama.jpg" class="d-block w-100 object-fit-cover" alt="Damas" style="height: 80vh;">
       <div class="carousel-caption d-none d-md-block">
         <h2 class="fw-bold text-light text-shadow">Moda femenina</h2>
         <p class="text-light">Tu estilo ideal está aquí</p>
       </div>
     </div>
     <div class="carousel-item">
-      <img src="../Public/Imagenes/ropa niño.jpg" class="d-block w-100 object-fit-cover" alt="Niños" style="height: 80vh;">
+      <img src="Inicio\Public\Imagenes\ropa niño.jpg" class="d-block w-100 object-fit-cover" alt="Niños" style="height: 80vh;">
       <div class="carousel-caption d-none d-md-block">
         <h2 class="fw-bold text-light text-shadow">Moda infantil</h2>
         <p class="text-light">Para los más pequeños de casa</p>
@@ -80,6 +69,50 @@
     </div>
   </div>
 </div>
+
+  <!-- INFORMACIÓN DESTACADA -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="fw-bold">¿Por qué elegirnos?</h2>
+        <p class="text-muted">En K-Shop, tu satisfacción es nuestra prioridad</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-4 text-center">
+          <i class="bi bi-truck fs-1 text-warning"></i>
+          <h5 class="mt-3">Envíos rápidos</h5>
+          <p>Realizamos entregas el mismo día en zonas seleccionadas. Tu pedido llega cuando lo necesitas.</p>
+        </div>
+        <div class="col-md-4 text-center">
+          <i class="bi bi-patch-check-fill fs-1 text-warning"></i>
+          <h5 class="mt-3">Calidad garantizada</h5>
+          <p>Productos seleccionados con altos estándares de calidad para que siempre luzcas increíble.</p>
+        </div>
+        <div class="col-md-4 text-center">
+          <i class="bi bi-heart-fill fs-1 text-warning"></i>
+          <h5 class="mt-3">Atención personalizada</h5>
+          <p>Nuestro equipo está disponible para ayudarte a elegir lo mejor para ti o para regalar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE NOSOTROS -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <img src="Inicio\Public\Imagenes\tienda_cajera.jpg" class="img-fluid rounded shadow" alt="Nuestro equipo">
+        </div>
+        <div class="col-md-6">
+          <h3 class="fw-bold">Sobre K-Shop</h3>
+          <p>Somos una tienda de moda colombiana comprometida con la diversidad y el estilo. En K-Shop creemos que vestirse bien es una forma de expresar quiénes somos. Nos dedicamos a ofrecer ropa de excelente calidad a precios accesibles para todas las edades.</p>
+          <p>Con más de 10 años en el mercado, hemos aprendido a escuchar a nuestros clientes y evolucionar con sus necesidades.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
 
   <!-- ACCESO A MÓDULOS -->
   <section class="py-5 text-center">
