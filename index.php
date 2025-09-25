@@ -22,7 +22,7 @@ switch ($controller) {
      case 'ventas':
         require_once './Inicio/Controlador/PedidoController.php';
         $controlador = new PedidoController();
-        break;
+        break;s
 
 }
 
@@ -32,4 +32,3 @@ if (method_exists($controlador, $action)) {
 } else {
     echo "La acción '$action' no existe en el controlador '$controller'.";
 }
-
