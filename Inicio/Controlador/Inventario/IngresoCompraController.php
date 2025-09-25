@@ -9,36 +9,43 @@ class IngresoCompraController {
         $this->ingresoCompraService = new IngresoCompraService();
     }
 
-    public function index() {
-        require __DIR__ . '/../../Vista/Inventario/IngresoCompraVista.php';
-    }
-
-
-    public function manejarPeticion() {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $this->nuevoingreso();
-        } else {
-            $this->listarIngresos();
-        }
-    }
-
-    private function listarIngresos() {
+    
+       public function manejarPeticion() {
+        $mensaje = "";
         $ingresos = $this->ingresoCompraService->obtenerIngresoCompras();
-        $mensaje = '';
-        require __DIR__ . '/../../Vista/Inventario/IngresoCompraVista.php';
-    }
 
-    public function nuevoingreso() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $idEmpleado  = $_POST['id_Empleado'];
-            $idProveedor = $_POST['id_Proveedor'];
-            $total       = $_POST['total'];
+            $accion = $_POST['accion'] ?? "";
 
-            $resultado = $this->ingresoCompraService->nuevoingreso($idEmpleado, $idProveedor, $total);
+            $idEmpleado  = trim($_POST['id_Empleado'] ?? "");
+            $idProveedor = trim($_POST['id_Proveedor'] ?? "");
+            $total       = trim($_POST['total'] ?? "");
 
-            $mensaje = $resultado['mensaje'] ?? '';
-            $ingresos = $this->ingresoCompraService->obtenerIngresoCompras();
-            require __DIR__ . '/../ ../Vista/Inventario/IngresoCompraVista.php';
+            if ($accion === "agregar") {
+                if (!empty($idEmpleado) && !empty($idProveedor) && !empty($total)) {
+                    $resultado = $this->ingresoCompraService->nuevoingreso($idEmpleado, $idProveedor, $total);
+                    $mensaje = $resultado['success'] ?? false
+                        ? "<p style='color:green;'>Ingreso de compra agregado correctamente.</p>"
+                        : "<p style='color:red;'>Error: {$resultado['error']}</p>";
+                } else {
+                    $mensaje = "<p style='color:red;'>Todos los campos son obligatorios.</p>";
+                }
+            }
+
+            if ($accion === "actualizar") {
+                $idIngreso = trim($_POST['id_Ingreso'] ?? "");
+                if (!empty($idIngreso) && !empty($idEmpleado) && !empty($idProveedor) && !empty($total)) {
+                    $resultado = $this->ingresoCompraService->actualizarIngreso($idIngreso, $idEmpleado, $idProveedor, $total);
+                    $mensaje = $resultado['success'] ?? false
+                        ? "<p style='color:green;'>Ingreso de compra actualizado correctamente.</p>"
+                        : "<p style='color:red;'>Error: {$resultado['error']}</p>";
+                } else {
+                    $mensaje = "<p style='color:red;'>Todos los campos son obligatorios.</p>";
+                }
+            }
+
         }
+
+        require __DIR__ . '/../../Vista/Inventario/IngresoCompraVista.php';
     }
 }

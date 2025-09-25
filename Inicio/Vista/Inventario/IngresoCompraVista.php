@@ -31,5 +31,21 @@
 
         <input type="submit" value="Agregar Ingreso">
     </form>
+
+    <h3>Actualizar ingreso existente</h3>
+    <form method="POST" action="">
+        <label for="id_Ingreso">ID Ingreso:</label><br>
+        <input type="number" name="id_Ingreso" id="id_Ingreso" required><br><br>
+
+        <label for="id_Empleado">Empleado:</label><br>
+        <input type="number" name="id_Empleado" id="id_Empleado" required><br><br>
+
+        <label for="id_Proveedor">Proveedor:</label><br>
+        <input type="number" name="id_Proveedor" id="id_Proveedor" required><br><br>
+
+        <label for="total">Total:</label><br>
+        <input type="text" name="total" id="total" required><br><br>
+
+        <input type="submit" value="Actualizar Ingreso">
 </body>
 </html>
