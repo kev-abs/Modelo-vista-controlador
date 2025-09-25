@@ -23,6 +23,11 @@ switch ($controller) {
         require_once './Inicio/Controlador/PedidoController.php';
         $controlador = new PedidoController();
         break;
+    
+    case 'producto':
+        require_once './Inicio/Controlador/ProductoController.php';
+        $controlador = new ProductoController();
+        break;
 
 }
 
