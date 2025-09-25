@@ -24,7 +24,7 @@ class IngresoCompraController {
             if ($accion === "agregar") {
                 if (!empty($idEmpleado) && !empty($idProveedor) && !empty($total)) {
                     $resultado = $this->ingresoCompraService->nuevoingreso($idEmpleado, $idProveedor, $total);
-                    $mensaje = $resultado['success'] ?? false
+                    $mensaje = ($resultado['error'] === false)
                         ? "<p style='color:green;'>Ingreso de compra agregado correctamente.</p>"
                         : "<p style='color:red;'>Error: {$resultado['error']}</p>";
                 } else {
@@ -41,6 +41,18 @@ class IngresoCompraController {
                         : "<p style='color:red;'>Error: {$resultado['error']}</p>";
                 } else {
                     $mensaje = "<p style='color:red;'>Todos los campos son obligatorios.</p>";
+                }
+            }
+
+            if ($accion === "eliminar") {
+                $idIngreso = trim($_POST['id_Ingreso'] ?? "");
+                if (!empty($idIngreso)) {
+                    $resultado = $this->ingresoCompraService->eliminarIngreso($idIngreso);
+                    $mensaje = $resultado['success'] ?? false
+                        ? "<p style='color:green;'>Ingreso de compra eliminado correctamente.</p>"
+                        : "<p style='color:red;'>Error: {$resultado['error']}</p>";
+                } else {
+                    $mensaje = "<p style='color:red;'>El ID del ingreso es obligatorio para eliminar.</p>";
                 }
             }
 
