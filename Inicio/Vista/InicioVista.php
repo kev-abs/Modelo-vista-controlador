@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Inicio - KSHOP</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
   <style>
     body {
@@ -11,6 +12,7 @@
       display: flex;
       flex-direction: column;
     }
+    
     main {
       flex: 1;
     }
@@ -18,43 +20,66 @@
 </head>
 <body>
 
-<!-- ENCABEZADO -->
+  <!-- ENCABEZADO -->
 <header class="bg-white sticky-top py-3 border-bottom shadow-sm">
   <div class="container d-flex flex-wrap justify-content-between align-items-center">
+
+    <!-- LOGO -->
     <div class="d-flex align-items-center">
-      <img src="Imagenes/logo_kshopsinfondo.png" alt="Logo K-Shop" width="83" class="me-2">
-      <a class="navbar-brand fw-bold fs-4 text-dark">K-SHOP</a>
+      <img src="../Public/Imagenes/logo_kshopsinfondo.png" alt="Logo K-Shop" width="83" height="" class="me-2">
+      <a href="../../index.php" class="text-decoration-none fs-7 fw-bold text-dark">K-SHOP</a>
     </div>
-    <nav class="nav nav-pills">
-      <a class="nav-link text-dark" href="#">Inicio</a>
-      <a class="nav-link text-dark" href="#">Nosotros</a>
-      <a class="nav-link text-dark" href="#">Contacto</a>
+
+    <!-- BARRA DE BÚSQUEDA CENTRADA (invisible en móvil) -->
+    <form class="mx-auto d-none d-md-block w-50" action="/buscar" method="GET">
+      <input type="text" class="form-control" name="q" placeholder="Buscar productos...">
+    </form>
+
+    <!-- MENÚ NAVEGACIÓN -->
+    <nav class="d-flex align-items-center gap-3">
+      <a href="./Productos.php" class="nav-link text-dark">Productos</a>
+      <a href="./servicios.php" class="nav-link text-dark">Servicios</a>
+      <!-- CARRITO -->
+      <a href="./carrito.php" class="btn btn-outline-dark border-0">
+        <i class="bi bi-cart-fill"></i>
+      </a>
+
+      <!-- INICIAR SESIÓN -->
+      <a href="index.php?Controller=login" class="btn btn-outline-dark border-0 text-dark">
+        <i class="bi bi-person-circle me-1"></i>Iniciar Sesión
+      </a>
     </nav>
   </div>
 </header>
 
 <!-- CONTENIDO PRINCIPAL -->
 <main>
-  <!-- CARRUSEL -->
-  <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="Imagenes/banner1.jpg" class="d-block w-100" alt="Banner 1">
-      </div>
-      <div class="carousel-item">
-        <img src="Imagenes/banner2.jpg" class="d-block w-100" alt="Banner 2">
-      </div>
-      <div class="carousel-item">
-        <img src="Imagenes/banner3.jpg" class="d-block w-100" alt="Banner 3">
+<!-- CARRUSEL -->
+<div id="carouselKshop" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="../Public/Imagenes/ropa caballero.jpeg" class="d-block w-100 object-fit-cover" alt="Caballeros" style="height: 80vh;">
+      <div class="carousel-caption d-none d-md-block">
+        <h2 class="fw-bold text-light text-shadow">Bienvenido a K-Shop</h2>
+        <p class="text-light">¡Donde puedes encontrar tus gustos sin tanto andar!</p>
       </div>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon"></span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-      <span class="carousel-control-next-icon"></span>
-    </button>
+    <div class="carousel-item">
+      <img src="../Public/Imagenes/ropa dama.jpg" class="d-block w-100 object-fit-cover" alt="Damas" style="height: 80vh;">
+      <div class="carousel-caption d-none d-md-block">
+        <h2 class="fw-bold text-light text-shadow">Moda femenina</h2>
+        <p class="text-light">Tu estilo ideal está aquí</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="../Public/Imagenes/ropa niño.jpg" class="d-block w-100 object-fit-cover" alt="Niños" style="height: 80vh;">
+      <div class="carousel-caption d-none d-md-block">
+        <h2 class="fw-bold text-light text-shadow">Moda infantil</h2>
+        <p class="text-light">Para los más pequeños de casa</p>
+      </div>
+    </div>
   </div>
+</div>
 
   <!-- ACCESO A MÓDULOS -->
   <section class="py-5 text-center">
