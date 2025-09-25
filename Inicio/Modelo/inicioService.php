@@ -11,7 +11,7 @@ class ModeloInicio {
             ],
             'ventas' => [
                 'label' => 'Ventas',
-                'ruta'  => 'index.php?controller=ventas&action=manejarPedido'
+                'ruta'  => 'index.php?Controller=ventas'
             ],
             'inventario' => [
                 'label' => 'Inventario',

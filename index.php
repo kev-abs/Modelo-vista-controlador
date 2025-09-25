@@ -23,9 +23,6 @@ switch ($controller) {
     case 'ventas':
         require_once './Inicio/Controlador/Ventas/PedidoController.php';
         $controlador = new PedidoController();
-        if ($action === 'manejarPeticion') {
-            $action = 'manejarPeticion';
-        }
         break;
 
 }
