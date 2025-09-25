@@ -1,10 +1,14 @@
 <?php
 $controller = isset($_GET['Controller']) ? $_GET['Controller'] : 'inicio';
-$action = isset($_GET['action']) ? $_GET['action'] : 'manejarPeticion';
+if ($controller === 'login') {
+    $action = isset($_GET['action']) ? $_GET['action'] : 'mostrarFormulario';
+} else {
+    $action = isset($_GET['action']) ? $_GET['action'] : 'manejarPeticion';
+}
 
 switch ($controller) {
     
-    case 'usuarios': 
+    case 'usuarios':
         require_once __DIR__ . '/Inicio/Controlador/Usuarios/ClienteController.php';
         $controlador = new ClienteController();
         break;
@@ -19,10 +23,15 @@ switch ($controller) {
         require_once './Inicio/Controlador/Inventario/IngresoCompraController.php';
         $controlador = new IngresoCompraController();
         break;
-    
+
     case 'ventas':
         require_once './Inicio/Controlador/Ventas/PedidoController.php';
         $controlador = new PedidoController();
+        break;
+
+    case 'login':
+        require_once './Inicio/Controlador/Logueo/LoginController.php';
+        $controlador = new LoginController();
         break;
 
 }
