@@ -15,6 +15,7 @@ class PedidoController {
     public function manejarPeticion() {
     $mensaje = "";
     $Pedidos = $this->pedidoService->obtenerPedidos();
+    $mensaje = $_GET["msg"] ?? "";
 
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $accion = $_POST["accion"] ?? "";
@@ -46,6 +47,9 @@ class PedidoController {
                     $mensaje = "<p style='color:red;'>Todos los campos son obligatorios.</p>";
                 }
             }
+
+            header("Location: index.php?Controller=ventas&msg=" . urlencode($mensaje));
+            exit();
         }
     include __DIR__ . '/../../Vista/Venta/PedidoVista.php';
     }   
