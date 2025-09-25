@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../Modelo/PedidoService.php';
+require_once __DIR__ . '/../../Modelo/Ventas/PedidoService.php';
 
 class PedidoController {
 
@@ -46,7 +46,7 @@ class PedidoController {
             }
         }
 
-    require __DIR__ . '/../Vista/index.php';
+    require __DIR__ . '/../../Vista/Venta/index.php';
     }   
     
 }
