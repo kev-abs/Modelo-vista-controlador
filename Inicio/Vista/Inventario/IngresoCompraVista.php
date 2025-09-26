@@ -60,7 +60,7 @@
 </header>
 
 <div class="container py-5">
-  <h1 class="text-center mb-4 fw-bold">Lista de Ingresos de Compra</h1>
+  <h1 class="text-center mb-4 fw-bold">Lista de Ingresos de Compra</h1> <!--GET-->
 
   <?php if (is_array($ingresos) && count($ingresos) > 0): ?>
     <div class="table-responsive">
@@ -91,12 +91,28 @@
     </div>
   <?php endif; ?>
 
-  <div class="text-center mt-4">
-    <a href="../Paneles/paneladmin.php" class="btn btn-secondary">
-      <i class="bi bi-arrow-left"></i> Volver al Panel
-    </a>
-  </div>
 </div>
+
+<div class="container mt-5">
+  <h2 class="mb-3 text-center">Agregar nuevo ingreso</h2>
+  <form method="POST" action="" class="text-center">
+    <input type="hidden" name="accion" value="agregar">
+    <div class="row mb-3 justify-content-center">
+      <div class="col-md-2">
+        <label for="id_Empleado" class="form-label">Empleado</label>
+        <input type="number" class="form-control text-center" name="id_Empleado" required>
+      </div>
+      <div class="col-md-2">
+        <label for="id_Proveedor" class="form-label">Proveedor</label>
+        <input type="number" class="form-control text-center" name="id_Proveedor" required>
+      </div>
+      <div class="col-md-2">
+        <label for="total" class="form-label">Total</label>
+        <input type="text" class="form-control text-center" name="total" required>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Agregar Ingreso</button>
+  </form>
 
 <div class="container mt-5">
   <h2 class="mb-3 text-center">Actualizar ingreso existente</h2>
@@ -134,7 +150,14 @@
         <input type="number" class="form-control text-center" name="id_Ingreso" required>
       </div>
     </div>
+    <button type="submit" class="btn btn-warning">Eliminar</button>
   </form>
+</div>
+
+<div class="text-center mt-4">
+    <a href="../Paneles/paneladmin.php" class="btn btn-secondary">
+      <i class="bi bi-arrow-left"></i> Volver al Panel
+    </a>
 </div>
 
 <footer class="bg-dark text-white text-center py-4 mt-auto">
