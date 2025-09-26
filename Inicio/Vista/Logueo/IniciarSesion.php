@@ -15,7 +15,7 @@
 
     <!-- LOGO -->
     <div class="d-flex align-items-center">
-      <img src="Inicio\Public\Imagenes\logo_kshopsinfondo.png" alt="Logo K-Shop" width="83" height="" class="me-2">
+      <img src="../../Public/Imagenes/logo_kshopsinfondo.png" alt="Logo K-Shop" width="83" height="" class="me-2">
       <a href="index.php" class="text-decoration-none fs-7 fw-bold text-dark">K-SHOP</a>
     </div>
 
