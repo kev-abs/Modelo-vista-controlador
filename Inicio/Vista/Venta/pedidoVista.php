@@ -37,7 +37,6 @@
         <p style="color:red;">Error al obtener los Pedidos.</p>
     <?php endif; ?>
 
-    <!-- Formulario Agregar -->
     <h2>Agregar nuevo Pedido</h2>
     <form method="POST">
         <input type="hidden" name="accion" value="agregar">
@@ -61,7 +60,6 @@
         <button type="submit">Agregar Pedido</button>
     </form>
 
-    <!-- Formulario Actualizar -->
     <h3>Actualizar Pedido</h3>
     <form method="POST">
         <input type="hidden" name="accion" value="actualizar">
