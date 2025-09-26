@@ -51,7 +51,7 @@
       <h2 class="card-title text-center mb-4 fw-bold text-dark">Iniciar Sesión</h2>
 
       <!-- Formulario -->
-      <form action="../../Controlador/Usuarios/Paneles/PanelController.php" method="POST" class="d-flex flex-column gap-3">
+      <form action="index.php?Controller=login&action=manejarPeticion" method="POST" class="d-flex flex-column gap-3">
 
         <!-- Email -->
         <div class="input-group">
