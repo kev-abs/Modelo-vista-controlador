@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Pedidos</title>
+    <link rel="stylesheet" href="/./Inicio/./Vista/./Venta/./style.css">
 </head>
 <body>
     <h1>Lista de Pedidos</h1>    
@@ -10,22 +11,32 @@
     <?= $mensaje ?? '' ?>
 
     <?php if (is_array($Pedidos)): ?>
-        <ul>
-            <?php foreach ($Pedidos as $pedido): ?>
-                <li>
-                    <?= htmlspecialchars($pedido["id_Pedido"]) ?> |
-                    <?= htmlspecialchars($pedido["id_Cliente"]) ?> |
-                    <?= htmlspecialchars($pedido["fecha_Pedido"]) ?> |
-                    <?= htmlspecialchars($pedido["estado"]) ?> |
-                    <?= htmlspecialchars($pedido["total"]) ?>
-                </li>
-            <?php endforeach; ?>
-        </ul>
+        <table class="tabla-pedidos">
+            <thead>
+                <tr>
+                    <th>ID Pedido</th>
+                    <th>ID Cliente</th>
+                    <th>Fecha</th>
+                    <th>Estado</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($Pedidos as $pedido): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($pedido["id_Pedido"]) ?></td>
+                        <td><?= htmlspecialchars($pedido["id_Cliente"]) ?></td>
+                        <td><?= htmlspecialchars($pedido["fecha_Pedido"]) ?></td>
+                        <td><?= htmlspecialchars($pedido["estado"]) ?></td>
+                        <td><?= htmlspecialchars($pedido["total"]) ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
     <?php else: ?>
         <p style="color:red;">Error al obtener los Pedidos.</p>
     <?php endif; ?>
 
-    <!-- Formulario Agregar -->
     <h2>Agregar nuevo Pedido</h2>
     <form method="POST">
         <input type="hidden" name="accion" value="agregar">
@@ -49,8 +60,7 @@
         <button type="submit">Agregar Pedido</button>
     </form>
 
-    <!-- Formulario Actualizar -->
-    <h2>Actualizar Pedido</h2>
+    <h3>Actualizar Pedido</h3>
     <form method="POST">
         <input type="hidden" name="accion" value="actualizar">
 
@@ -73,4 +83,3 @@
     </form>
 </body>
 </html>
-

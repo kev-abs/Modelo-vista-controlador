@@ -10,9 +10,11 @@ class PedidoService {
     }
 
     public function obtenerPedidos() {
-    $respuesta = @file_get_contents($this->apiUrl);
-    if ($respuesta === FALSE) return false;
-    return json_decode($respuesta, true);
+        $respuesta = file_get_contents($this->apiUrl);
+        if ($respuesta === FALSE) {
+            return false; 
+        }
+        return json_decode($respuesta, true); 
     }
 
     public function agregarPedidos($id_Cliente, $fecha_Pedido, $estado, $total) {
