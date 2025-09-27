@@ -1,5 +1,5 @@
 <?php
-require_once "./Inicio/Modelo/Logueo/VerificarUsuarios.php";
+require_once __DIR__ . "../../../Modelo/Logueo/VerificarUsuarios.php";
 
 class LoginController {
     public function mostrarFormulario() {
@@ -8,7 +8,7 @@ class LoginController {
 
     public function manejarPeticion() {
         session_start();
-        include("./Inicio/Conexion/Conexion.php");
+        include __DIR__ . "/../../Conexion/Conexion.php";
 
         $usuarioModel = new VerificarUsuarios($conexion);
 
@@ -21,7 +21,7 @@ class LoginController {
             $_SESSION["id_cliente"] = $cliente["ID_Cliente"];
             $_SESSION["nombre"] = $cliente["Nombre"];
             $_SESSION["rol"] = "cliente";
-            header("Location: ../../Vista/Paneles/panelCliente.php");
+            header("Location: ./Inicio/Vista/Usuarios/Paneles/panelCliente.php");
             exit();
         }
 
@@ -36,7 +36,7 @@ class LoginController {
                     $_SESSION["id_empleado"] = $empleado["ID_Empleado"];
                     $_SESSION["nombre"] = $empleado["Nombre"];
                     $_SESSION["rol"] = "vendedor";
-                    header("Location: ../../Vista/Usuarios/Paneles/panelVendedor.php");
+                    header("Location: ./Inicio/Vista/Usuarios/Paneles/panelVendedor.php");
                     exit();
                 }
             } elseif ($cargo === "administrador") {
@@ -45,7 +45,7 @@ class LoginController {
                     $_SESSION["id_empleado"] = $empleado["ID_Empleado"];
                     $_SESSION["nombre"] = $empleado["Nombre"];
                     $_SESSION["rol"] = "administrador";
-                    header("Location: ../../Vista/Usuarios/Paneles/panelAdmin.php");
+                    header("Location: ./Inicio/Vista/Usuarios/Paneles/panelAdmin.php");
                     exit();
                 }
             } else {

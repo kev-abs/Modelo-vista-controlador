@@ -8,7 +8,7 @@ header("Expires: Sat, 01 Jan 2000 00:00:00 GMT");
 
 // Validación de sesión
 if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'administrador') {
-    header("Location: ../../../index.php?controller=logi");
+    header("Location: index.php?Controller=login");
     exit();
 }
 ?>
@@ -62,69 +62,166 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'administrador') {
 </head>
 <body>
 
-<!-- ENCABEZADO -->
+<!-- ENCABEZADO PANEL ADMIN -->
 <header class="bg-white sticky-top py-3 border-bottom shadow-sm">
   <div class="container d-flex flex-wrap justify-content-between align-items-center">
 
     <!-- LOGO -->
     <div class="d-flex align-items-center">
-      <img src="../Imagenes/logo_kshopsinfondo.png" alt="Logo K-Shop" width="83" height="" class="me-2">
-      <a class="text-decoration-none fs-7 fw-bold text-dark">K-SHOP</a>
+      <img src="../../../Public/Imagenes/logo_kshopsinfondo.png" alt="Logo K-Shop" width="83" class="me-2">
+      <a href="../../index.php" class="text-decoration-none fs-7 fw-bold text-dark">K-SHOP | Admin</a>
     </div>
 
-    <!-- BARRA DE BÚSQUEDA CENTRADA (invisible en móvil) -->
+    <!-- BARRA DE BÚSQUEDA -->
     <form class="mx-auto d-none d-md-block w-50" action="/buscar" method="GET">
-      <input type="text" class="form-control" name="q" placeholder="Buscar productos...">
+      <input type="text" class="form-control" name="q" placeholder="Buscar en el panel...">
     </form>
 
-    <!-- MENÚ NAVEGACIÓN -->
+    <!-- BOTÓN CERRAR SESIÓN -->
     <nav class="d-flex align-items-center gap-3">
-
-      <!-- CERRAR SESIÓN-->
-      <a href="../php/cerrarsesion.php" class="nav-link">
-            <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
-          </a>
+      <a href="../../../Controlador/Logueo/CerarSesion.php" class="btn btn-outline-dark border-0 text-dark">
+        Cerrar Sesión
+      </a>
     </nav>
   </div>
 </header>
 
-<!-- Dropdown flotante -->
-<div class="position-relative">
-  <div class="dropdown position-absolute end-0 mt-3 me-4">
-    <button class="btn btn-light dropdown-toggle shadow-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-      <i class="bi bi-three-dots-vertical"></i>
-    </button>
-    <ul class="dropdown-menu">
-      <li><h6 class="dropdown-header">Perfil</h6></li>
-      <li><a class="dropdown-item" href="../perfiles/perfil_admin.php">Perfil de Administrador</a></li>
-      <li><hr class="dropdown-divider"></li>
-      <li><h6 class="dropdown-header">Gestión General</h6></li>
-      <li><a class="dropdown-item" href="../Barra de navegacion/registrar_vendedor.php">Registrar Vendedor</a></li>
-      <li><a class="dropdown-item" href="../php/consultar_vendedores.php">Consultar Vendedores</a></li>
-      <li><hr class="dropdown-divider"></li>
-      <li><a class="dropdown-item" href="../php/consultar_clientes.php">Consultar Clientes</a></li>
-      <li><a class="dropdown-item" href="../php/listar_clientes.php">Agregar Cliente</a></li>
-      <li><hr class="dropdown-divider"></li>
-      <li><a class="dropdown-item" href="../Barra de navegacion/Admin_productos.php">Consultar Productos</a></li>
-      <li><a class="dropdown-item" href="../Barra de navegacion/Admin_productos.php#formulario">Agregar Producto</a></li>
-      <li><hr class="dropdown-divider"></li>
-      <li><a class="dropdown-item" href="../Inventario/consultar_inventario.php">Consultar Inventario</a></li>
-      <li><a class="dropdown-item" href="../Inventario/actualizar_inventario.php">Actualizar Inventario</a></li>
-      <li><hr class="dropdown-divider"></li>
-      <li><a class="dropdown-item" href="#">Consultar Ventas</a></li>
-      <li><hr class="dropdown-divider"></li>
-      <li><a class="dropdown-item" href="../reportes/estadisticas_ventas.php">Estadísticas de Ventas</a></li>
-      <li><a class="dropdown-item" href="../reportes/exportar_datos.php">Exportar Datos</a></li>
-      <li><a class="dropdown-item" href="../reportes/productos_mas_vendidos.php">Productos Más Vendidos</a></li>
-      <li><a class="dropdown-item" href="../reportes/clientes_frecuentes.php">Clientes Frecuentes</a></li>
-      <li><a class="dropdown-item" href="../reportes/bajo_inventario.php">Bajo Inventario</a></li>
-      <li><a class="dropdown-item" href="../reportes/efectividad_cupones.php">Uso de Cupones</a></li>
-    </ul>
+
+<!-- MENÚ LATERAL OFFCANVAS -->
+<div class="offcanvas offcanvas-start bg-dark text-white" tabindex="-1" id="menuModulos">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title">Módulos</h5>
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="accordion accordion-flush" id="accordionModulos">
+
+      <!-- Perfil -->
+      <div class="accordion-item bg-dark text-white">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed bg-dark text-white" 
+                  type="button" data-bs-toggle="collapse" data-bs-target="#modPerfil">
+            👤 Perfil
+          </button>
+        </h2>
+        <div id="modPerfil" class="accordion-collapse collapse" data-bs-parent="#accordionModulos">
+          <div class="accordion-body">
+            <ul class="list-unstyled">
+              <li><a href="../perfiles/perfil_admin.php" class="text-white text-decoration-none">➤ Perfil de Administrador</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Usuarios -->
+      <div class="accordion-item bg-dark text-white">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed bg-dark text-white" 
+                  type="button" data-bs-toggle="collapse" data-bs-target="#modUsuarios">
+            👥 Usuarios
+          </button>
+        </h2>
+        <div id="modUsuarios" class="accordion-collapse collapse" data-bs-parent="#accordionModulos">
+          <div class="accordion-body">
+            <ul class="list-unstyled">
+              <li><a href="../Barra de navegacion/registrar_vendedor.php" class="text-white text-decoration-none">➤ Registrar Vendedor</a></li>
+              <li><a href="../php/consultar_vendedores.php" class="text-white text-decoration-none">➤ Consultar Vendedores</a></li>
+              <li><a href="../php/consultar_clientes.php" class="text-white text-decoration-none">➤ Consultar Clientes</a></li>
+              <li><a href="../php/listar_clientes.php" class="text-white text-decoration-none">➤ Agregar Cliente</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Productos -->
+      <div class="accordion-item bg-dark text-white">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed bg-dark text-white" 
+                  type="button" data-bs-toggle="collapse" data-bs-target="#modProductos">
+            👕 Productos
+          </button>
+        </h2>
+        <div id="modProductos" class="accordion-collapse collapse" data-bs-parent="#accordionModulos">
+          <div class="accordion-body">
+            <ul class="list-unstyled">
+              <li><a href="../Barra de navegacion/Admin_productos.php" class="text-white text-decoration-none">➤ Consultar Productos</a></li>
+              <li><a href="../Barra de navegacion/Admin_productos.php#formulario" class="text-white text-decoration-none">➤ Agregar Producto</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Inventario -->
+      <div class="accordion-item bg-dark text-white">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed bg-dark text-white" 
+                  type="button" data-bs-toggle="collapse" data-bs-target="#modInventario">
+            📦 Inventario
+          </button>
+        </h2>
+        <div id="modInventario" class="accordion-collapse collapse" data-bs-parent="#accordionModulos">
+          <div class="accordion-body">
+            <ul class="list-unstyled">
+              <li><a href="../Inventario/consultar_inventario.php" class="text-white text-decoration-none">➤ Consultar Inventario</a></li>
+              <li><a href="../Inventario/actualizar_inventario.php" class="text-white text-decoration-none">➤ Actualizar Inventario</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ventas -->
+      <div class="accordion-item bg-dark text-white">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed bg-dark text-white" 
+                  type="button" data-bs-toggle="collapse" data-bs-target="#modVentas">
+            🛒 Ventas
+          </button>
+        </h2>
+        <div id="modVentas" class="accordion-collapse collapse" data-bs-parent="#accordionModulos">
+          <div class="accordion-body">
+            <ul class="list-unstyled">
+              <li><a href="#" class="text-white text-decoration-none">➤ Consultar Ventas</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reportes -->
+      <div class="accordion-item bg-dark text-white">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed bg-dark text-white" 
+                  type="button" data-bs-toggle="collapse" data-bs-target="#modReportes">
+            📊 Reportes
+          </button>
+        </h2>
+        <div id="modReportes" class="accordion-collapse collapse" data-bs-parent="#accordionModulos">
+          <div class="accordion-body">
+            <ul class="list-unstyled">
+              <li><a href="../reportes/estadisticas_ventas.php" class="text-white text-decoration-none">➤ Estadísticas de Ventas</a></li>
+              <li><a href="../reportes/exportar_datos.php" class="text-white text-decoration-none">➤ Exportar Datos</a></li>
+              <li><a href="../reportes/productos_mas_vendidos.php" class="text-white text-decoration-none">➤ Productos Más Vendidos</a></li>
+              <li><a href="../reportes/clientes_frecuentes.php" class="text-white text-decoration-none">➤ Clientes Frecuentes</a></li>
+              <li><a href="../reportes/bajo_inventario.php" class="text-white text-decoration-none">➤ Bajo Inventario</a></li>
+              <li><a href="../reportes/efectividad_cupones.php" class="text-white text-decoration-none">➤ Uso de Cupones</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>
 
+
 <!-- INFORMACIÓN DEL PANEL -->
 <main class="container my-5">
+  <div class="d-flex justify-content-start ps-3 py-2 border-bottom">
+    <button class="navbar-toggler navbar-dark border-0 bg-dark p-2 rounded"
+            type="button" data-bs-toggle="offcanvas" data-bs-target="#menuModulos"
+            aria-controls="menuModulos">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
   <div class="row justify-content-center text-center">
     <div class="col-lg-10">
       <h2 class="mb-4">Bienvenido al Panel de Administración de K-SHOP</h2>
@@ -137,33 +234,33 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'administrador') {
       <div class="row row-cols-1 row-cols-md-2 g-4 mt-3">
         <div class="col">
           <div class="card h-100 border-start border-5 border-warning shadow-sm">
-            <div class="card-body text-start">
-              <h5 class="card-title text-dark"><i class="bi bi-people-fill me-2 text-warning"></i>Gestión de Empleados y Clientes</h5>
-              <p class="card-text text-muted">Registra, consulta y controla la actividad de los usuarios y trabajadores de la tienda.</p>
+            <div class="card-body">
+              <h5 class="card-title"><i class="bi bi-people-fill text-primary me-2"></i>Usuarios</h5>
+              <p class="card-text">Registra, consulta y administra clientes y empleados de la tienda.</p>
             </div>
           </div>
         </div>
         <div class="col">
           <div class="card h-100 border-start border-5 border-warning shadow-sm">
-            <div class="card-body text-start">
-              <h5 class="card-title text-dark"><i class="bi bi-box-seam me-2 text-warning"></i>Gestión de Productos e Inventario</h5>
-              <p class="card-text text-muted">Administra tu catálogo de productos, mantén actualizado el inventario y garantiza la disponibilidad.</p>
+            <div class="card-body">
+              <h5 class="card-title"><i class="bi bi-bag-check text-success me-2"></i>Productos</h5>
+              <p class="card-text">Administra el catálogo, actualiza información y controla inventario.</p>
             </div>
           </div>
         </div>
         <div class="col">
           <div class="card h-100 border-start border-5 border-warning shadow-sm">
-            <div class="card-body text-start">
-              <h5 class="card-title text-dark"><i class="bi bi-graph-up-arrow me-2 text-warning"></i>Reportes y Estadísticas</h5>
-              <p class="card-text text-muted">Accede a análisis detallados sobre ventas, productos más vendidos, clientes frecuentes y más.</p>
+            <div class="card-body">
+              <h5 class="card-title"><i class="bi bi-box-seam text-warning me-2"></i>Inventario</h5>
+              <p class="card-text">Consulta el inventario en tiempo real y mantén actualizada la disponibilidad.</p>
             </div>
           </div>
         </div>
         <div class="col">
           <div class="card h-100 border-start border-5 border-warning shadow-sm">
-            <div class="card-body text-start">
-              <h5 class="card-title text-dark"><i class="bi bi-currency-dollar me-2 text-warning"></i>Ventas y Promociones</h5>
-              <p class="card-text text-muted">Consulta los movimientos de venta, controla los cupones y mejora la rentabilidad de la tienda.</p>
+            <div class="card-body">
+              <h5 class="card-title"><i class="bi bi-cart4 text-danger me-2"></i>Ventas</h5>
+              <p class="card-text">Accede a estadísticas de ventas y controla promociones y cupones.</p>
             </div>
           </div>
         </div>
@@ -187,7 +284,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'administrador') {
     <p class="mb-0">&copy; 2025 Tienda K-Shop - Todos los derechos reservados</p>
   </div>
 </footer>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../Funciones/funciones.js" defer></script>
 </body>
 </html>

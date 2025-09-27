@@ -1,7 +1,7 @@
 <?php
 $host = "localhost";
-$usuario = "Manuel";
-$contrasena = "Manuel251428";
+$usuario = "root";
+$contrasena = "";
 $base_datos = "TiendaKshop";
 
 $conexion = new mysqli($host, $usuario, $contrasena, $base_datos);

@@ -7,16 +7,16 @@ if ($controller === 'login') {
 }
 
 switch ($controller) {
-    
-    case 'usuarios':
-        require_once __DIR__ . '/Inicio/Controlador/Usuarios/ClienteController.php';
-        $controlador = new ClienteController();
-        break;
 
     case 'inicio':
     default:
         require_once './Inicio/Controlador/inicioController.php';
         $controlador = new InicioController();
+        break;
+    
+    case 'usuarios':
+        require_once __DIR__ . '/Inicio/Controlador/Usuarios/ClienteController.php';
+        $controlador = new ClienteController();
         break;
     
     case 'inventario':
@@ -38,6 +38,11 @@ switch ($controller) {
         require_once './Inicio/Controlador/Logueo/LoginController.php';
         $controlador = new LoginController();
         break;
+
+    case 'panel':
+        require_once './Inicio/Controlador/Usuarios/Paneles/PanelController.php';
+        $controlador = new PanelController();
+    break;
 
 }
 
