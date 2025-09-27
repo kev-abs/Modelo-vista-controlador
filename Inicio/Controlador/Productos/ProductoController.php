@@ -1,6 +1,6 @@
 <?php 
-require_once __DIR__ . '/../Modelo/ProductoService.php';
-require_once __DIR__ . '/../Confi/Confi.php';
+require_once __DIR__ . '/../../Modelo/Productos/ProductoService.php';
+require_once __DIR__ . '/../../Confi/Confi.php';
 
 class ProductoController {
     private $productoService;
@@ -59,9 +59,14 @@ class ProductoController {
                      . htmlspecialchars($resultado["error"])
                      . "</p>";
             $productos = [];
-        }
 
-        include __DIR__ . "/../Vista/Producto.php";
+            header("Location: index.php?Controller=productos&msg=" . urlencode($mensaje));
+            exit();//REVISAAAAAAAAAAR
+            
+        }
+        
+
+        include __DIR__ . "/../../Vista/Productos/Producto.php";
     }
 }
 ?>

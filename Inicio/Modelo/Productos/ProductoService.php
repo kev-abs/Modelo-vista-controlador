@@ -9,24 +9,33 @@ class ProductoService {
 
     /* -------------------- GET -------------------- */
     public function obtenerProductos(){
-        $ch = curl_init($this->apiUrl);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $respuesta = curl_exec($ch);
-        $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $response = file_get_contents($this->apiUrl);
+        $decoded = json_decode($response, true);
 
-        if (curl_errno($ch)) {
-            $error = curl_error($ch);
-            curl_close($ch);
-            return ["success" => false, "error" => "cURL: $error"];
-        }
-        curl_close($ch);
+        $resultado = [];
 
-        if ($http_code >= 200 && $http_code < 300) {
-            return ["success" => true, "data" => json_decode($respuesta, true)];
-        } else {
-            return ["success" => false, "error" => "HTTP $http_code", "raw" => $respuesta];
+        if (is_array($decoded)){
+            foreach ($decoded as $fila){
+
+                $partes = array_map('trim', explode('|', $fila));
+                if (count($partes) >= 7) {
+                    $resultado[] = [
+                        'id_Producto' => $partes[0],
+                        'nombre'      => $partes[1],
+                        'descripcion' => $partes[2],
+                        'precio'      => $partes[3],
+                        'stock'       => $partes[4],
+                        'id_Proveedor'=> $partes[5],
+                        'estado'      => $partes[6]
+                    ];
+                }
+            }
         }
+        return ["success" => true, "data" => $resultado];
     }
+
+
+
 
     /* -------------------- POST -------------------- */
     public function agregarProducto($nombre, $descripcion, $precio, $stock, $id_Proveedor, $imagen = null, $estado = null) {
@@ -106,8 +115,7 @@ class ProductoService {
         } else {
             return ["success" => false, "error" => "HTTP $http_code - $respuestaPet"];
         }
-
-
+    }
 }
-}
+
 ?>

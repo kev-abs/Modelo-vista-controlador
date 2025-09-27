@@ -30,7 +30,7 @@ switch ($controller) {
         break;
     
     case 'producto':
-        require_once './Inicio/Controlador/ProductoController.php';
+        require_once './Inicio/Controlador/Productos/ProductoController.php';
         $controlador = new ProductoController();
         break;
 
