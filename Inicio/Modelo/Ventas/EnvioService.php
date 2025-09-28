@@ -1,0 +1,94 @@
+<?php
+
+
+class EnvioService {
+    private $apiUrl;
+
+    public function __construct() {
+        global $urlEnvio;
+        $this->apiUrl = $urlEnvio;
+    }
+
+    public function obtenerEnvios() {
+        $respuesta = file_get_contents($this->apiUrl);
+        if ($respuesta === FALSE) {
+            return false; 
+        }
+        return json_decode($respuesta, true); 
+    }
+
+    public function agregarEnvios($id_Pedido, $direccion_Envio, $fecha_Envio, $metodo_Envio, $estado_Envio) {
+        $data_json = json_encode([
+            "id_Pedido" => $$id_Pedido,
+            "direccion_Envio" => $direccion_Envio,
+            "fecha_Envio" => $fecha_Envio,
+            "metodo_Envio" => $metodo_Envio,
+            "estado_Envio" => $estado_Envio
+        ]);
+
+        $proceso = curl_init($this->apiUrl);
+
+        curl_setopt($proceso, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($proceso, CURLOPT_POSTFIELDS, $data_json);
+        curl_setopt($proceso, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($proceso, CURLOPT_HTTPHEADER, [
+            'Content-Type: application/json',
+            'Content-Length: ' . strlen($data_json)
+        ]); 
+
+        $respuestaPet = curl_exec($proceso);
+        $http_code = curl_getinfo($proceso, CURLINFO_HTTP_CODE);
+
+        if (curl_errno($proceso)) {
+            $error = curl_error($proceso);
+            curl_close($proceso);
+            return ["success" => false, "error" => $error];
+        }
+        curl_close($proceso);
+
+
+        if ($http_code === 200 || $http_code === 201) {
+            return ["success" => true];
+        } else {
+            return ["success" => false, "error" => "HTTP $http_code"];
+        }
+
+    }
+
+    public function actualizarEnvios($id_Envio, $id_Pedido, $direccion_Envio, $fecha_Envio, $metodo_Envio, $estado_Envio) {
+        $data_json = json_encode([
+            "id_Pedido" => $$id_Pedido,
+            "direccion_Envio" => $direccion_Envio,
+            "fecha_Envio" => $fecha_Envio,
+            "metodo_Envio" => $metodo_Envio,
+            "estado_Envio" => $estado_Envio
+        ]);
+
+        $url = $this->apiUrl . "/" . $id_Envio;
+
+        $proceso = curl_init($url);
+        curl_setopt($proceso, CURLOPT_CUSTOMREQUEST, "PUT");
+        curl_setopt($proceso, CURLOPT_POSTFIELDS, $data_json);
+        curl_setopt($proceso, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($proceso, CURLOPT_HTTPHEADER, [
+            'Content-Type: application/json',
+            'Content-Length: ' . strlen($data_json)
+        ]);
+
+        $respuestaPet = curl_exec($proceso);
+        $http_code = curl_getinfo($proceso, CURLINFO_HTTP_CODE);
+
+        if (curl_errno($proceso)) {
+            $error = curl_error($proceso);
+            curl_close($proceso);
+            return ["success" => false, "error" => $error];
+        }
+        curl_close($proceso);
+
+        if ($http_code === 200) {
+            return ["success" => true];
+        } else {
+            return ["success" => false, "error" => "HTTP $http_code - $respuestaPet"];
+        }
+    }
+}
