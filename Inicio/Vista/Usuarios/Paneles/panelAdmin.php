@@ -235,7 +235,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'administrador') {
 
       <!-- Card Usuarios -->
       <div class="col">
-        <a href="../../../../index.php?Controller=usuarios" class="text-decoration-none">
+        <a href="index.php?Controller=usuarios" class="text-decoration-none">
           <div class="card h-100 border-start border-5 border-warning shadow-sm">
             <div class="card-body">
               <h5 class="card-title">
@@ -249,7 +249,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'administrador') {
 
       <!-- Card Productos -->
       <div class="col">
-        <a href="../../../index.php?Controller=inventario" class="text-decoration-none">
+        <a href="index.php?Controller=productos" class="text-decoration-none">
           <div class="card h-100 border-start border-5 border-warning shadow-sm">
             <div class="card-body">
               <h5 class="card-title">
@@ -263,7 +263,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'administrador') {
 
       <!-- Card Inventario -->
       <div class="col">
-        <a href="../../../index.php?Controller=inventario" class="text-decoration-none">
+        <a href="index.php?Controller=inventario" class="text-decoration-none">
           <div class="card h-100 border-start border-5 border-warning shadow-sm">
             <div class="card-body">
               <h5 class="card-title">
@@ -277,7 +277,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'administrador') {
 
       <!-- Card Ventas -->
       <div class="col">
-        <a href="../../../index.php?Controller=ventas" class="text-decoration-none">
+        <a href="index.php?Controller=ventas" class="text-decoration-none">
           <div class="card h-100 border-start border-5 border-warning shadow-sm">
             <div class="card-body">
               <h5 class="card-title">
