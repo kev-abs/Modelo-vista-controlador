@@ -1,5 +1,8 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 
 class PanelController {
 
@@ -17,11 +20,11 @@ class PanelController {
                 break;
 
             case 'cliente':
-                require_once __DIR__ . 'Inicio\Vista\Usuarios\Paneles\panelCliente.php';
+                require_once __DIR__ . '../../../../Vista/Usuarios/Paneles/panelCliente.php';
                 break;
 
             case 'vendedor':
-                require_once __DIR__ . 'Inicio\Vista\Usuarios\Paneles\panelVendedor.php';
+                require_once __DIR__ . '../../../../Vista/Usuarios/Paneles/panelVendedor.php';
                 break;
 
             default:

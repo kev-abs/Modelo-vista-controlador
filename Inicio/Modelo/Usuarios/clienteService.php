@@ -10,48 +10,61 @@ class ClienteService {
 
     public function obtenerClientes() {
         $respuesta = file_get_contents($this->apiUrl);
-        if ($respuesta === FALSE) {
-            return ["success" => false, "error" => "Error al conectar con la API: {$this->apiUrl}"];
+        if ($respuesta === FALSE) return [];
+
+        // Decodificar JSON
+        $lineas = json_decode($respuesta, true);
+        if (!is_array($lineas)) return [];
+
+        $clientes = [];
+        foreach ($lineas as $linea) {
+            $datos = array_map('trim', explode("|", $linea));
+            if (count($datos) >= 8) {
+                $clientes[] = [
+                    "ID_Cliente"     => $datos[0],
+                    "Nombre"         => $datos[1],
+                    "Correo"         => $datos[2],
+                    "Contrasena"     => $datos[3],
+                    "Fecha_Registro" => $datos[4],
+                    "Estado"         => $datos[5],
+                    "Documento"      => $datos[6],
+                    "Telefono"       => $datos[7],
+                ];
+            }
         }
-        return ["success" => true, "data" => json_decode($respuesta, true)];
+        return $clientes;
     }
 
-    public function agregarCliente($nombre, $correo, $contrasena, $documento, $telefono) {
-        $datosPost = array(
-            "nombre"     => $nombre,
-            "correo"     => $correo,
-            "contrasena" => $contrasena,
-            "documento"  => $documento,
-            "telefono" => $telefono
-        );
 
-        $data_json_post = json_encode($datosPost);
+    public function agregarCliente($nombre, $correo, $contrasena, $documento, $telefono, $estado) {
+        $datos = compact("nombre","correo","contrasena","documento","telefono","estado");
+        return $this->enviarPeticion("POST", $this->apiUrl, $datos);
+    }
 
-        $proceso = curl_init($this->apiUrl);
-        curl_setopt($proceso, CURLOPT_CUSTOMREQUEST, "POST");
-        curl_setopt($proceso, CURLOPT_POSTFIELDS, $data_json_post);
-        curl_setopt($proceso, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($proceso, CURLOPT_HTTPHEADER, array(
-            'Content-Type: application/json',
-            'Content-Length: ' . strlen($data_json_post)
-        ));
+    public function actualizarCliente($id, $nombre, $correo, $telefono, $documento, $estado) {
+        $datos = compact("nombre","correo","telefono","documento","estado");
+        return $this->enviarPeticion("PUT", $this->apiUrl . "/$id", $datos);
+    }
 
-        $respuestapet = curl_exec($proceso);
-        $http_code = curl_getinfo($proceso, CURLINFO_HTTP_CODE);
+    public function eliminarCliente($id) {
+        return $this->enviarPeticion("DELETE", $this->apiUrl . "/$id");
+    }
 
-        if (curl_errno($proceso)) {
-            $error = curl_error($proceso);
-            curl_close($proceso);
-            return ["success" => false, "error" => $error];
-        }
+    private function enviarPeticion($metodo, $url, $datos = null) {
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $metodo);
+        if ($datos) curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($datos));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, ["Content-Type: application/json"]);
 
-        curl_close($proceso);
+        $res = curl_exec($ch);
+        $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
 
-        // Retorno consistente
-        if ($http_code >= 200 && $http_code < 300) {
-            return ["success" => true, "response" => json_decode($respuestapet, true)];
-        } else {
-            return ["success" => false, "error" => "HTTP $http_code", "response" => $respuestapet];
-        }
+        return [
+            "success" => ($http_code >= 200 && $http_code < 300),
+            "error"   => ($http_code >= 200 && $http_code < 300) ? null : "HTTP $http_code",
+            "response"=> $res
+        ];
     }
 }

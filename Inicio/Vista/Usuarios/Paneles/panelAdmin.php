@@ -1,14 +1,17 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 // Bloqueo para evitar volver con "atrás"
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 header("Expires: Sat, 01 Jan 2000 00:00:00 GMT");
 
 // Validación de sesión
 if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'administrador') {
-    header("Location: index.php?Controller=login");
+    header("Location: /ModeloVistaControlador/index.php?Controller=login");
     exit();
 }
 ?>
@@ -68,7 +71,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'administrador') {
 
     <!-- LOGO -->
     <div class="d-flex align-items-center">
-      <img src="../../../Public/Imagenes/logo_kshopsinfondo.png" alt="Logo K-Shop" width="83" class="me-2">
+      <img src="/ModeloVistaControlador/Inicio/Public/Imagenes/logo_kshopsinfondo.png" alt="Logo K-Shop" width="83" class="me-2">
       <a href="../../index.php" class="text-decoration-none fs-7 fw-bold text-dark">K-SHOP | Admin</a>
     </div>
 
@@ -79,7 +82,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'administrador') {
 
     <!-- BOTÓN CERRAR SESIÓN -->
     <nav class="d-flex align-items-center gap-3">
-      <a href="../../../Controlador/Logueo/CerarSesion.php" class="btn btn-outline-dark border-0 text-dark">
+      <a href="/ModeloVistaControlador/Inicio/Controlador/Logueo/CerrarSesion.php" class="btn btn-outline-dark border-0 text-dark">
         Cerrar Sesión
       </a>
     </nav>
@@ -211,17 +214,16 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'administrador') {
     </div>
   </div>
 </div>
-
-
-<!-- INFORMACIÓN DEL PANEL -->
-<main class="container my-5">
   <div class="d-flex justify-content-start ps-3 py-2 border-bottom">
-    <button class="navbar-toggler navbar-dark border-0 bg-dark p-2 rounded"
+    <button class="d-flex justify-content-start ps-3 py-2 border-bottom navbar-toggler navbar-dark border-0 bg-dark p-2 rounded"
             type="button" data-bs-toggle="offcanvas" data-bs-target="#menuModulos"
             aria-controls="menuModulos">
       <span class="navbar-toggler-icon"></span>
     </button>
   </div>
+
+<!-- INFORMACIÓN DEL PANEL -->
+<main class="container my-5">
   <div class="row justify-content-center text-center">
     <div class="col-lg-10">
       <h2 class="mb-4">Bienvenido al Panel de Administración de K-SHOP</h2>
@@ -231,40 +233,62 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'administrador') {
       </p>
       <hr class="my-4" />
 
-      <div class="row row-cols-1 row-cols-md-2 g-4 mt-3">
-        <div class="col">
+      <!-- Card Usuarios -->
+      <div class="col">
+        <a href="index.php?Controller=usuarios" class="text-decoration-none">
           <div class="card h-100 border-start border-5 border-warning shadow-sm">
             <div class="card-body">
-              <h5 class="card-title"><i class="bi bi-people-fill text-primary me-2"></i>Usuarios</h5>
+              <h5 class="card-title">
+                <i class="bi bi-people-fill text-primary me-2"></i>Usuarios
+              </h5>
               <p class="card-text">Registra, consulta y administra clientes y empleados de la tienda.</p>
             </div>
           </div>
-        </div>
-        <div class="col">
+        </a>
+      </div>
+
+      <!-- Card Productos -->
+      <div class="col">
+        <a href="index.php?Controller=productos" class="text-decoration-none">
           <div class="card h-100 border-start border-5 border-warning shadow-sm">
             <div class="card-body">
-              <h5 class="card-title"><i class="bi bi-bag-check text-success me-2"></i>Productos</h5>
+              <h5 class="card-title">
+                <i class="bi bi-bag-check text-success me-2"></i>Productos
+              </h5>
               <p class="card-text">Administra el catálogo, actualiza información y controla inventario.</p>
             </div>
           </div>
-        </div>
-        <div class="col">
+        </a>
+      </div>
+
+      <!-- Card Inventario -->
+      <div class="col">
+        <a href="index.php?Controller=inventario" class="text-decoration-none">
           <div class="card h-100 border-start border-5 border-warning shadow-sm">
             <div class="card-body">
-              <h5 class="card-title"><i class="bi bi-box-seam text-warning me-2"></i>Inventario</h5>
+              <h5 class="card-title">
+                <i class="bi bi-box-seam text-warning me-2"></i>Inventario
+              </h5>
               <p class="card-text">Consulta el inventario en tiempo real y mantén actualizada la disponibilidad.</p>
             </div>
           </div>
-        </div>
-        <div class="col">
+        </a>
+      </div>
+
+      <!-- Card Ventas -->
+      <div class="col">
+        <a href="index.php?Controller=ventas" class="text-decoration-none">
           <div class="card h-100 border-start border-5 border-warning shadow-sm">
             <div class="card-body">
-              <h5 class="card-title"><i class="bi bi-cart4 text-danger me-2"></i>Ventas</h5>
+              <h5 class="card-title">
+                <i class="bi bi-cart4 text-danger me-2"></i>Ventas
+              </h5>
               <p class="card-text">Accede a estadísticas de ventas y controla promociones y cupones.</p>
             </div>
           </div>
-        </div>
+        </a>
       </div>
+
 
       <div class="alert alert-light mt-5 border-start border-5 border-success shadow-sm">
         <h4 class="alert-heading">💡 ¡Tu rol importa!</h4>

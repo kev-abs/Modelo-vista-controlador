@@ -1,13 +1,17 @@
 <?php
-$controller = isset($_GET['Controller']) ? $_GET['Controller'] : 'inicio';
-if ($controller === 'login') {
+$nombreController = isset($_GET['Controller']) ? $_GET['Controller'] : 'inicio';
+
+if ($nombreController === 'login') {
     $action = isset($_GET['action']) ? $_GET['action'] : 'mostrarFormulario';
 } else {
     $action = isset($_GET['action']) ? $_GET['action'] : 'manejarPeticion';
 }
 
-switch ($controller) {
+$id = isset($_GET['id']) ? $_GET['id'] : null;
 
+$controlador = null;
+
+switch ($nombreController) {
     case 'inicio':
     default:
         require_once './Inicio/Controlador/inicioController.php';
@@ -15,8 +19,9 @@ switch ($controller) {
         break;
     
     case 'usuarios':
-        require_once __DIR__ . '/Inicio/Controlador/Usuarios/ClienteController.php';
+        require_once "./Inicio/Controlador/Usuarios/ClienteController.php";
         $controlador = new ClienteController();
+        $id = isset($_GET['id']) ? $_GET['id'] : null;
         break;
     
     case 'inventario':
@@ -42,14 +47,16 @@ switch ($controller) {
     case 'panel':
         require_once './Inicio/Controlador/Usuarios/Paneles/PanelController.php';
         $controlador = new PanelController();
-    break;
-
+        break;
 }
 
-// Ejecuta la acción
-if (method_exists($controlador, $action)) {
-    $controlador->$action();
-} else {
-    echo "La acción '$action' no existe en el controlador '$controller'.";
+if ($controlador !== null) {
+    if ($id !== null && method_exists($controlador, $action)) {
+        $controlador->$action($id);
+    } elseif (method_exists($controlador, $action)) {
+        $controlador->$action();
+    } else {
+        $controlador->index();
+    }
 }
 ?>
