@@ -249,7 +249,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'administrador') {
 
       <!-- Card Productos -->
       <div class="col">
-        <a href="index.php?Controller=productos" class="text-decoration-none">
+        <a href="index.php?Controller=producto" class="text-decoration-none">
           <div class="card h-100 border-start border-5 border-warning shadow-sm">
             <div class="card-body">
               <h5 class="card-title">
