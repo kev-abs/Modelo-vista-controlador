@@ -9,37 +9,62 @@ class ClienteController {
         $this->clienteService = new ClienteService();
     }
 
-     public function index() {
+    public function index() {
         require __DIR__ . '/../../Vista/Usuarios/ClienteVista.php';
     }
 
     public function manejarPeticion() {
         $mensaje = "";
+        $clientes = $this->clienteService->obtenerClientes();
 
-        if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            $nombre     = trim($_POST["nombre"] ?? '');
-            $correo     = trim($_POST["correo"] ?? '');
-            $contrasena = trim($_POST["contrasena"] ?? '');
-            $documento = trim($_POST["documento"] ?? '');
-            $telefono = trim($_POST["telefono"] ?? '' );
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $accion = $_POST['accion'] ?? "";
 
-            if (!empty($nombre) && !empty($correo) && !empty($contrasena) && !empty($documento) && !empty($telefono)) {
-                $resultado = $this->clienteService->agregarCliente($nombre, $correo, $contrasena, $documento, $telefono);
+            $idCliente = trim($_POST['id_Cliente'] ?? "");
+            $nombre    = trim($_POST['nombre'] ?? "");
+            $correo    = trim($_POST['correo'] ?? "");
+            $contrasena= trim($_POST['contrasena'] ?? "");
+            $documento = trim($_POST['documento'] ?? "");
+            $telefono  = trim($_POST['telefono'] ?? "");
+            $estado    = trim($_POST['estado'] ?? "");
 
-                if ($resultado["success"]) {
-                    $mensaje = "<p class='text-success text-center'>Usuario agregado correctamente.</p>";
+            if ($accion === "agregar") {
+                if ($nombre && $correo && $contrasena) {
+                    $resultado = $this->clienteService->agregarCliente($nombre, $correo, $contrasena, $documento, $telefono, $estado);
+                    $mensaje = $resultado['success']
+                        ? "<div class='alert alert-success'>Cliente agregado correctamente.</div>"
+                        : "<div class='alert alert-danger'>Error: {$resultado['error']}</div>";
                 } else {
-                    $mensaje = "<p class='text-danger text-center'>Error: " . htmlspecialchars($resultado["error"] ?? 'desconocido') . "</p>";
+                    $mensaje = "<div class='alert alert-danger'>Los campos nombre, correo y contraseña son obligatorios.</div>";
                 }
-            } else {
-                $mensaje = "<p class='text-danger text-center'>Todos los campos son obligatorios.</p>";
+            }
+
+            if ($accion === "actualizar") {
+                if ($idCliente && $nombre && $correo) {
+                    $resultado = $this->clienteService->actualizarCliente($idCliente, $nombre, $correo, $telefono, $documento, $estado);
+                    $mensaje = $resultado['success']
+                        ? "<div class='alert alert-success'>Cliente actualizado correctamente.</div>"
+                        : "<div class='alert alert-danger'>Error: {$resultado['error']}</div>";
+                } else {
+                    $mensaje = "<div class='alert alert-danger'>Todos los campos son obligatorios para actualizar.</div>";
+                }
+            }
+
+            if ($accion === "eliminar") {
+                if ($idCliente) {
+                    $resultado = $this->clienteService->eliminarCliente($idCliente);
+                    $mensaje = $resultado['success']
+                        ? "<div class='alert alert-success'>Cliente eliminado correctamente.</div>"
+                        : "<div class='alert alert-danger'>Error: {$resultado['error']}</div>";
+                } else {
+                    $mensaje = "<div class='alert alert-danger'>El ID del cliente es obligatorio para eliminar.</div>";
+                }
             }
         }
-
-        $resultado = $this->clienteService->obtenerClientes();
-        $clientes = $resultado["data"] ?? [];
-
-
+        $clientes = $this->clienteService->obtenerClientes();
+        $mensaje  = $mensaje ?? "";
         require __DIR__ . '/../../Vista/Usuarios/ClienteVista.php';
+
     }
+
 }
