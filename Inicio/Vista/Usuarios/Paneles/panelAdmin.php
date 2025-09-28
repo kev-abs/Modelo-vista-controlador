@@ -72,7 +72,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'administrador') {
     <!-- LOGO -->
     <div class="d-flex align-items-center">
       <img src="/ModeloVistaControlador/Inicio/Public/Imagenes/logo_kshopsinfondo.png" alt="Logo K-Shop" width="83" class="me-2">
-      <a href="../../index.php" class="text-decoration-none fs-7 fw-bold text-dark">K-SHOP | Admin</a>
+      <a href="/ModeloVistaControlador/index.php?Controller=panel&action=manejarPeticion" class="text-decoration-none fs-7 fw-bold text-dark">K-SHOP | Admin</a>
     </div>
 
     <!-- BARRA DE BÚSQUEDA -->
@@ -127,10 +127,12 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'administrador') {
         <div id="modUsuarios" class="accordion-collapse collapse" data-bs-parent="#accordionModulos">
           <div class="accordion-body">
             <ul class="list-unstyled">
-              <li><a href="../Barra de navegacion/registrar_vendedor.php" class="text-white text-decoration-none">➤ Registrar Vendedor</a></li>
-              <li><a href="../php/consultar_vendedores.php" class="text-white text-decoration-none">➤ Consultar Vendedores</a></li>
-              <li><a href="../php/consultar_clientes.php" class="text-white text-decoration-none">➤ Consultar Clientes</a></li>
-              <li><a href="../php/listar_clientes.php" class="text-white text-decoration-none">➤ Agregar Cliente</a></li>
+              <li><a href="/ModeloVistaControlador/index.php?Controller=usuarios&action=consultarEmpleados" class="text-white text-decoration-none">➤ Consultar Empleados </a></li>
+              <li><a href="/ModeloVistaControlador/index.php?Controller=usuarios&action=agregarEmpleado" class="text-white text-decoration-none">➤ Registrar Empleados</a></li>
+              <li><a href="/ModeloVistaControlador/index.php?Controller=usuarios&action=editarEliminarEmpleado" class="text-white text-decoration-none">➤ Actualizar o Eliminar empleados</a></li>
+              <li><a href="/ModeloVistaControlador/index.php?Controller=usuarios&action=consultarClientes" class="text-white text-decoration-none">➤ Consultar Clientes</a></li>
+              <li><a href="/ModeloVistaControlador/index.php?Controller=usuarios&action=agregarCliente" class="text-white text-decoration-none">➤ Agregar Cliente</a></li>
+              <li><a href="/ModeloVistaControlador/index.php?Controller=usuarios&action=editarEliminarCliente" class="text-white text-decoration-none">➤ Actualizar o Eliminar Cliente</a></li>
             </ul>
           </div>
         </div>
@@ -222,77 +224,74 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'administrador') {
     </button>
   </div>
 
-<!-- INFORMACIÓN DEL PANEL -->
+<!-- PANEL DE ADMINISTRACIÓN -->
 <main class="container my-5">
   <div class="row justify-content-center text-center">
     <div class="col-lg-10">
-      <h2 class="mb-4">Bienvenido al Panel de Administración de K-SHOP</h2>
-      <p class="lead text-muted">
-        Este panel está diseñado para brindarte control total sobre la tienda. Desde la gestión de usuarios hasta el análisis detallado de ventas,
-        aquí encontrarás todas las herramientas necesarias para que K-SHOP funcione de forma óptima y profesional.
+      <h1 class="mb-3 fw-bold">Bienvenido al Panel de Administración de K-SHOP</h1>
+      <p class="lead text-secondary mb-5">
+        Controla todos los aspectos de la tienda desde un solo lugar. Gestiona usuarios, productos, inventario y ventas de manera eficiente y profesional.
       </p>
-      <hr class="my-4" />
 
-      <!-- Card Usuarios -->
-      <div class="col">
-        <a href="/ModeloVistaControlador/index.php?Controller=usuarios" class="text-decoration-none">
-          <div class="card h-100 border-start border-5 border-warning shadow-sm">
-            <div class="card-body">
-              <h5 class="card-title">
-                <i class="bi bi-people-fill text-primary me-2"></i>Usuarios
-              </h5>
-              <p class="card-text">Registra, consulta y administra clientes y empleados de la tienda.</p>
+
+      <div class="row g-4">
+        <!-- Card Usuarios -->
+        <div class="col-md-6 col-lg-3">
+          <a href="/ModeloVistaControlador/index.php?Controller=usuarios" class="text-decoration-none">
+            <div class="card h-100 shadow-sm border-0">
+              <div class="card-body text-center">
+                <i class="bi bi-people-fill fs-1 text-primary mb-3"></i>
+                <h5 class="card-title fw-bold">Usuarios</h5>
+                <p class="card-text text-muted">Registra, consulta y administra clientes y empleados de la tienda.</p>
+              </div>
             </div>
-          </div>
-        </a>
+          </a>
+        </div>
+
+        <!-- Card Productos -->
+        <div class="col-md-6 col-lg-3">
+          <a href="/ModeloVistaControlador/index.php?Controller=producto" class="text-decoration-none">
+            <div class="card h-100 shadow-sm border-0">
+              <div class="card-body text-center">
+                <i class="bi bi-bag-check fs-1 text-success mb-3"></i>
+                <h5 class="card-title fw-bold">Productos</h5>
+                <p class="card-text text-muted">Administra el catálogo, actualiza información y controla inventario.</p>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Card Inventario -->
+        <div class="col-md-6 col-lg-3">
+          <a href="/ModeloVistaControlador/index.php?Controller=inventario" class="text-decoration-none">
+            <div class="card h-100 shadow-sm border-0">
+              <div class="card-body text-center">
+                <i class="bi bi-box-seam fs-1 text-warning mb-3"></i>
+                <h5 class="card-title fw-bold">Inventario</h5>
+                <p class="card-text text-muted">Consulta el inventario en tiempo real y mantén actualizada la disponibilidad.</p>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Card Ventas -->
+        <div class="col-md-6 col-lg-3">
+          <a href="/ModeloVistaControlador/index.php?Controller=ventas" class="text-decoration-none">
+            <div class="card h-100 shadow-sm border-0">
+              <div class="card-body text-center">
+                <i class="bi bi-cart4 fs-1 text-danger mb-3"></i>
+                <h5 class="card-title fw-bold">Ventas</h5>
+                <p class="card-text text-muted">Accede a estadísticas, promociones y controla los cupones disponibles.</p>
+              </div>
+            </div>
+          </a>
+        </div>
       </div>
 
-      <!-- Card Productos -->
-      <div class="col">
-        <a href="/ModeloVistaControlador/index.php?Controller=producto" class="text-decoration-none">
-          <div class="card h-100 border-start border-5 border-warning shadow-sm">
-            <div class="card-body">
-              <h5 class="card-title">
-                <i class="bi bi-bag-check text-success me-2"></i>Productos
-              </h5>
-              <p class="card-text">Administra el catálogo, actualiza información y controla inventario.</p>
-            </div>
-          </div>
-        </a>
-      </div>
-
-      <!-- Card Inventario -->
-      <div class="col">
-        <a href="/ModeloVistaControlador/index.php?Controller=inventario" class="text-decoration-none">
-          <div class="card h-100 border-start border-5 border-warning shadow-sm">
-            <div class="card-body">
-              <h5 class="card-title">
-                <i class="bi bi-box-seam text-warning me-2"></i>Inventario
-              </h5>
-              <p class="card-text">Consulta el inventario en tiempo real y mantén actualizada la disponibilidad.</p>
-            </div>
-          </div>
-        </a>
-      </div>
-
-      <!-- Card Ventas -->
-      <div class="col">
-        <a href="index.php?Controller=ventas" class="text-decoration-none">
-          <div class="card h-100 border-start border-5 border-warning shadow-sm">
-            <div class="card-body">
-              <h5 class="card-title">
-                <i class="bi bi-cart4 text-danger me-2"></i>Ventas
-              </h5>
-              <p class="card-text">Accede a estadísticas de ventas y controla promociones y cupones.</p>
-            </div>
-          </div>
-        </a>
-      </div>
-
-
-      <div class="alert alert-light mt-5 border-start border-5 border-success shadow-sm">
-        <h4 class="alert-heading">💡 ¡Tu rol importa!</h4>
-        <p class="mb-0">Como administrador, eres el motor que impulsa el crecimiento de K-SHOP. Cada decisión cuenta. ¡Haz que cada clic construya una mejor tienda!</p>
+      <!-- Nota motivacional -->
+      <div class="alert alert-light mt-5 shadow-sm rounded-4 border-start border-5 border-success">
+        <h4 class="alert-heading fw-bold">💡 ¡Tu rol importa!</h4>
+        <p class="mb-0 text-secondary">Como administrador, eres el motor que impulsa el crecimiento de K-SHOP. Cada decisión cuenta. ¡Haz que cada clic construya una mejor tienda!</p>
       </div>
     </div>
   </div>

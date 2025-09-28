@@ -10,7 +10,7 @@ class IngresoCompraController {
     }
 
     
-       public function manejarPeticion() {
+    public function manejarPeticion() {
         $mensaje = "";
         $ingresos = $this->ingresoCompraService->obtenerIngresoCompras();
 
