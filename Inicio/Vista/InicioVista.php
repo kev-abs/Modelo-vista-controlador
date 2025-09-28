@@ -42,7 +42,6 @@
 </header>
 
 <!-- CONTENIDO PRINCIPAL -->
-<main>
 <!-- CARRUSEL -->
 <div id="carouselKshop" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
@@ -69,6 +68,68 @@
     </div>
   </div>
 </div>
+
+<!-- SECCIÓN CATEGORÍAS -->
+<section class="py-5">
+  <div class="container text-center">
+    <h2 class="fw-bold mb-4">Explora por categorías</h2>
+    <div class="row g-4">
+      
+      <div class="col-md-4">
+        <div class="card border-0 shadow-sm">
+          <div class="ratio ratio-1x1">
+            <img src="Inicio/Public/Imagenes/RopaCaballero2.png" class="card-img-top" alt="Hombre" style="object-fit: cover;">
+          </div>
+          <div class="card-body">
+            <h5 class="fw-bold">Hombre</h5>
+            <a href="#" class="btn btn-dark btn-sm">Ver más</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card border-0 shadow-sm">
+          <div class="ratio ratio-1x1">
+            <img src="Inicio/Public/Imagenes/RopaDama2.png" class="card-img-top" alt="Mujer" style="object-fit: cover;">
+          </div>
+          <div class="card-body">
+            <h5 class="fw-bold">Mujer</h5>
+            <a href="#" class="btn btn-dark btn-sm">Ver más</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card border-0 shadow-sm">
+          <div class="ratio ratio-1x1">
+            <img src="Inicio/Public/Imagenes/RopaNiños2.png" class="card-img-top" alt="Niños" style="object-fit: cover;">
+          </div>
+          <div class="card-body">
+            <h5 class="fw-bold">Niños</h5>
+            <a href="#" class="btn btn-dark btn-sm">Ver más</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+  <!-- SOBRE NOSOTROS -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <img src="Inicio\Public\Imagenes\tienda_cajera.jpg" class="img-fluid rounded shadow" alt="Nuestro equipo">
+        </div>
+        <div class="col-md-6">
+          <h3 class="fw-bold">Sobre K-Shop</h3>
+          <p>Somos una tienda de moda colombiana comprometida con la diversidad y el estilo. En K-Shop creemos que vestirse bien es una forma de expresar quiénes somos. Nos dedicamos a ofrecer ropa de excelente calidad a precios accesibles para todas las edades.</p>
+          <p>Con más de 10 años en el mercado, hemos aprendido a escuchar a nuestros clientes y evolucionar con sus necesidades.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- INFORMACIÓN DESTACADA -->
   <section class="py-5 bg-light">
@@ -97,52 +158,66 @@
     </div>
   </section>
 
-  <!-- SOBRE NOSOTROS -->
-  <section class="py-5">
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col-md-6">
-          <img src="Inicio\Public\Imagenes\tienda_cajera.jpg" class="img-fluid rounded shadow" alt="Nuestro equipo">
-        </div>
-        <div class="col-md-6">
-          <h3 class="fw-bold">Sobre K-Shop</h3>
-          <p>Somos una tienda de moda colombiana comprometida con la diversidad y el estilo. En K-Shop creemos que vestirse bien es una forma de expresar quiénes somos. Nos dedicamos a ofrecer ropa de excelente calidad a precios accesibles para todas las edades.</p>
-          <p>Con más de 10 años en el mercado, hemos aprendido a escuchar a nuestros clientes y evolucionar con sus necesidades.</p>
-        </div>
+    <!-- NEWSLETTER -->
+    <section class="bg-light py-5">
+      <div class="container text-center">
+        <h3 class="fw-bold">Suscríbete a nuestras novedades</h3>
+        <p class="text-muted">Recibe descuentos y noticias exclusivas</p>
+        <form class="row justify-content-center g-2">
+          <div class="col-md-4">
+            <input type="email" class="form-control" placeholder="Ingresa tu correo">
+          </div>
+          <div class="col-md-2">
+            <button type="submit" class="btn btn-dark w-100">Suscribirme</button>
+          </div>
+        </form>
       </div>
-    </div>
-  </section>
-
-
-  <!-- ACCESO A MÓDULOS -->
-  <section class="py-5 text-center">
-    <div class="container">
-      <h2 class="fw-bold mb-4">Accede a los módulos</h2>
-      <div class="row g-3 justify-content-center">
-        <?php if (!empty($modulos)): ?>
-          <?php foreach ($modulos as $modulo): ?>
-            <div class="col-md-3">
-              <a href="<?= $modulo['ruta'] ?>" class="btn btn-dark w-100 py-3">
-                <?= htmlspecialchars($modulo['label']) ?>
-              </a>
-            </div>
-          <?php endforeach; ?>
-        <?php else: ?>
-          <p>No hay módulos disponibles.</p>
-        <?php endif; ?>
-      </div>
-      </div>
-    </div>
-  </section>
+    </section>
 </main>
 
-<!-- FOOTER -->
-<footer class="bg-dark text-white text-center py-4 mt-auto">
-  <div class="container">
-    <p class="mb-1">&copy; 2025 K-SHOP - Todos los derechos reservados</p>
-    <small>Desarrollado con PHP MVC + Bootstrap</small>
-  </div>
-</footer>
+  <!-- FOOTER -->
+  <footer class="bg-dark text-white pt-5 mt-auto">
+    <div class="container">
+      <div class="row text-center text-md-start">
+        <!-- INFO -->
+        <div class="col-md-3 mb-4">
+          <h5 class="fw-bold">K-SHOP</h5>
+          <p class="small">Tu tienda de moda en Colombia. Estilo, calidad y confianza en un solo lugar.</p>
+        </div>
+        <!-- ENLACES -->
+        <div class="col-md-3 mb-4">
+          <h6 class="fw-bold">Ayuda</h6>
+          <ul class="list-unstyled small">
+            <li><a href="#" class="text-white text-decoration-none">Preguntas frecuentes</a></li>
+            <li><a href="#" class="text-white text-decoration-none">Políticas de devolución</a></li>
+            <li><a href="#" class="text-white text-decoration-none">Contáctanos</a></li>
+          </ul>
+        </div>
+        <!-- CATEGORÍAS -->
+        <div class="col-md-3 mb-4">
+          <h6 class="fw-bold">Categorías</h6>
+          <ul class="list-unstyled small">
+            <li><a href="#" class="text-white text-decoration-none">Hombre</a></li>
+            <li><a href="#" class="text-white text-decoration-none">Mujer</a></li>
+            <li><a href="#" class="text-white text-decoration-none">Niños</a></li>
+          </ul>
+        </div>
+        <!-- REDES -->
+        <div class="col-md-3 mb-4">
+          <h6 class="fw-bold">Síguenos</h6>
+          <div class="d-flex gap-3 justify-content-center justify-content-md-start">
+            <a href="#" class="text-white fs-5"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="text-white fs-5"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="text-white fs-5"><i class="bi bi-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center py-3 border-top border-secondary mt-3 small">
+        &copy; 2025 K-SHOP - Todos los derechos reservados | Desarrollado con PHP MVC + Bootstrap
+      </div>
+    </div>
+  </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 </body>
