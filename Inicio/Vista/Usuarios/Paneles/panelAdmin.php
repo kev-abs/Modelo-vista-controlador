@@ -127,10 +127,12 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'administrador') {
         <div id="modUsuarios" class="accordion-collapse collapse" data-bs-parent="#accordionModulos">
           <div class="accordion-body">
             <ul class="list-unstyled">
-              <li><a href="../Barra de navegacion/registrar_vendedor.php" class="text-white text-decoration-none">➤ Registrar Vendedor</a></li>
-              <li><a href="../php/consultar_vendedores.php" class="text-white text-decoration-none">➤ Consultar Vendedores</a></li>
-              <li><a href="../php/consultar_clientes.php" class="text-white text-decoration-none">➤ Consultar Clientes</a></li>
-              <li><a href="../php/listar_clientes.php" class="text-white text-decoration-none">➤ Agregar Cliente</a></li>
+              <li><a href="/ModeloVistaControlador/index.php?Controller=usuarios&action=consultarEmpleados" class="text-white text-decoration-none">➤ Consultar Empleados </a></li>
+              <li><a href="/ModeloVistaControlador/index.php?Controller=usuarios&action=agregarEmpleado" class="text-white text-decoration-none">➤ Registrar Empleados</a></li>
+              <li><a href="/ModeloVistaControlador/index.php?Controller=usuarios&action=editarEliminarEmpleado" class="text-white text-decoration-none">➤ Actualizar o Eliminar empleados</a></li>
+              <li><a href="/ModeloVistaControlador/index.php?Controller=usuarios&action=consultarClientes" class="text-white text-decoration-none">➤ Consultar Clientes</a></li>
+              <li><a href="/ModeloVistaControlador/index.php?Controller=usuarios&action=agregarCliente" class="text-white text-decoration-none">➤ Agregar Cliente</a></li>
+              <li><a href="/ModeloVistaControlador/index.php?Controller=usuarios&action=editarEliminarCliente" class="text-white text-decoration-none">➤ Actualizar o Eliminar Cliente</a></li>
             </ul>
           </div>
         </div>
