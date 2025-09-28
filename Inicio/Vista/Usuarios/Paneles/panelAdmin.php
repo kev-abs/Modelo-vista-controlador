@@ -233,6 +233,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'administrador') {
         Controla todos los aspectos de la tienda desde un solo lugar. Gestiona usuarios, productos, inventario y ventas de manera eficiente y profesional.
       </p>
 
+
       <div class="row g-4">
         <!-- Card Usuarios -->
         <div class="col-md-6 col-lg-3">

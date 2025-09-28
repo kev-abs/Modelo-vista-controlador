@@ -19,7 +19,7 @@ class ModeloInicio {
             ],
             'productos' => [
                 'label' => 'Productos',
-                'ruta'  => 'index.php?controller=productos'
+                'ruta'  => 'index.php?Controller=producto'
             ]
         ];
     }
