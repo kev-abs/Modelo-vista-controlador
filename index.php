@@ -19,9 +19,8 @@ switch ($nombreController) {
         break;
     
     case 'usuarios':
-        require_once "./Inicio/Controlador/Usuarios/ClienteController.php";
-        $controlador = new ClienteController();
-        $id = isset($_GET['id']) ? $_GET['id'] : null;
+        require_once "./Inicio/Controlador/Usuarios/usuarioController.php";
+        $controlador = new UsuariosController();
         break;
     
     case 'inventario':
