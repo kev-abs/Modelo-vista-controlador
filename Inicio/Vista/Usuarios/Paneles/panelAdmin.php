@@ -143,14 +143,15 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'administrador') {
         <h2 class="accordion-header">
           <button class="accordion-button collapsed bg-dark text-white" 
                   type="button" data-bs-toggle="collapse" data-bs-target="#modProductos">
-            👕 Productos
+            Productos
           </button>
         </h2>
         <div id="modProductos" class="accordion-collapse collapse" data-bs-parent="#accordionModulos">
           <div class="accordion-body">
             <ul class="list-unstyled">
-              <li><a href="../Barra de navegacion/Admin_productos.php" class="text-white text-decoration-none">➤ Consultar Productos</a></li>
-              <li><a href="../Barra de navegacion/Admin_productos.php#formulario" class="text-white text-decoration-none">➤ Agregar Producto</a></li>
+              <li><a href="/ModeloVistaControlador/index.php?Controller=producto" class="text-white text-decoration-none">➤ Consultar Productos</a></li>
+              <li><a href="/ModeloVistaControlador/index.php?Controller=producto&action=actualizarProducto" class="text-white text-decoration-none">➤ Actualizar Producto</a></li>
+              <li><a href="/ModeloVistaControlador/index.php?Controller=producto&action=agregarProducto" class="text-white text-decoration-none">➤ Agregar Producto</a></li>
             </ul>
           </div>
         </div>
