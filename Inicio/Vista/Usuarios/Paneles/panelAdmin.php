@@ -185,8 +185,8 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'administrador') {
         <div id="modVentas" class="accordion-collapse collapse" data-bs-parent="#accordionModulos">
           <div class="accordion-body">
             <ul class="list-unstyled">
-              <li><a href="../../../../index.php?Controller=ventas" class="text-white text-decoration-none">➤ Consultar Pedido</a></li>
-              <li><a href="../../../../index.php?Controller=envios" class="text-white text-decoration-none">➤ Consultar Envío</a></li>
+              <li><a href="/ModeloVistaControlador/index.php?Controller=ventas" class="text-white text-decoration-none">➤ Consultar Pedido</a></li>
+              <li><a href="/ModeloVistaControlador/index.php?Controller=envios" class="text-white text-decoration-none">➤ Consultar Envío</a></li>
             </ul>
           </div>
         </div>
