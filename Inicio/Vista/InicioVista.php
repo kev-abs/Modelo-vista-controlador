@@ -26,7 +26,7 @@
 
     <!-- MENÚ NAVEGACIÓN -->
     <nav class="d-flex align-items-center gap-3">
-      <a href="./Productos.php" class="nav-link text-dark">Productos</a>
+      <a href="index.php?Controller=productos&action=verProductos" class="nav-link text-dark">Productos</a>
       <a href="./servicios.php" class="nav-link text-dark">Servicios</a>
       <!-- CARRITO -->
       <a href="./carrito.php" class="btn btn-outline-dark border-0">

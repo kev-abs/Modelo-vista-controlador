@@ -53,6 +53,12 @@ switch ($nombreController) {
     $controlador = new CuponController();
     break;
 
+
+    case 'productos':
+    require_once './Inicio/Controlador/inicioController.php';
+    $controlador = new InicioController();
+    break;
+
 }
 
 if ($controlador !== null) {
