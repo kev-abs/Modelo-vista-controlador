@@ -52,6 +52,18 @@ switch ($nombreController) {
         require_once './Inicio/Controlador/Usuarios/Paneles/PanelController.php';
         $controlador = new PanelController();
         break;
+
+
+    case 'productos':
+    require_once './Inicio/Controlador/inicioController.php';
+    $controlador = new InicioController();
+
+    
+    case 'cupon':
+    require_once './Inicio/Controlador/Inventario/CuponController.php';
+
+    break;
+
 }
 
 if ($controlador !== null) {
