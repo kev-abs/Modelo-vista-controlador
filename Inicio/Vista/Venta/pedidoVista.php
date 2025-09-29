@@ -14,7 +14,7 @@
     <!-- LOGO -->
     <div class="d-flex align-items-center">
       <img src="/ModeloVistaControlador/Inicio/Public/Imagenes/logo_kshopsinfondo.png" alt="Logo K-Shop" width="83" class="me-2">
-      <a href="../../../index.php?Controller=panel" class="text-decoration-none fs-7 fw-bold text-dark">K-SHOP | Admin</a>
+      <a href="/ModeloVistaControlador/index.php?Controller=panel&action=manejarPeticion" class="text-decoration-none fs-7 fw-bold text-dark">K-SHOP | Admin</a>
     </div>
 
     <!-- BARRA DE BÚSQUEDA -->
