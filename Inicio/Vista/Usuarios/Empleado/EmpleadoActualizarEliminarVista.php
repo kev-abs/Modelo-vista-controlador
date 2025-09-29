@@ -44,6 +44,12 @@
                 <p class="text-muted small mb-4">
                     Modifica los datos del empleado para que tu registro sea confiable y tu equipo funcione de forma óptima.
                 </p>
+                <!-- Mensajes -->
+                <?php if (!empty($mensaje)): ?>
+                    <div class="mb-3">
+                        <?= $mensaje ?>
+                    </div>
+                <?php endif; ?>
                     <form method="POST" class="row g-3">
                         <input type="hidden" name="accion" value="actualizar">
 

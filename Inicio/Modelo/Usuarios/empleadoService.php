@@ -37,8 +37,8 @@ class EmpleadoService {
         return $this->enviarPeticion("POST", $this->apiUrl, $datos);
     }
 
-    public function actualizarEmpleado($id, $nombre, $cargo, $correo, $estado) {
-        $datos = compact("nombre","cargo","correo","estado");
+    public function actualizarEmpleado($id, $nombre, $cargo,$contrasena,  $correo, $estado) {
+        $datos = compact("nombre","cargo","correo","contrasena","estado");
         return $this->enviarPeticion("PUT", $this->apiUrl . "/$id", $datos);
     }
 
@@ -47,15 +47,15 @@ class EmpleadoService {
     }
 
     private function enviarPeticion($metodo, $url, $datos = null) {
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $metodo);
-        if ($datos) curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($datos));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, ["Content-Type: application/json"]);
+        $proceso = curl_init($url);
+        curl_setopt($proceso, CURLOPT_CUSTOMREQUEST, $metodo);
+        if ($datos) curl_setopt($proceso, CURLOPT_POSTFIELDS, json_encode($datos));
+        curl_setopt($proceso, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($proceso, CURLOPT_HTTPHEADER, ["Content-Type: application/json"]);
 
-        $res = curl_exec($ch);
-        $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close($ch);
+        $res = curl_exec($proceso);
+        $http_code = curl_getinfo($proceso, CURLINFO_HTTP_CODE);
+        curl_close($proceso);
 
         return [
             "success" => ($http_code >= 200 && $http_code < 300),

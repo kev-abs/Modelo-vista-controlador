@@ -41,9 +41,15 @@
                 </h5>
                 </div>
                 <div class="card-body bg-light p-4">
-                <p class="text-muted small mb-4">
-                    Completa los datos del empleado y asegúrate de registrar correctamente su información para un manejo adecuado del equipo.
-                </p>
+                    <p class="text-muted small mb-4">
+                        Completa los datos del empleado y asegúrate de registrar correctamente su información para un manejo adecuado del equipo.
+                    </p>
+                    <!-- Mensajes -->
+                    <?php if (!empty($mensaje)): ?>
+                        <div class="mb-3">
+                            <?= $mensaje ?>
+                        </div>
+                    <?php endif; ?>
                     <form method="POST" class="row g-3">
                         <input type="hidden" name="accion" value="agregar">
 
