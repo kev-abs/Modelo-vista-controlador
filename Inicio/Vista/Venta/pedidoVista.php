@@ -168,7 +168,7 @@
   </div>
 
 <main class="container my-5">
-  <h1 class="mb-4">🧾 Lista de Pedidos</h1>
+  <h1 class="mb-4">Lista de Pedidos</h1>
 
   <?= $mensaje ?? '' ?>
 
