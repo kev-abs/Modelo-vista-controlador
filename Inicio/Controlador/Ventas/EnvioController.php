@@ -49,6 +49,17 @@ class EnvioController {
                 }
             }
 
+            if ($accion === "eliminar") {
+                if (!empty($id_Envio)) {
+                    $resultado = $this->envioService->eliminarEnvio($id_Envio);
+                    $mensaje = $resultado["success"]
+                        ? "<p style='color:green;'>Envio eliminado correctamente.</p>"
+                        : "<p style='color:red;'>Error: {$resultado['error']}</p>";
+                } else {
+                    $mensaje = "<p style='color:red;'>El ID del envío es obligatorio para eliminar.</p>";
+                }
+            }
+
             header("Location: index.php?Controller=envios&msg=" . urlencode($mensaje));
             exit();
         }

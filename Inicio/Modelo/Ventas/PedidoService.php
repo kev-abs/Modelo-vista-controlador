@@ -89,6 +89,30 @@ class PedidoService {
             return ["success" => false, "error" => "HTTP $http_code - $respuestaPet"];
         }
     }
+
+    public function eliminarPedido($id_Pedido) {
+    $url = $this->apiUrl . "/" . $id_Pedido;
+
+    $proceso = curl_init($url);
+    curl_setopt($proceso, CURLOPT_CUSTOMREQUEST, "DELETE");
+    curl_setopt($proceso, CURLOPT_RETURNTRANSFER, true);
+
+    $respuestaPet = curl_exec($proceso);
+    $http_code = curl_getinfo($proceso, CURLINFO_HTTP_CODE);
+
+    if (curl_errno($proceso)) {
+        $error = curl_error($proceso);
+        curl_close($proceso);
+        return ["success" => false, "error" => $error];
+    }
+    curl_close($proceso);
+
+    if ($http_code === 200 || $http_code === 204) {
+        return ["success" => true];
+    } else {
+        return ["success" => false, "error" => "HTTP $http_code - $respuestaPet"];
+    }
+}
 }
 
 

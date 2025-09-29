@@ -182,6 +182,7 @@
             <th>Fecha</th>
             <th>Estado</th>
             <th>Total</th>
+            <th>Acciones</th> 
           </tr>
         </thead>
         <tbody>
@@ -192,6 +193,17 @@
               <td><?= htmlspecialchars($pedido["fecha_Pedido"]) ?></td>
               <td><?= htmlspecialchars($pedido["estado"]) ?></td>
               <td>$<?= number_format($pedido["total"], 2) ?></td>
+              <td>
+              
+              <form method="POST" style="display:inline;">
+                <input type="hidden" name="accion" value="eliminar">
+                <input type="hidden" name="id_Pedido" value="<?= htmlspecialchars($pedido["id_Pedido"]) ?>">
+                <button type="submit" class="btn btn-sm btn-danger"
+                        onclick="return confirm('¿Seguro que quiere eliminar este pedido?');">
+                  Eliminar
+                </button>
+              </form>
+            </td>
             </tr>
           <?php endforeach; ?>
         </tbody>

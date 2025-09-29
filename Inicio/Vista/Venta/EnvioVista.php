@@ -183,6 +183,7 @@
             <th>Fecha</th>
             <th>Método</th>
             <th>Estado</th>
+            <th>Acciones</th> 
           </tr>
         </thead>
         <tbody>
@@ -194,6 +195,17 @@
               <td><?= htmlspecialchars($envio["fechaEnvio"]) ?></td>
               <td><?= htmlspecialchars($envio["metodoEnvio"]) ?></td>
               <td><?= htmlspecialchars($envio["estadoEnvio"]) ?></td>
+              <td>
+              
+              <form method="POST" style="display:inline;">
+                <input type="hidden" name="accion" value="eliminar">
+                <input type="hidden" name="id_Envio" value="<?= htmlspecialchars($envio["id_Envio"]) ?>">
+                <button type="submit" class="btn btn-sm btn-danger"
+                        onclick="return confirm('¿Seguro que quiere eliminar este envío?');">
+                  Eliminar
+                </button>
+              </form>
+            </td>
             </tr>
           <?php endforeach; ?>
         </tbody>
