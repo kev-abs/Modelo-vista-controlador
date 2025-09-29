@@ -10,25 +10,13 @@ class EnvioService {
     }
 
     public function obtenerEnvios() {
-    $proceso = curl_init($this->apiUrl);
-    curl_setopt($proceso, CURLOPT_RETURNTRANSFER, true);
-
-    $respuesta = curl_exec($proceso);
-    $http_code = curl_getinfo($proceso, CURLINFO_HTTP_CODE);
-
-    if (curl_errno($proceso)) {
-        $error = curl_error($proceso);
-        curl_close($proceso);
-        return ["error" => $error];
+        $respuesta = file_get_contents($this->apiUrl);
+        if ($respuesta === FALSE) {
+            return false; 
+        }
+        return json_decode($respuesta, true); 
     }
-    curl_close($proceso);
 
-    if ($http_code === 200) {
-        return json_decode($respuesta, true);
-    } else {
-        return ["error" => "HTTP $http_code - $respuesta"];
-    }
-}
 
     public function agregarEnvios($id_Pedido, $direccionEnvio, $fechaEnvio, $metodoEnvio, $estadoEnvio) {
         $data_json = json_encode([
