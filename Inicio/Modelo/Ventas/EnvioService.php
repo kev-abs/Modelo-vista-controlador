@@ -10,20 +10,33 @@ class EnvioService {
     }
 
     public function obtenerEnvios() {
-        $respuesta = file_get_contents($this->apiUrl);
-        if ($respuesta === FALSE) {
-            return false; 
-        }
-        return json_decode($respuesta, true); 
-    }
+    $proceso = curl_init($this->apiUrl);
+    curl_setopt($proceso, CURLOPT_RETURNTRANSFER, true);
 
-    public function agregarEnvios($id_Pedido, $direccion_Envio, $fecha_Envio, $metodo_Envio, $estado_Envio) {
+    $respuesta = curl_exec($proceso);
+    $http_code = curl_getinfo($proceso, CURLINFO_HTTP_CODE);
+
+    if (curl_errno($proceso)) {
+        $error = curl_error($proceso);
+        curl_close($proceso);
+        return ["error" => $error];
+    }
+    curl_close($proceso);
+
+    if ($http_code === 200) {
+        return json_decode($respuesta, true);
+    } else {
+        return ["error" => "HTTP $http_code - $respuesta"];
+    }
+}
+
+    public function agregarEnvios($id_Pedido, $direccionEnvio, $fechaEnvio, $metodoEnvio, $estadoEnvio) {
         $data_json = json_encode([
-            "id_Pedido" => $$id_Pedido,
-            "direccion_Envio" => $direccion_Envio,
-            "fecha_Envio" => $fecha_Envio,
-            "metodo_Envio" => $metodo_Envio,
-            "estado_Envio" => $estado_Envio
+            "id_Pedido" => $id_Pedido,
+            "direccionEnvio" => $direccionEnvio,
+            "fechaEnvio" => $fechaEnvio,
+            "metodoEnvio" => $metodoEnvio,
+            "estadoEnvio" => $estadoEnvio
         ]);
 
         $proceso = curl_init($this->apiUrl);
@@ -55,13 +68,13 @@ class EnvioService {
 
     }
 
-    public function actualizarEnvios($id_Envio, $id_Pedido, $direccion_Envio, $fecha_Envio, $metodo_Envio, $estado_Envio) {
+    public function actualizarEnvios($id_Envio, $id_Pedido, $direccionEnvio, $fechaEnvio, $metodoEnvio, $estadoEnvio) {
         $data_json = json_encode([
-            "id_Pedido" => $$id_Pedido,
-            "direccion_Envio" => $direccion_Envio,
-            "fecha_Envio" => $fecha_Envio,
-            "metodo_Envio" => $metodo_Envio,
-            "estado_Envio" => $estado_Envio
+            "id_Pedido" => $id_Pedido,
+            "direccion_Envio" => $direccionEnvio,
+            "fechaEnvio" => $fechaEnvio,
+            "metodoEnvio" => $metodoEnvio,
+            "estadoEnvio" => $estadoEnvio
         ]);
 
         $url = $this->apiUrl . "/" . $id_Envio;

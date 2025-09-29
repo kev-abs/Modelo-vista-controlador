@@ -22,14 +22,14 @@ class EnvioController {
 
             $id_Envio          = trim($_POST["id_Envio"] ?? "");
             $id_Pedido         = trim($_POST["id_Pedido"] ?? "");
-            $direccion_Envio   = trim($_POST["direccion_Envio"] ?? "");
-            $fecha_Envio       = trim($_POST["fecha_Envio"] ?? "");
-            $metodo_Envio      = trim($_POST["metodo_Envio"] ?? "");
-            $estado_Envio      = trim($_POST["estado_Envio"] ?? "");
+            $direccionEnvio   = trim($_POST["direccionEnvio"] ?? "");
+            $fechaEnvio       = trim($_POST["fechaEnvio"] ?? "");
+            $metodoEnvio      = trim($_POST["metodoEnvio"] ?? "");
+            $estadoEnvio      = trim($_POST["estadoEnvio"] ?? "");
 
             if ($accion === "agregar") {
-                if (!empty($id_Pedido) && !empty($direccion_Envio) && !empty($fecha_Envio) && !empty($metodo_Envio) && !empty($estado_Envio)) {
-                    $resultado = $this->envioService->agregarEnvios($id_Pedido, $direccion_Envio, $fecha_Envio, $metodo_Envio, $estado_Envio);
+                if (!empty($id_Pedido) && !empty($direccionEnvio) && !empty($fechaEnvio) && !empty($metodoEnvio) && !empty($estadoEnvio)) {
+                    $resultado = $this->envioService->agregarEnvios($id_Pedido, $direccionEnvio, $fechaEnvio, $metodoEnvio, $estadoEnvio);
                     $mensaje = $resultado["success"]
                         ? "<p style='color:green;'>Envio agregado correctamente.</p>"
                         : "<p style='color:red;'>Error: {$resultado['error']}</p>";
@@ -39,8 +39,8 @@ class EnvioController {
             }
 
             if ($accion === "actualizar") {
-                if (!empty($id_Envio) && !empty($id_Pedido) && !empty($direccion_Envio) && !empty($fecha_Envio) && !empty($metodo_Envio) && !empty($estado_Envio)) {
-                    $resultado = $this->envioService->actualizarEnvios($id_Envio, $id_Pedido, $direccion_Envio, $fecha_Envio, $metodo_Envio, $estado_Envio);
+                if (!empty($id_Envio) && !empty($id_Pedido) && !empty($direccionEnvio) && !empty($fechaEnvio) && !empty($metodoEnvio) && !empty($estadoEnvio)) {
+                    $resultado = $this->envioService->actualizarEnvios($id_Envio, $id_Pedido, $direccionEnvio, $fechaEnvio, $metodoEnvio, $estadoEnvio);
                     $mensaje = $resultado["success"]
                         ? "<p style='color:green;'>Envio actualizado correctamente.</p>"
                         : "<p style='color:red;'>Error: {$resultado['error']}</p>";
@@ -49,10 +49,10 @@ class EnvioController {
                 }
             }
 
-            header("Location: index.php?Controller=ventas&msg=" . urlencode($mensaje));
+            header("Location: index.php?Controller=envios&msg=" . urlencode($mensaje));
             exit();
         }
-    include __DIR__ . '/../../Vista/Venta/PedidoVista.php';
+    include __DIR__ . '/../../Vista/Venta/EnvioVista.php';
     }   
     
 }
