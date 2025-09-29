@@ -1,15 +1,15 @@
 <?php
 
 
-class PedidoService {
+class EnvioService {
     private $apiUrl;
 
     public function __construct() {
-        global $urlPedido;
-        $this->apiUrl = $urlPedido;
+        global $urlEnvio;
+        $this->apiUrl = $urlEnvio;
     }
 
-    public function obtenerPedidos() {
+    public function obtenerEnvios() {
         $respuesta = file_get_contents($this->apiUrl);
         if ($respuesta === FALSE) {
             return false; 
@@ -17,12 +17,14 @@ class PedidoService {
         return json_decode($respuesta, true); 
     }
 
-    public function agregarPedidos($id_Cliente, $fecha_Pedido, $estado, $total) {
+
+    public function agregarEnvios($id_Pedido, $direccionEnvio, $fechaEnvio, $metodoEnvio, $estadoEnvio) {
         $data_json = json_encode([
-            "id_Cliente" => $id_Cliente,
-            "fecha_Pedido" => $fecha_Pedido,
-            "estado" => $estado,
-            "total" => $total
+            "id_Pedido" => $id_Pedido,
+            "direccionEnvio" => $direccionEnvio,
+            "fechaEnvio" => $fechaEnvio,
+            "metodoEnvio" => $metodoEnvio,
+            "estadoEnvio" => $estadoEnvio
         ]);
 
         $proceso = curl_init($this->apiUrl);
@@ -54,15 +56,16 @@ class PedidoService {
 
     }
 
-    public function actualizarPedidos($id_Pedido, $id_Cliente, $fecha_Pedido, $estado, $total) {
+    public function actualizarEnvios($id_Envio, $id_Pedido, $direccionEnvio, $fechaEnvio, $metodoEnvio, $estadoEnvio) {
         $data_json = json_encode([
-            "id_Cliente"   => $id_Cliente,
-            "fecha_Pedido" => $fecha_Pedido,
-            "estado"       => $estado,
-            "total"        => $total
+            "id_Pedido" => $id_Pedido,
+            "direccion_Envio" => $direccionEnvio,
+            "fechaEnvio" => $fechaEnvio,
+            "metodoEnvio" => $metodoEnvio,
+            "estadoEnvio" => $estadoEnvio
         ]);
 
-        $url = $this->apiUrl . "/" . $id_Pedido;
+        $url = $this->apiUrl . "/" . $id_Envio;
 
         $proceso = curl_init($url);
         curl_setopt($proceso, CURLOPT_CUSTOMREQUEST, "PUT");
@@ -90,8 +93,8 @@ class PedidoService {
         }
     }
 
-    public function eliminarPedido($id_Pedido) {
-    $url = $this->apiUrl . "/" . $id_Pedido;
+    public function eliminarEnvio($id_Envio) {
+    $url = $this->apiUrl . "/" . $id_Envio;
 
     $proceso = curl_init($url);
     curl_setopt($proceso, CURLOPT_CUSTOMREQUEST, "DELETE");
@@ -114,5 +117,3 @@ class PedidoService {
     }
 }
 }
-
-
