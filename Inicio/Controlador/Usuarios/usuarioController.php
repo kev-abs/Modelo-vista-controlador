@@ -107,11 +107,12 @@ class UsuariosController {
             $idEmpleado = trim($_POST['id_Empleado'] ?? "");
             $nombre = trim($_POST['nombre'] ?? "");
             $cargo = trim($_POST['cargo'] ?? "");
+            $contrasena = trim($_POST['contrasena']?? "");
             $correo = trim($_POST['correo'] ?? "");
             $estado = trim($_POST['estado'] ?? "");
 
             if ($accion === "actualizar" && $idEmpleado && $nombre && $correo) {
-                $resultado = $this->empleadoService->actualizarEmpleado($idEmpleado, $nombre, $cargo, $correo, $estado);
+                $resultado = $this->empleadoService->actualizarEmpleado($idEmpleado, $nombre, $cargo, $contrasena, $correo, $estado);
                 $mensaje = $resultado['success']
                     ? "<div class='alert alert-success'>Empleado actualizado correctamente.</div>"
                     : "<div class='alert alert-danger'>Error: {$resultado['error']}</div>";
