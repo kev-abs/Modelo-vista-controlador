@@ -1,61 +1,59 @@
-<?php 
+<?php
 require_once __DIR__ . '/../../Modelo/Inventario/IngresoCompraService.php';
 require_once __DIR__ . "/../../Confi/Confi.php";
 
 class IngresoCompraController {
-    private $ingresoCompraService;
+    private $ingresoService;
 
     public function __construct() {
-        $this->ingresoCompraService = new IngresoCompraService();
+        $this->ingresoService = new IngresoCompraService();
     }
 
-    
     public function manejarPeticion() {
         $mensaje = "";
-        $ingresos = $this->ingresoCompraService->obtenerIngresoCompras();
+        $ingresos = $this->ingresoService->obtenerIngresoCompras();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $accion = $_POST['accion'] ?? "";
-
+            $accion      = $_POST['accion'] ?? "";
+            $idIngreso   = trim($_POST['id_Ingreso'] ?? "");
             $idEmpleado  = trim($_POST['id_Empleado'] ?? "");
             $idProveedor = trim($_POST['id_Proveedor'] ?? "");
             $total       = trim($_POST['total'] ?? "");
 
+            // ================== AGREGAR ==================
             if ($accion === "agregar") {
-                if (!empty($idEmpleado) && !empty($idProveedor) && !empty($total)) {
-                    $resultado = $this->ingresoCompraService->nuevoingreso($idEmpleado, $idProveedor, $total);
-                    $mensaje = ($resultado['error'] === false)
-                        ? "<p style='color:green;'>Ingreso de compra agregado correctamente.</p>"
-                        : "<p style='color:red;'>Error: {$resultado['error']}</p>";
-                } else {
-                    $mensaje = "<p style='color:red;'>Todos los campos son obligatorios.</p>";
-                }
+                $resultado = $this->ingresoService->nuevoIngreso($idEmpleado, $idProveedor, $total);
+                $mensaje = $resultado['error'] === false
+                    ? "<p style='color:green;'>{$resultado['mensaje']}</p>"
+                    : "<p style='color:red;'>Error: {$resultado['mensaje']}</p>";
             }
 
+            // ================== ACTUALIZAR ==================
             if ($accion === "actualizar") {
-                $idIngreso = trim($_POST['id_Ingreso'] ?? "");
-                if (!empty($idIngreso) && !empty($idEmpleado) && !empty($idProveedor) && !empty($total)) {
-                    $resultado = $this->ingresoCompraService->actualizarIngreso($idIngreso, $idEmpleado, $idProveedor, $total);
-                    $mensaje = $resultado['success'] ?? false
-                        ? "<p style='color:green;'>Ingreso de compra actualizado correctamente.</p>"
-                        : "<p style='color:red;'>Error: {$resultado['error']}</p>";
-                } else {
-                    $mensaje = "<p style='color:red;'>Todos los campos son obligatorios.</p>";
-                }
-            }
-
-            if ($accion === "eliminar") {
-                $idIngreso = trim($_POST['id_Ingreso'] ?? "");
                 if (!empty($idIngreso)) {
-                    $resultado = $this->ingresoCompraService->eliminarIngreso($idIngreso);
-                    $mensaje = $resultado['success'] ?? false
-                        ? "<p style='color:green;'>Ingreso de compra eliminado correctamente.</p>"
+                    $resultado = $this->ingresoService->actualizarIngreso($idIngreso, $idEmpleado, $idProveedor, $total);
+                    $mensaje = $resultado['success']
+                        ? "<p style='color:green;'>Ingreso actualizado correctamente.</p>"
                         : "<p style='color:red;'>Error: {$resultado['error']}</p>";
                 } else {
-                    $mensaje = "<p style='color:red;'>El ID del ingreso es obligatorio para eliminar.</p>";
+                    $mensaje = "<p style='color:red;'>El ID es obligatorio para actualizar.</p>";
                 }
             }
 
+            // ================== ELIMINAR ==================
+            if ($accion === "eliminar") {
+                if (!empty($idIngreso)) {
+                    $resultado = $this->ingresoService->eliminarIngreso($idIngreso);
+                    $mensaje = $resultado['success']
+                        ? "<p style='color:green;'>Ingreso eliminado correctamente.</p>"
+                        : "<p style='color:red;'>Error: {$resultado['error']}</p>";
+                } else {
+                    $mensaje = "<p style='color:red;'>El ID es obligatorio para eliminar.</p>";
+                }
+            }
+
+            // refrescar lista después de cada acción
+            $ingresos = $this->ingresoService->obtenerIngresoCompras();
         }
 
         require __DIR__ . '/../../Vista/Inventario/IngresoCompraVista.php';
