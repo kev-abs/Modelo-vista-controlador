@@ -14,7 +14,7 @@
     <!-- LOGO -->
     <div class="d-flex align-items-center">
       <img src="/ModeloVistaControlador/Inicio/Public/Imagenes/logo_kshopsinfondo.png" alt="Logo K-Shop" width="83" class="me-2">
-      <a href="../../../index.php?Controller=panel" class="text-decoration-none fs-7 fw-bold text-dark">K-SHOP | Admin</a>
+      <a href="/ModeloVistaControlador/index.php?Controller=panel&action=manejarPeticion" class="text-decoration-none fs-7 fw-bold text-dark">K-SHOP | Admin</a>
     </div>
 
     <!-- BARRA DE BÚSQUEDA -->
@@ -127,8 +127,8 @@
         <div id="modVentas" class="accordion-collapse collapse" data-bs-parent="#accordionModulos">
           <div class="accordion-body">
             <ul class="list-unstyled">
-              <li><a href="../../../../index.php?Controller=ventas" class="text-white text-decoration-none">➤ Consultar Pedido</a></li>
-              <li><a href="../../../../index.php?Controller=envios" class="text-white text-decoration-none">➤ Consultar Envío</a></li>
+              <li><a href="/ModeloVistaControlador/index.php?Controller=ventas" class="text-white text-decoration-none">➤ Consultar Pedido</a></li>
+              <li><a href="/ModeloVistaControlador/index.php?Controller=envios" class="text-white text-decoration-none">➤ Consultar Envío</a></li>
             </ul>
           </div>
         </div>
@@ -168,7 +168,7 @@
   </div>
 
 <main class="container my-5">
-  <h1 class="mb-4">🧾 Lista de Pedidos</h1>
+  <h1 class="mb-4">Lista de Pedidos</h1>
 
   <?= $mensaje ?? '' ?>
 
