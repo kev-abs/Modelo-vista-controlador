@@ -45,7 +45,7 @@ class LoginController {
                     $_SESSION["id_empleado"] = $empleado["ID_Empleado"];
                     $_SESSION["nombre"] = $empleado["Nombre"];
                     $_SESSION["rol"] = "administrador";
-                    header("Location: ./Inicio/Vista/Usuarios/Paneles/panelAdmin.php");
+                    header("Location: /ModeloVistaControlador/Inicio/Vista/Usuarios/Paneles/panelAdmin.php");
                     exit();
                 }
             } else {

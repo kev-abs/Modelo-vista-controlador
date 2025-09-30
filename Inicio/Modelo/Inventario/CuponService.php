@@ -10,21 +10,33 @@ class CuponService {
     // Obtener todos los cupones
     public function obtenerCupones() {
         $response = file_get_contents($this->apiUrl);
+
+        if ($response === false) {
+            return [];
+        }
+
         $decoded = json_decode($response, true);
 
-        $resultado = [];
-        if (is_array($decoded)) {
-            foreach ($decoded as $fila) {
-                $resultado[] = [
-                    "id_Cupon" => $fila["ID_Cupon"] ?? null,
-                    "codigo" => $fila["Codigo"] ?? "",
-                    "descuento" => $fila["Descuento"] ?? 0,
-                    "fecha_expiracion" => $fila["Fecha_Expiracion"] ?? ""
-                ];
-            }
+        if (!is_array($decoded)) {
+            return [];
         }
+
+        $resultado = [];
+        foreach ($decoded as $fila) {
+            // Separar cada string en partes
+            $partes = explode(" ", $fila);
+
+            $resultado[] = [
+                "id_Cupon" => $partes[0] ?? null,
+                "codigo" => $partes[1] ?? "",
+                "descuento" => $partes[2] ?? 0,
+                "fecha_expiracion" => $partes[3] ?? ""
+            ];
+        }
+
         return $resultado;
     }
+
 
     // Crear cupón
     public function nuevoCupon($codigo, $descuento, $fechaExpiracion) {

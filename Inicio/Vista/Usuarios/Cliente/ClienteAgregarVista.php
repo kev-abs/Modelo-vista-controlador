@@ -44,6 +44,12 @@
                     <p class="text-muted small mb-4">
                         Completa los datos del cliente de manera precisa. Esto te permitirá ofrecerle un mejor seguimiento y servicio.
                     </p>
+                    <!-- Mensajes -->
+                    <?php if (!empty($mensaje)): ?>
+                        <div class="mb-3">
+                            <?= $mensaje ?>
+                        </div>
+                    <?php endif; ?>
                     <form method="POST" class="row g-3">
                         <input type="hidden" name="accion" value="agregar">
 

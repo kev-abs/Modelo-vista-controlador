@@ -51,12 +51,13 @@ class UsuariosController {
             $idCliente = trim($_POST['id_Cliente'] ?? "");
             $nombre = trim($_POST['nombre'] ?? "");
             $correo = trim($_POST['correo'] ?? "");
+            $contrasena = trim($_POST['contrasena'] ?? "");
             $documento = trim($_POST['documento'] ?? "");
             $telefono = trim($_POST['telefono'] ?? "");
             $estado = trim($_POST['estado'] ?? "");
 
             if ($accion === "actualizar" && $idCliente && $nombre && $correo) {
-                $resultado = $this->clienteService->actualizarCliente($idCliente, $nombre, $correo, $telefono, $documento, $estado);
+                $resultado = $this->clienteService->actualizarCliente($idCliente, $nombre, $correo,  $contrasena, $telefono, $documento, $estado);
                 $mensaje = $resultado['success']
                     ? "<div class='alert alert-success'>Cliente actualizado correctamente.</div>"
                     : "<div class='alert alert-danger'>Error: {$resultado['error']}</div>";
@@ -106,11 +107,12 @@ class UsuariosController {
             $idEmpleado = trim($_POST['id_Empleado'] ?? "");
             $nombre = trim($_POST['nombre'] ?? "");
             $cargo = trim($_POST['cargo'] ?? "");
+            $contrasena = trim($_POST['contrasena']?? "");
             $correo = trim($_POST['correo'] ?? "");
             $estado = trim($_POST['estado'] ?? "");
 
             if ($accion === "actualizar" && $idEmpleado && $nombre && $correo) {
-                $resultado = $this->empleadoService->actualizarEmpleado($idEmpleado, $nombre, $cargo, $correo, $estado);
+                $resultado = $this->empleadoService->actualizarEmpleado($idEmpleado, $nombre, $cargo, $contrasena, $correo, $estado);
                 $mensaje = $resultado['success']
                     ? "<div class='alert alert-success'>Empleado actualizado correctamente.</div>"
                     : "<div class='alert alert-danger'>Error: {$resultado['error']}</div>";

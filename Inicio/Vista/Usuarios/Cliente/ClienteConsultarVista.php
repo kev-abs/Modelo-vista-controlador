@@ -53,6 +53,7 @@
                                 <th>Teléfono</th>
                                 <th>Estado</th>
                                 <th>Fecha Registro</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -74,9 +75,16 @@
                                         <?php endif; ?>
                                     </td>
                                     <td><?= htmlspecialchars($c['Fecha_Registro']) ?></td>
+                                    <td>
+                                        <a href="/ModeloVistaControlador/index.php?Controller=usuarios&action=editarEliminarCliente&id=<?= urlencode($c['ID_Cliente']) ?>" 
+                                        class="btn btn-sm btn-outline-dark" title="Editar cliente">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
+
                     </table>
                 </div>
             </div>
