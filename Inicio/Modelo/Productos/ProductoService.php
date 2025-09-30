@@ -7,9 +7,21 @@ class ProductoService {
         $this->apiUrl = $urlProducto;
     }
 
+    private $jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1OTI2NzA2NCwiZXhwIjoxNzU5MjcwNjY0fQ.LWRUe-YEFJGZD_ItjwKGoBNJsG_di3bbyHgcze18ITg";
+
     /* -------------------- GET -------------------- */
     public function obtenerProductos(){
-        $response = file_get_contents($this->apiUrl);
+        $headers =[
+            "Authorization: Bearer {$this->jwtToken}"
+        ];
+        $context = stream_context_create([
+            "http" => [
+                "method" => "GET",
+                "header" => implode("\r\n", $headers)
+            ]
+        ]);
+
+        $response = file_get_contents($this->apiUrl, false, $context);
         $decoded = json_decode($response, true);
 
         $resultado = [];
