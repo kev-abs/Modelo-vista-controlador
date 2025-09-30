@@ -1,69 +1,11 @@
-<?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
-// Bloqueo para evitar volver con "atrás"
-header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-header("Cache-Control: post-check=0, pre-check=0", false);
-header("Pragma: no-cache");
-header("Expires: Sat, 01 Jan 2000 00:00:00 GMT");
-
-// Validación de sesión
-if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'administrador') {
-    header("Location: /ModeloVistaControlador/index.php?Controller=login");
-    exit();
-}
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>K-SHOP - Panel Admin</title>
-
-  <!-- Bootstrap y Bootstrap Icons -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-
-  <style>
-    html, body {
-      height: 100%;
-      background-color: #ffffff;
-      color: #000000;
-    }
-    body {
-      display: flex;
-      flex-direction: column;
-    }
-    main {
-      flex: 1;
-    }
-    .nav-link {
-      color: #000000 !important;
-      transition: background-color 0.3s, color 0.3s;
-    }
-    .nav-link:hover {
-      color: #ffffff !important;
-      background-color: #0d6efd;
-      border-radius: 0.375rem;
-    }
-    .nav-link.text-warning:hover {
-      background-color: #dc3545;
-    }
-    .logo-img {
-      height: 40px;
-      margin-right: 10px;
-    }
-    .carousel img {
-      object-fit: cover;
-      height: 500px;
-      filter: brightness(85%);
-    }
-  </style>
+  <meta charset="UTF-8">
+  <title>Envíos</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100 bg-light">
 
 <!-- ENCABEZADO PANEL ADMIN -->
 <header class="bg-white sticky-top py-3 border-bottom shadow-sm">
@@ -72,7 +14,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'administrador') {
     <!-- LOGO -->
     <div class="d-flex align-items-center">
       <img src="/ModeloVistaControlador/Inicio/Public/Imagenes/logo_kshopsinfondo.png" alt="Logo K-Shop" width="83" class="me-2">
-      <a href="/ModeloVistaControlador/index.php?Controller=panel&action=manejarPeticion" class="text-decoration-none fs-7 fw-bold text-dark">K-SHOP | Admin</a>
+      <a href="../../../index.php?Controller=panel"text-decoration-none fs-7 fw-bold text-dark">K-SHOP | Admin</a>
     </div>
 
     <!-- BARRA DE BÚSQUEDA -->
@@ -143,15 +85,14 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'administrador') {
         <h2 class="accordion-header">
           <button class="accordion-button collapsed bg-dark text-white" 
                   type="button" data-bs-toggle="collapse" data-bs-target="#modProductos">
-            Productos
+            👕 Productos
           </button>
         </h2>
         <div id="modProductos" class="accordion-collapse collapse" data-bs-parent="#accordionModulos">
           <div class="accordion-body">
             <ul class="list-unstyled">
-              <li><a href="/ModeloVistaControlador/index.php?Controller=producto" class="text-white text-decoration-none">➤ Consultar Productos</a></li>
-              <li><a href="/ModeloVistaControlador/index.php?Controller=producto&action=actualizarProducto" class="text-white text-decoration-none">➤ Actualizar Producto</a></li>
-              <li><a href="/ModeloVistaControlador/index.php?Controller=producto&action=agregarProducto" class="text-white text-decoration-none">➤ Agregar Producto</a></li>
+              <li><a href="../Barra de navegacion/Admin_productos.php" class="text-white text-decoration-none">➤ Consultar Productos</a></li>
+              <li><a href="../Barra de navegacion/Admin_productos.php#formulario" class="text-white text-decoration-none">➤ Agregar Producto</a></li>
             </ul>
           </div>
         </div>
@@ -226,75 +167,125 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'administrador') {
     </button>
   </div>
 
-<!-- PANEL DE ADMINISTRACIÓN -->
 <main class="container my-5">
-  <div class="row justify-content-center text-center">
-    <div class="col-lg-10">
-      <h1 class="mb-3 fw-bold">Bienvenido al Panel de Administración de K-SHOP</h1>
-      <p class="lead text-secondary mb-5">
-        Controla todos los aspectos de la tienda desde un solo lugar. Gestiona usuarios, productos, inventario y ventas de manera eficiente y profesional.
-      </p>
+  <h1 class="mb-4">📦 Lista de Envíos</h1>
 
+  <?= $mensaje ?? '' ?>
 
-      <div class="row g-4">
-        <!-- Card Usuarios -->
-        <div class="col-md-6 col-lg-3">
-          <a href="/ModeloVistaControlador/index.php?Controller=usuarios" class="text-decoration-none">
-            <div class="card h-100 shadow-sm border-0">
-              <div class="card-body text-center">
-                <i class="bi bi-people-fill fs-1 text-primary mb-3"></i>
-                <h5 class="card-title fw-bold">Usuarios</h5>
-                <p class="card-text text-muted">Registra, consulta y administra clientes y empleados de la tienda.</p>
-              </div>
-            </div>
-          </a>
+  <?php if (is_array($Envios)): ?>
+    <div class="table-responsive">
+      <table class="table table-striped table-hover align-middle">
+        <thead class="table-dark">
+          <tr>
+            <th>ID Envío</th>
+            <th>ID Pedido</th>
+            <th>Dirección</th>
+            <th>Fecha</th>
+            <th>Método</th>
+            <th>Estado</th>
+            <th>Acciones</th> 
+          </tr>
+        </thead>
+        <tbody>
+          <?php foreach ($Envios as $envio): ?>
+            <tr>
+              <td><?= htmlspecialchars($envio["id_Envio"]) ?></td>
+              <td><?= htmlspecialchars($envio["id_Pedido"]) ?></td>
+              <td><?= htmlspecialchars($envio["direccionEnvio"]) ?></td>
+              <td><?= htmlspecialchars($envio["fechaEnvio"]) ?></td>
+              <td><?= htmlspecialchars($envio["metodoEnvio"]) ?></td>
+              <td><?= htmlspecialchars($envio["estadoEnvio"]) ?></td>
+              <td>
+              
+              <form method="POST" style="display:inline;">
+                <input type="hidden" name="accion" value="eliminar">
+                <input type="hidden" name="id_Envio" value="<?= htmlspecialchars($envio["id_Envio"]) ?>">
+                <button type="submit" class="btn btn-sm btn-danger"
+                        onclick="return confirm('¿Seguro que quiere eliminar este envío?');">
+                  Eliminar
+                </button>
+              </form>
+            </td>
+            </tr>
+          <?php endforeach; ?>
+        </tbody>
+      </table>
+    </div>
+  <?php else: ?>
+    <div class="alert alert-danger">Error al obtener los envíos.</div>
+  <?php endif; ?>
+
+  <!-- Formulario Agregar -->
+  <div class="card mt-5">
+    <div class="card-header bg-success text-white">Agregar Envío</div>
+    <div class="card-body">
+      <form method="POST" class="row g-3">
+        <input type="hidden" name="accion" value="agregar">
+
+        <div class="col-md-6">
+          <label for="id_Pedido" class="form-label">ID Pedido</label>
+          <input type="number" class="form-control" name="id_Pedido" id="id_Pedido" required>
+        </div>
+        <div class="col-md-6">
+          <label for="direccionEnvio" class="form-label">Dirección</label>
+          <input type="text" class="form-control" name="direccionEnvio" id="direccionEnvio" required>
+        </div>
+        <div class="col-md-6">
+          <label for="fechaEnvio" class="form-label">Fecha</label>
+          <input type="date" class="form-control" name="fechaEnvio" id="fechaEnvio" required>
+        </div>
+        <div class="col-md-6">
+          <label for="metodoEnvio" class="form-label">Método</label>
+          <input type="text" class="form-control" name="metodoEnvio" id="metodoEnvio" required>
+        </div>
+        <div class="col-md-12">
+          <label for="estadoEnvio" class="form-label">Estado</label>
+          <input type="text" class="form-control" name="estadoEnvio" id="estadoEnvio" required>
         </div>
 
-        <!-- Card Productos -->
-        <div class="col-md-6 col-lg-3">
-          <a href="/ModeloVistaControlador/index.php?Controller=producto" class="text-decoration-none">
-            <div class="card h-100 shadow-sm border-0">
-              <div class="card-body text-center">
-                <i class="bi bi-bag-check fs-1 text-success mb-3"></i>
-                <h5 class="card-title fw-bold">Productos</h5>
-                <p class="card-text text-muted">Administra el catálogo, actualiza información y controla inventario.</p>
-              </div>
-            </div>
-          </a>
+        <div class="col-12">
+          <button type="submit" class="btn btn-success">Agregar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Formulario Actualizar -->
+  <div class="card mt-4">
+    <div class="card-header bg-warning">Actualizar Envío</div>
+    <div class="card-body">
+      <form method="POST" class="row g-3">
+        <input type="hidden" name="accion" value="actualizar">
+
+        <div class="col-md-4">
+          <label for="id_Envio" class="form-label">ID Envío</label>
+          <input type="number" class="form-control" name="id_Envio" id="id_Envio" required>
+        </div>
+        <div class="col-md-4">
+          <label for="id_Pedido" class="form-label">ID Pedido</label>
+          <input type="number" class="form-control" name="id_Pedido" id="id_Pedido" required>
+        </div>
+        <div class="col-md-4">
+          <label for="direccionEnvio" class="form-label">Dirección</label>
+          <input type="text" class="form-control" name="direccionEnvio" id="direccionEnvio" required>
+        </div>
+        <div class="col-md-6">
+          <label for="fechaEnvio" class="form-label">Fecha</label>
+          <input type="date" class="form-control" name="fechaEnvio" id="fechaEnvio" required>
+        </div>
+        <div class="col-md-6">
+          <label for="metodoEnvio" class="form-label">Método</label>
+          <input type="text" class="form-control" name="metodoEnvio" id="metodoEnvio" required>
+        </div>
+        <div class="col-md-12">
+          <label for="estadoEnvio" class="form-label">Estado</label>
+          <input type="text" class="form-control" name="estadoEnvio" id="estadoEnvio" required>
         </div>
 
-        <!-- Card Inventario -->
-        <div class="col-md-6 col-lg-3">
-          <a href="/ModeloVistaControlador/index.php?Controller=inventario" class="text-decoration-none">
-            <div class="card h-100 shadow-sm border-0">
-              <div class="card-body text-center">
-                <i class="bi bi-box-seam fs-1 text-warning mb-3"></i>
-                <h5 class="card-title fw-bold">Inventario</h5>
-                <p class="card-text text-muted">Consulta el inventario en tiempo real y mantén actualizada la disponibilidad.</p>
-              </div>
-            </div>
-          </a>
+        <div class="col-12">
+          <button type="submit" class="btn btn-warning">Actualizar</button>
         </div>
-
-        <!-- Card Ventas -->
-        <div class="col-md-6 col-lg-3">
-          <a href="/ModeloVistaControlador/index.php?Controller=ventas" class="text-decoration-none">
-            <div class="card h-100 shadow-sm border-0">
-              <div class="card-body text-center">
-                <i class="bi bi-cart4 fs-1 text-danger mb-3"></i>
-                <h5 class="card-title fw-bold">Ventas</h5>
-                <p class="card-text text-muted">Accede a estadísticas, promociones y controla los cupones disponibles.</p>
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-
-      <!-- Nota motivacional -->
-      <div class="alert alert-light mt-5 shadow-sm rounded-4 border-start border-5 border-success">
-        <h4 class="alert-heading fw-bold">💡 ¡Tu rol importa!</h4>
-        <p class="mb-0 text-secondary">Como administrador, eres el motor que impulsa el crecimiento de K-SHOP. Cada decisión cuenta. ¡Haz que cada clic construya una mejor tienda!</p>
-      </div>
+      </form>
     </div>
   </div>
 </main>
@@ -309,7 +300,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'administrador') {
     <p class="mb-0">&copy; 2025 Tienda K-Shop - Todos los derechos reservados</p>
   </div>
 </footer>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="../Funciones/funciones.js" defer></script>
 </body>
 </html>

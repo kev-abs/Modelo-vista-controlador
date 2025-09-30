@@ -9,64 +9,103 @@ class ProductoController {
         $this->productoService = new ProductoService();
     }
 
-    public function manejarPeticion() {
+    public function index() {
+        $this->consultarProductos();
+    }
+
+    // ================= LISTAR PRODUCTOS =================
+    public function consultarProductos() {
         $mensaje = "";
+        $productos = [];
 
-        /* ---------- AGREGAR (POST) ---------- */
-        if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            $accion = $_POST["accion"] ?? "";
-            $nombre       = $_POST["nombre"];
-            $descripcion  = $_POST["descripcion"];
-            $precio       = $_POST["precio"];
-            $stock        = $_POST["stock"];
-            $id_Proveedor = $_POST["id_Proveedor"];
-            $estado       = $_POST["estado"];
-            $imagen       = null;
-
-           if ($accion === "agregar") {
-                if (!empty($nombre) && !empty($descripcion) && !empty($precio) && !empty($stock) && !empty($id_Proveedor) && !empty($estado)) {
-                    $resultado = $this->productoService->agregarProducto($nombre, $descripcion, $precio, $stock, $id_Proveedor, $imagen, $estado);
-                    $mensaje = $resultado["success"]
-                        ? "<p style='color:green;'>Producto agregado correctamente.</p>"
-                        : "<p style='color:red;'>Error: {$resultado['error']}</p>";
-                } else {
-                    $mensaje = "<p style='color:red;'>Todos los campos son obligatorios.</p>";
-                }
-            }
-            
-            if ($accion === "actualizar") {
-                $id_Producto  = $_POST["id_Producto"];
-                if (!empty($id_Producto) && !empty($nombre) && !empty($descripcion) && !empty($precio) && !empty($stock) && !empty($id_Proveedor) && !empty($estado)) {
-                    $resultado = $this->productoService->actualizarProductos($id_Producto, $nombre, $descripcion, $precio, $stock, $id_Proveedor, $imagen, $estado);
-                    $mensaje = $resultado["success"]
-                        ? "<p style='color:green;'>Producto actualizado correctamente.</p>"
-                        : "<p style='color:red;'>Error: {$resultado['error']}</p>";
-                } else {
-                    $mensaje = "<p style='color:red;'>Todos los campos son obligatorios.</p>";
-                }
-            }
-            
-            
-        }
-    
-
-        /* ---------- CARGAR LISTA SIEMPRE ---------- */
         $resultado = $this->productoService->obtenerProductos();
         if ($resultado["success"]) {
             $productos = $resultado["data"];
         } else {
-            $mensaje .= "<p class='text-danger text-center'>"
-                     . htmlspecialchars($resultado["error"])
-                     . "</p>";
-            $productos = [];
-
-            header("Location: index.php?Controller=productos&msg=" . urlencode($mensaje));
-            exit();//REVISAAAAAAAAAAR
-            
+            $mensaje = "<div class='alert alert-danger'>Error: " . htmlspecialchars($resultado["error"]) . "</div>";
         }
-        
 
-        include __DIR__ . "/../../Vista/Productos/Producto.php";
+        require __DIR__ . "/../../Vista/Productos/Producto/ProductoConsultarVista.php";
     }
+
+    // ================= AGREGAR PRODUCTO =================
+    public function agregarProducto() {
+        $mensaje = "";
+
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            $nombre       = trim($_POST["nombre"] ?? "");
+            $descripcion  = trim($_POST["descripcion"] ?? "");
+            $precio       = trim($_POST["precio"] ?? "");
+            $stock        = trim($_POST["stock"] ?? "");
+            $id_Proveedor = trim($_POST["id_Proveedor"] ?? "");
+            $estado       = trim($_POST["estado"] ?? "");
+
+            // Manejo de imagen
+            $imagen = null;
+            if (isset($_FILES["imagen"]) && $_FILES["imagen"]["error"] === UPLOAD_ERR_OK) {
+                $tmpImagen   = $_FILES["imagen"]["tmp_name"];
+                $nombreImagen = basename($_FILES["imagen"]["name"]);
+                $carpetaDestino = __DIR__ . "/../../Public/Imagenes_productos/";
+
+                if (move_uploaded_file($tmpImagen, $carpetaDestino . $nombreImagen)) {
+                    $imagen = $nombreImagen;
+                } else {
+                    $mensaje = "<div class='alert alert-danger'>Error al subir la imagen.</div>";
+                }
+            }
+
+            if ($nombre && $descripcion && $precio && $stock && $id_Proveedor && $estado) {
+                $resultado = $this->productoService->agregarProducto($nombre, $descripcion, $precio, $stock, $id_Proveedor, $imagen, $estado);
+                $mensaje = $resultado["success"]
+                    ? "<div class='alert alert-success'>Producto agregado correctamente.</div>"
+                    : "<div class='alert alert-danger'>Error: {$resultado['error']}</div>";
+            } else {
+                $mensaje = "<div class='alert alert-danger'>Todos los campos son obligatorios.</div>";
+            }
+        }
+
+        require __DIR__ . "/../../Vista/Productos/Producto/ProductoAgregarVista.php";
+    }
+
+    // ================= ACTUALIZAR PRODUCTO =================
+    public function actualizarProducto() {
+        $mensaje = "";
+
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            $id_Producto  = trim($_POST["id_Producto"] ?? "");
+            $nombre       = trim($_POST["nombre"] ?? "");
+            $descripcion  = trim($_POST["descripcion"] ?? "");
+            $precio       = trim($_POST["precio"] ?? "");
+            $stock        = trim($_POST["stock"] ?? "");
+            $id_Proveedor = trim($_POST["id_Proveedor"] ?? "");
+            $estado       = trim($_POST["estado"] ?? "");
+
+            // Manejo de imagen
+            $imagen = null;
+            if (isset($_FILES["imagen"]) && $_FILES["imagen"]["error"] === UPLOAD_ERR_OK) {
+                $tmpImagen   = $_FILES["imagen"]["tmp_name"];
+                $nombreImagen = basename($_FILES["imagen"]["name"]);
+                $carpetaDestino = __DIR__ . "/../../Public/Imagenes_productos/";
+
+                if (move_uploaded_file($tmpImagen, $carpetaDestino . $nombreImagen)) {
+                    $imagen = $nombreImagen;
+                } else {
+                    $mensaje = "<div class='alert alert-danger'>Error al subir la imagen.</div>";
+                }
+            }
+
+            if ($id_Producto && $nombre && $descripcion && $precio && $stock && $id_Proveedor && $estado) {
+                $resultado = $this->productoService->actualizarProductos($id_Producto, $nombre, $descripcion, $precio, $stock, $id_Proveedor, $imagen, $estado);
+                $mensaje = $resultado["success"]
+                    ? "<div class='alert alert-success'>Producto actualizado correctamente.</div>"
+                    : "<div class='alert alert-danger'>Error: {$resultado['error']}</div>";
+            } else {
+                $mensaje = "<div class='alert alert-danger'>Todos los campos son obligatorios para actualizar.</div>";
+            }
+        }
+
+        require __DIR__ . "/../../Vista/Productos/Producto/ProductoActualizarVista.php";
+    }
+
 }
 ?>

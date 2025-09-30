@@ -26,16 +26,14 @@ class ProductoService {
                         'precio'      => $partes[3],
                         'stock'       => $partes[4],
                         'id_Proveedor'=> $partes[5],
-                        'estado'      => $partes[6]
+                        'imagen'      => $partes[6],
+                        'estado'      => $partes[7]
                     ];
                 }
             }
         }
         return ["success" => true, "data" => $resultado];
     }
-
-
-
 
     /* -------------------- POST -------------------- */
     public function agregarProducto($nombre, $descripcion, $precio, $stock, $id_Proveedor, $imagen = null, $estado = null) {
@@ -116,6 +114,8 @@ class ProductoService {
             return ["success" => false, "error" => "HTTP $http_code - $respuestaPet"];
         }
     }
+    
+
 }
 
 ?>

@@ -8,4 +8,5 @@ $urlCliente = "http://localhost:8080/clientes";
 $urlEmpleado = "http://localhost:8080/empleados";
 $urlIngresoCompra = "http://localhost:8080/ingresocompra";
 $urlResena = "http://localhost:8080/resena";
+$urlEnvio = "http://localhost:8080/envio";
 ?>
