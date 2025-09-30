@@ -45,6 +45,12 @@
                     <p class="text-muted small mb-4">
                         Modifica los datos del cliente con facilidad. Asegúrate de que la información esté siempre correcta y completa.
                     </p>
+                    <!-- Mensajes -->
+                    <?php if (!empty($mensaje)): ?>
+                        <div class="mb-3">
+                            <?= $mensaje ?>
+                        </div>
+                    <?php endif; ?>
                     <form method="POST" class="row g-3">
                         <input type="hidden" name="accion" value="actualizar">
                         
@@ -57,6 +63,10 @@
                         <div class="col-md-6">
                             <input type="email" name="correo" class="form-control rounded-2" placeholder="Correo" required>
                         </div>
+                        <div class="col-md-6">
+                            <input type="password" name="contrasena" class="form-control" placeholder="Nueva Contraseña" required>
+                        </div>
+
                         <div class="col-md-6">
                             <input type="text" name="documento" class="form-control rounded-2" placeholder="Documento">
                         </div>
