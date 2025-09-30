@@ -33,7 +33,7 @@ switch ($nombreController) {
         $controlador = new PedidoController();
         break;
 
-    case 'envios':  
+    case 'envios':
         require_once './Inicio/Controlador/Ventas/EnvioController.php';
         $controlador = new EnvioController();
         break;
@@ -63,13 +63,6 @@ switch ($nombreController) {
     case 'productos':
     require_once './Inicio/Controlador/inicioController.php';
     $controlador = new InicioController();
-
-
-
-    case 'productos':
-    require_once './Inicio/Controlador/inicioController.php';
-    $controlador = new InicioController();
-    break;
 
 }
 
