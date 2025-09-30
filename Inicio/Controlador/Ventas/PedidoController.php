@@ -48,6 +48,17 @@ class PedidoController {
                 }
             }
 
+            if ($accion === "eliminar") {
+                if (!empty($id_Pedido)) {
+                    $resultado = $this->pedidoService->eliminarPedido($id_Pedido);
+                    $mensaje = $resultado["success"]
+                        ? "<p style='color:green;'>Pedido eliminado correctamente.</p>"
+                        : "<p style='color:red;'>Error: {$resultado['error']}</p>";
+                } else {
+                    $mensaje = "<p style='color:red;'>El ID del pedido es obligatorio para eliminar.</p>";
+                }
+            }
+
             header("Location: index.php?Controller=ventas&msg=" . urlencode($mensaje));
             exit();
         }

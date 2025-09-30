@@ -32,6 +32,11 @@ switch ($nombreController) {
         require_once './Inicio/Controlador/Ventas/PedidoController.php';
         $controlador = new PedidoController();
         break;
+
+    case 'envios':  
+        require_once './Inicio/Controlador/Ventas/EnvioController.php';
+        $controlador = new EnvioController();
+        break;
     
     case 'producto':
         require_once './Inicio/Controlador/Productos/ProductoController.php';
@@ -47,6 +52,12 @@ switch ($nombreController) {
         require_once './Inicio/Controlador/Usuarios/Paneles/PanelController.php';
         $controlador = new PanelController();
         break;
+
+    
+    case 'cupon':
+    require_once './Inicio/Controlador/Inventario/CuponController.php';
+    $controlador = new CuponController();
+    break;
 
 
     case 'productos':
@@ -64,6 +75,12 @@ switch ($nombreController) {
         require_once './Inicio/Controlador/Inventario/IngresoCompraController.php';
         $controlador = new IngresoCompraController();
         break;
+
+
+    case 'productos':
+    require_once './Inicio/Controlador/inicioController.php';
+    $controlador = new InicioController();
+    break;
 
 }
 

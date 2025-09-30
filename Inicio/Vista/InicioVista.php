@@ -15,8 +15,8 @@
 
     <!-- LOGO -->
     <div class="d-flex align-items-center">
-      <img src="Inicio/Public/Imagenes/logo_kshopsinfondo.png" alt="Logo K-Shop" width="83" height="" class="me-2">
-      <a href="../../index.php" class="text-decoration-none fs-7 fw-bold text-dark">K-SHOP</a>
+      <img src="/ModeloVistaControlador/Inicio/Public/Imagenes/logo_kshopsinfondo.png" alt="Logo K-Shop" width="83" height="" class="me-2">
+      <a href="/ModeloVistaControlador/index.php?Controller=inicio" class="text-decoration-none fs-7 fw-bold text-dark">K-SHOP</a>
     </div>
 
     <!-- BARRA DE BÚSQUEDA CENTRADA (invisible en móvil) -->

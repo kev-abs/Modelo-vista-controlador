@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Gestión de Pedidos</title>
+  <title>Envíos</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="d-flex flex-column min-vh-100 bg-light">
@@ -168,38 +168,40 @@
   </div>
 
 <main class="container my-5">
-  <h1 class="mb-4">Lista de Pedidos</h1>
+  <h1 class="mb-4">Lista de Envíos</h1>
 
   <?= $mensaje ?? '' ?>
 
-  <?php if (is_array($Pedidos)): ?>
+  <?php if (is_array($Envios)): ?>
     <div class="table-responsive">
       <table class="table table-striped table-hover align-middle">
         <thead class="table-dark">
           <tr>
+            <th>ID Envío</th>
             <th>ID Pedido</th>
-            <th>ID Cliente</th>
+            <th>Dirección</th>
             <th>Fecha</th>
+            <th>Método</th>
             <th>Estado</th>
-            <th>Total</th>
             <th>Acciones</th> 
           </tr>
         </thead>
         <tbody>
-          <?php foreach ($Pedidos as $pedido): ?>
+          <?php foreach ($Envios as $envio): ?>
             <tr>
-              <td><?= htmlspecialchars($pedido["id_Pedido"]) ?></td>
-              <td><?= htmlspecialchars($pedido["id_Cliente"]) ?></td>
-              <td><?= htmlspecialchars($pedido["fecha_Pedido"]) ?></td>
-              <td><?= htmlspecialchars($pedido["estado"]) ?></td>
-              <td>$<?= number_format($pedido["total"], 2) ?></td>
+              <td><?= htmlspecialchars($envio["id_Envio"]) ?></td>
+              <td><?= htmlspecialchars($envio["id_Pedido"]) ?></td>
+              <td><?= htmlspecialchars($envio["direccionEnvio"]) ?></td>
+              <td><?= htmlspecialchars($envio["fechaEnvio"]) ?></td>
+              <td><?= htmlspecialchars($envio["metodoEnvio"]) ?></td>
+              <td><?= htmlspecialchars($envio["estadoEnvio"]) ?></td>
               <td>
               
               <form method="POST" style="display:inline;">
                 <input type="hidden" name="accion" value="eliminar">
-                <input type="hidden" name="id_Pedido" value="<?= htmlspecialchars($pedido["id_Pedido"]) ?>">
+                <input type="hidden" name="id_Envio" value="<?= htmlspecialchars($envio["id_Envio"]) ?>">
                 <button type="submit" class="btn btn-sm btn-danger"
-                        onclick="return confirm('¿Seguro que quiere eliminar este pedido?');">
+                        onclick="return confirm('¿Seguro que quiere eliminar este envío?');">
                   Eliminar
                 </button>
               </form>
@@ -210,31 +212,35 @@
       </table>
     </div>
   <?php else: ?>
-    <div class="alert alert-danger">Error al obtener los pedidos.</div>
+    <div class="alert alert-danger">Error al obtener los envíos.</div>
   <?php endif; ?>
 
   <!-- Formulario Agregar -->
   <div class="card mt-5">
-    <div class="card-header bg-success text-white">Agregar Pedido</div>
+    <div class="card-header bg-success text-white">Agregar Envío</div>
     <div class="card-body">
       <form method="POST" class="row g-3">
         <input type="hidden" name="accion" value="agregar">
 
         <div class="col-md-6">
-          <label for="id_Cliente" class="form-label">ID Cliente</label>
-          <input type="number" class="form-control" name="id_Cliente" id="id_Cliente" required>
+          <label for="id_Pedido" class="form-label">ID Pedido</label>
+          <input type="number" class="form-control" name="id_Pedido" id="id_Pedido" required>
         </div>
         <div class="col-md-6">
-          <label for="fecha_Pedido" class="form-label">Fecha</label>
-          <input type="date" class="form-control" name="fecha_Pedido" id="fecha_Pedido" required>
+          <label for="direccionEnvio" class="form-label">Dirección</label>
+          <input type="text" class="form-control" name="direccionEnvio" id="direccionEnvio" required>
         </div>
         <div class="col-md-6">
-          <label for="estado" class="form-label">Estado</label>
-          <input type="text" class="form-control" name="estado" id="estado" required>
+          <label for="fechaEnvio" class="form-label">Fecha</label>
+          <input type="date" class="form-control" name="fechaEnvio" id="fechaEnvio" required>
         </div>
         <div class="col-md-6">
-          <label for="total" class="form-label">Total</label>
-          <input type="number" class="form-control" name="total" id="total" required>
+          <label for="metodoEnvio" class="form-label">Método</label>
+          <input type="text" class="form-control" name="metodoEnvio" id="metodoEnvio" required>
+        </div>
+        <div class="col-md-12">
+          <label for="estadoEnvio" class="form-label">Estado</label>
+          <input type="text" class="form-control" name="estadoEnvio" id="estadoEnvio" required>
         </div>
 
         <div class="col-12">
@@ -246,30 +252,34 @@
 
   <!-- Formulario Actualizar -->
   <div class="card mt-4">
-    <div class="card-header bg-warning">Actualizar Pedido</div>
+    <div class="card-header bg-warning">Actualizar Envío</div>
     <div class="card-body">
       <form method="POST" class="row g-3">
         <input type="hidden" name="accion" value="actualizar">
 
         <div class="col-md-4">
+          <label for="id_Envio" class="form-label">ID Envío</label>
+          <input type="number" class="form-control" name="id_Envio" id="id_Envio" required>
+        </div>
+        <div class="col-md-4">
           <label for="id_Pedido" class="form-label">ID Pedido</label>
           <input type="number" class="form-control" name="id_Pedido" id="id_Pedido" required>
         </div>
         <div class="col-md-4">
-          <label for="id_Cliente" class="form-label">ID Cliente</label>
-          <input type="number" class="form-control" name="id_Cliente" id="id_Cliente" required>
-        </div>
-        <div class="col-md-4">
-          <label for="fecha_Pedido" class="form-label">Fecha</label>
-          <input type="date" class="form-control" name="fecha_Pedido" id="fecha_Pedido" required>
+          <label for="direccionEnvio" class="form-label">Dirección</label>
+          <input type="text" class="form-control" name="direccionEnvio" id="direccionEnvio" required>
         </div>
         <div class="col-md-6">
-          <label for="estado" class="form-label">Estado</label>
-          <input type="text" class="form-control" name="estado" id="estado" required>
+          <label for="fechaEnvio" class="form-label">Fecha</label>
+          <input type="date" class="form-control" name="fechaEnvio" id="fechaEnvio" required>
         </div>
         <div class="col-md-6">
-          <label for="total" class="form-label">Total</label>
-          <input type="number" class="form-control" name="total" id="total" required>
+          <label for="metodoEnvio" class="form-label">Método</label>
+          <input type="text" class="form-control" name="metodoEnvio" id="metodoEnvio" required>
+        </div>
+        <div class="col-md-12">
+          <label for="estadoEnvio" class="form-label">Estado</label>
+          <input type="text" class="form-control" name="estadoEnvio" id="estadoEnvio" required>
         </div>
 
         <div class="col-12">
