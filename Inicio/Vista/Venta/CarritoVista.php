@@ -28,7 +28,7 @@
       <a href="index.php?Controller=productos&action=verProductos" class="nav-link text-dark">Productos</a>
       <a href="./servicios.php" class="nav-link text-dark">Servicios</a>
       <!-- CARRITO -->
-      <a href="#" class="btn btn-outline-dark border-0">
+      <a href="index.php?Controller=carrito&action=mostrar" class="btn btn-outline-dark border-0">
         <i class="bi bi-cart-fill"></i>
       </a>
 
@@ -41,7 +41,7 @@
 </header>
 
 <div class="container mt-5">
-    <h2 class="mb-4"><i class="bi bi-cart"></i> Tu Carrito</h2>
+    <h2 class="mb-4"><i class="bi bi-cart"></i>Tu Carrito</h2>
 
     <?php if (!empty($carrito)): ?>
         <div class="row g-4">
