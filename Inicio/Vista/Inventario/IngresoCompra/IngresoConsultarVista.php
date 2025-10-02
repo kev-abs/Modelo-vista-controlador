@@ -7,6 +7,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body class="bg-light d-flex flex-column min-vh-100">
+    
 
     <div class="container py-5  flex-grow-1">
     <h1 class="text-center mb-4 fw-bold">Lista de Ingresos de Compra</h1>
