@@ -7,7 +7,7 @@ class ClienteService {
         $this->apiUrl = $urlCliente;
     }
 
-    private $jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1OTM3MzE0NiwiZXhwIjoxNzU5NDU5NTQ2fQ.zYpTFWgsukxyEagLCKPYtMMRMpWuyOQLBgAizM88670";
+    private $jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1OTQyNDQwNiwiZXhwIjoxNzU5NTEwODA2fQ.Rz7_kcunB46k67BTNoVu_h-cp3jcconErejXMXV8Ync";
 
 
     public function obtenerClientes() {
@@ -49,12 +49,32 @@ class ClienteService {
 
 
     public function agregarCliente($nombre, $correo, $contrasena, $documento, $telefono, $estado) {
-        $datos = compact("nombre","correo","contrasena","documento","telefono","estado");
+
+        $hash = password_hash($contrasena, PASSWORD_BCRYPT);
+
+        $datos = [
+            "nombre"     => $nombre,
+            "correo"     => $correo,
+            "contrasena" => $hash,
+            "documento"  => $documento,
+            "telefono"   => $telefono,
+            "estado"     => $estado
+        ];
         return $this->enviarPeticion("POST", $this->apiUrl, $datos);
     }
 
     public function actualizarCliente($id, $nombre, $correo, $contrasena, $telefono, $documento, $estado) {
-        $datos = compact("nombre","correo","contrasena","telefono","documento","estado");
+
+        $hash = password_hash($contrasena, PASSWORD_BCRYPT);
+
+        $datos = [
+            "nombre"     => $nombre,
+            "correo"     => $correo,
+            "contrasena" => $hash,
+            "documento"  => $documento,
+            "telefono"   => $telefono,
+            "estado"     => $estado
+        ];
         return $this->enviarPeticion("PUT", $this->apiUrl . "/$id", $datos);
     }
 
