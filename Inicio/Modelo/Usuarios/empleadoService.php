@@ -7,7 +7,7 @@ class EmpleadoService {
         $this->apiUrl = $urlEmpleado;
     }
 
-    private $jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1OTI1MjYxNSwiZXhwIjoxNzU5MjU2MjE1fQ.TH1ovSG9IZyH9ZX-06qcPtEoAQ7NXF8MKcZO8zAMrZM";
+    private $jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1OTI2OTA4MywiZXhwIjoxNzU5MjcyNjgzfQ.lceubp1ut5mqgxP0uW1KnoHtUTLzoM9m5GE2SgX44H4";
 
     public function obtenerEmpleados() {
 
@@ -81,16 +81,34 @@ class EmpleadoService {
     private function enviarPeticion($metodo, $url, $datos = null) {
         $proceso = curl_init($url);
         curl_setopt($proceso, CURLOPT_CUSTOMREQUEST, $metodo);
-        if ($datos) curl_setopt($proceso, CURLOPT_POSTFIELDS, json_encode($datos));
         curl_setopt($proceso, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($proceso, CURLOPT_HTTPHEADER, [
+
+        $headers = [
             "Content-Type: application/json",
-            'Content-Length: ' . strlen($datos),
-            "Athorization: Bearer{$this->jwtToken}"
-        ]);
+            "Authorization: Bearer {$this->jwtToken}"
+        ];
+
+        if ($datos) {
+            $jsonData = json_encode($datos);
+            curl_setopt($proceso, CURLOPT_POSTFIELDS, $jsonData);
+            $headers[] = 'Content-Length: ' . strlen($jsonData);
+        }
+
+        curl_setopt($proceso, CURLOPT_HTTPHEADER, $headers);
 
         $res = curl_exec($proceso);
         $http_code = curl_getinfo($proceso, CURLINFO_HTTP_CODE);
+
+        if ($res === false) {
+            $error = curl_error($proceso);
+            curl_close($proceso);
+            return [
+                "success" => false,
+                "error"   => "cURL error: $error",
+                "response"=> null
+            ];
+        }
+
         curl_close($proceso);
 
         return [

@@ -7,6 +7,7 @@ class ProductoService {
         $this->apiUrl = $urlProducto;
     }
 
+
     private $jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1OTM2NDg4OCwiZXhwIjoxNzU5MzY4NDg4fQ.Ed1xmDTATzlpQzKAQosZkNmY0j-2sdVlF6Rkd_GGKZY";
 
     /* -------------------- GET -------------------- */
