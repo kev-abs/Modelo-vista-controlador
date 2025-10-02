@@ -44,15 +44,38 @@
             position: relative;
         }
     </style>
-</head>
-<body class="bg-light">
+      <!-- ENCABEZADO -->
+<header class="bg-white sticky-top py-3 border-bottom shadow-sm">
+  <div class="container d-flex flex-wrap justify-content-between align-items-center">
 
-<!-- Botón volver al inicio -->
-<div class="container my-4 text-center">
-    <a href="index.php" class="btn btn-outline-secondary btn-lg btn-hover">
-        <i class="bi bi-arrow-left me-2"></i>Volver al inicio
-    </a>
-</div>
+    <!-- LOGO -->
+    <div class="d-flex align-items-center">
+      <img src="/ModeloVistaControlador/Inicio/Public/Imagenes/logo_kshopsinfondo.png" alt="Logo K-Shop" width="83" height="" class="me-2">
+      <a href="/ModeloVistaControlador/index.php?Controller=inicio" class="text-decoration-none fs-7 fw-bold text-dark">K-SHOP</a>
+    </div>
+
+    <!-- BARRA DE BÚSQUEDA CENTRADA (invisible en móvil) -->
+    <form class="mx-auto d-none d-md-block w-50" action="/buscar" method="GET">
+      <input type="text" class="form-control" name="q" placeholder="Buscar productos...">
+    </form>
+
+    <!-- MENÚ NAVEGACIÓN -->
+    <nav class="d-flex align-items-center gap-3">
+      <a href="index.php?Controller=productos&action=verProductos" class="nav-link text-dark">Productos</a>
+      <a href="./servicios.php" class="nav-link text-dark">Servicios</a>
+      <!-- CARRITO -->
+      <a href="./carrito.php" class="btn btn-outline-dark border-0">
+        <i class="bi bi-cart-fill"></i>
+      </a>
+
+      <!-- INICIAR SESIÓN -->
+      <a href="index.php?Controller=login" class="btn btn-outline-dark border-0 text-dark">
+        <i class="bi bi-person-circle me-1"></i>Iniciar Sesión
+      </a>
+    </nav>
+  </div>
+</header>
+</head>
 
 <?php if (!empty($productos) && is_array($productos)): ?>
 <div class="container my-5">
@@ -90,6 +113,24 @@
     </div>
 </div>
 <?php endif; ?>
+
+<div class="container my-4 text-center">
+    <a href="index.php" class="btn btn-outline-secondary btn-lg btn-hover">
+        <i class="bi bi-arrow-left me-2"></i>Volver al inicio
+    </a>
+</div>
+
+<!-- FOOTER -->
+    <footer class="bg-dark text-white text-center py-4 mt-auto">
+        <div class="container">
+            <div class="mb-3">
+                <a href="#" class="text-white me-3">Términos</a>
+                <a href="#" class="text-white me-3">Privacidad</a>
+                <a href="#" class="text-white">Ayuda</a>
+            </div>
+            <p class="mb-0">&copy; 2025 Tienda K-Shop - Todos los derechos reservados</p>
+        </div>
+    </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>

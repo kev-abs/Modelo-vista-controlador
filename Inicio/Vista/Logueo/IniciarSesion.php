@@ -75,7 +75,7 @@
       <div class="text-center mt-4">
         <a href="./registro.php" class="link-dark d-block mb-1">¿No tienes cuenta? Regístrate</a>
         <a href="./restablecer_contraseña.php" class="link-dark d-block mb-1">Olvidé mi contraseña</a>
-        <a href="../index.php" class="link-dark d-block mt-2">← Volver al inicio</a>
+        <a href="/ModeloVistaControlador/index.php?Controller=inicio" class="link-dark d-block mt-2">← Volver al inicio</a>
       </div>
 
     </div>

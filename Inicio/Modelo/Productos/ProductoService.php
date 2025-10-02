@@ -7,7 +7,7 @@ class ProductoService {
         $this->apiUrl = $urlProducto;
     }
 
-    private $jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1OTI2NzA2NCwiZXhwIjoxNzU5MjcwNjY0fQ.LWRUe-YEFJGZD_ItjwKGoBNJsG_di3bbyHgcze18ITg";
+    private $jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1OTM2NDg4OCwiZXhwIjoxNzU5MzY4NDg4fQ.Ed1xmDTATzlpQzKAQosZkNmY0j-2sdVlF6Rkd_GGKZY";
 
     /* -------------------- GET -------------------- */
     public function obtenerProductos(){
@@ -66,7 +66,8 @@ class ProductoService {
         curl_setopt($proceso, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($proceso, CURLOPT_HTTPHEADER, [
             'Content-Type: application/json',
-            'Content-Length: ' . strlen($data_json)
+            'Content-Length: ' . strlen($data_json),
+            "Authorization: Bearer {$this->jwtToken}"
         ]);
 
         $respuestaPet = curl_exec($proceso);
@@ -107,7 +108,8 @@ class ProductoService {
         curl_setopt($proceso, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($proceso, CURLOPT_HTTPHEADER, [
             'Content-Type: application/json',
-            'Content-Length: ' . strlen($data_json)
+            'Content-Length: ' . strlen($data_json),
+            "Authorization: Bearer {$this->jwtToken}"
         ]);
 
     $respuestaPet = curl_exec($proceso);

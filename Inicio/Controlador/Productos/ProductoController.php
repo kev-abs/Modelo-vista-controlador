@@ -39,8 +39,7 @@ class ProductoController {
             $stock        = trim($_POST["stock"] ?? "");
             $id_Proveedor = trim($_POST["id_Proveedor"] ?? "");
             $estado       = trim($_POST["estado"] ?? "");
-
-            // Manejo de imagen
+            
             $imagen = null;
             if (isset($_FILES["imagen"]) && $_FILES["imagen"]["error"] === UPLOAD_ERR_OK) {
                 $tmpImagen   = $_FILES["imagen"]["tmp_name"];
