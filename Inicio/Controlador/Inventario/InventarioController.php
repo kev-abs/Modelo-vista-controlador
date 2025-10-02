@@ -6,7 +6,6 @@ require_once __DIR__ . "/../../Modelo/Inventario/IngresoCompraService.php";
 class InventarioController {
     private $cuponService;
     private $ingresoService;
-    private $proveedorService;
 
     public function __construct() {
         $this->cuponService = new CuponService();

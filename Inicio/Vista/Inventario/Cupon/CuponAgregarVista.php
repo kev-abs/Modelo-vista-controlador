@@ -31,7 +31,7 @@
 
   <!-- Botón Volver -->
     <div class="text-center mt-4">
-        <a href="../ModeloVistaControlador/index.php?Controller=proveedor" class="btn btn-outline-secondary btn-lg w-50">
+        <a href="../ModeloVistaControlador/index.php?Controller=inventario" class="btn btn-outline-secondary btn-lg w-50">
             <i class="bi bi-arrow-left me-2"></i> Volver al Panel
         </a>
     </div>
