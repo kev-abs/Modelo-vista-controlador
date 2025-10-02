@@ -6,7 +6,7 @@ class InicioController {
     private $service;
 
     public function __construct() {
-        global $urlProducto; // asegúrate de que existe
+        global $urlProducto;
         $this->service = new ProductoService();
     }
 
