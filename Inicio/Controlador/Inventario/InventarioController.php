@@ -6,6 +6,7 @@ require_once __DIR__ . "/../../Modelo/Inventario/IngresoCompraService.php";
 class InventarioController {
     private $cuponService;
     private $ingresoService;
+    private $proveedorService;
 
     public function __construct() {
         $this->cuponService = new CuponService();
@@ -31,7 +32,7 @@ class InventarioController {
             $total       = trim($_POST['total'] ?? "");
 
             if ($idEmpleado && $idProveedor && $total) {
-                $resultado = $this->ingresoService->nuevoIngreso($idEmpleado, $idProveedor, $total);
+                $resultado = $this->ingresoService->nuevoingreso($idEmpleado, $idProveedor, $total);
                 $mensaje = $resultado['success']
                     ? "<div class='alert alert-success'>{$resultado['mensaje']}</div>"
                     : "<div class='alert alert-danger'>Error: {$resultado['mensaje']}</div>";
@@ -124,5 +125,6 @@ class InventarioController {
         $cupones = $this->cuponService->obtenerCupones();
         include_once __DIR__ . "/../../Vista/Inventario/Cupon/CuponActualizarEliminarVista.php";
     }
+
 }
 ?>

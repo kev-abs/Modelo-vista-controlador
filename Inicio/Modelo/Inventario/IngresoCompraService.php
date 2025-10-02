@@ -58,15 +58,15 @@ class IngresoCompraService{
         if (curl_errno($ch)) {
            $error = curl_error($ch);
            curl_close($ch);
-           return ["error" => true, "message" => $error];
+           return ["success" => false, "message" => $error];
         }
 
         curl_close($ch);
 
         if ($http_code === 200 || $http_code === 201) {
-            return ["error" => false, "mensaje" => "Ingreso de compra registrado exitosamente."];
+            return ["success" => true, "mensaje" => "Ingreso de compra registrado exitosamente."];
         } else {
-            return ["error" => true, "mensaje" => "Error al registrar el ingreso de compra. Código HTTP: $http_code"];
+            return ["success" => false, "mensaje" => "Error al registrar el ingreso de compra. Código HTTP: $http_code"];
         }
     }
     

@@ -41,10 +41,11 @@ class CuponService {
     // Crear cupón
     public function nuevoCupon($codigo, $descuento, $fechaExpiracion) {
         $nuevoCupon = [
-            "Codigo" => $codigo,
-            "Descuento" => (int)$descuento,
-            "Fecha_Expiracion" => $fechaExpiracion
+            "codigo" => $codigo, 
+            "descuento" => (float)$descuento,
+            "fechaExpiracion" => $fechaExpiracion
         ];
+
 
         $data_json = json_encode($nuevoCupon);
 
@@ -61,18 +62,21 @@ class CuponService {
         $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
 
-        return ($http_code === 200 || $http_code === 201)
-            ? ["success" => true, "mensaje" => "Cupón agregado correctamente."]
-            : ["success" => false, "mensaje" => "Error al registrar cupón. HTTP: $http_code"];
+        return [
+            "success" => ($http_code >= 200 && $http_code < 300),
+            "mensaje" => "HTTP $http_code. Respuesta: " . $response . " " . ($error ?? "")
+        ];
     }
 
     // Actualizar cupón
     public function actualizarCupon($id, $codigo, $descuento, $fechaExpiracion) {
         $data_json = json_encode([
-            "Codigo" => $codigo,
-            "Descuento" => (int)$descuento,
-            "Fecha_Expiracion" => $fechaExpiracion
-        ]);
+            $nuevoCupon = [
+                "codigo" => $codigo, 
+                "descuento" => (float) $descuento,
+                "fechaExpiracion" => $fechaExpiracion
+            ]
+        ]); 
 
         $ch = curl_init($this->apiUrl . "/" . $id);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
@@ -87,9 +91,10 @@ class CuponService {
         $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
 
-        return ($http_code === 200)
-            ? ["success" => true, "mensaje" => "Cupón actualizado correctamente."]
-            : ["success" => false, "mensaje" => "Error al actualizar cupón. HTTP: $http_code"];
+        return [
+            "success" => ($http_code >= 200 && $http_code < 300),
+            "mensaje" => "HTTP $http_code. Respuesta: " . $response . " " . ($error ?? "")
+        ];
     }
 
     // Eliminar cupón
