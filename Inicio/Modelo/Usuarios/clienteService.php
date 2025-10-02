@@ -7,7 +7,7 @@ class ClienteService {
         $this->apiUrl = $urlCliente;
     }
 
-    private $jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1OTI2OTA4MywiZXhwIjoxNzU5MjcyNjgzfQ.lceubp1ut5mqgxP0uW1KnoHtUTLzoM9m5GE2SgX44H4";
+    private $jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1OTM3MzE0NiwiZXhwIjoxNzU5NDU5NTQ2fQ.zYpTFWgsukxyEagLCKPYtMMRMpWuyOQLBgAizM88670";
 
 
     public function obtenerClientes() {
@@ -21,7 +21,7 @@ class ClienteService {
                 "header" => implode("\r\n", $headers)
             ]
         ]);
-        $respuesta = file_get_contents($this->apiUrl);
+        $respuesta = file_get_contents($this->apiUrl, false, $context);
         if ($respuesta === FALSE) return [];
 
         // Decodificar JSON
