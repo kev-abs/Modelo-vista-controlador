@@ -2,7 +2,6 @@
 require_once __DIR__ . "/../../Confi/Confi.php";
 require_once __DIR__ . "/../../Modelo/Inventario/CuponService.php";
 require_once __DIR__ . "/../../Modelo/Inventario/IngresoCompraService.php";
-require_once __DIR__ . "/../../Modelo/Inventario/ProveedorService.php";
 
 class InventarioController {
     private $cuponService;
@@ -12,7 +11,6 @@ class InventarioController {
     public function __construct() {
         $this->cuponService = new CuponService();
         $this->ingresoService = new IngresoCompraService();
-        $this->proveedorService = new ProveedorService();
     }
 
     // ================= VISTA PRINCIPAL =================
@@ -126,65 +124,6 @@ class InventarioController {
 
         $cupones = $this->cuponService->obtenerCupones();
         include_once __DIR__ . "/../../Vista/Inventario/Cupon/CuponActualizarEliminarVista.php";
-    }
-
-    // ================= PROVEEDORES =================
-    public function consultarProveedores() {
-        $proveedores = $this->proveedorService->obtenerProveedores();
-        include_once __DIR__ . "/../../Vista/Inventario/Proveedor/ProveedorConsultarVista.php";
-    }
-    
-
-    public function agregarProveedor() {
-        $mensaje = "";
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $id        = trim($_POST['ID_Proveedor'] ?? "");
-            $nombre   = trim($_POST['Nombre_Empresa'] ?? "");
-            $contacto  = trim($_POST['Contacto'] ?? "");
-            $telefono  = trim($_POST['Telefono'] ?? "");
-            $correo    = trim($_POST['Correo'] ?? "");
-            $direccion = trim($_POST['Direccion'] ?? "");
-
-            if ($nombre && $contacto && $telefono && $correo && $direccion) {
-                $resultado = $this->proveedorService->nuevoProveedor($nombre, $contacto, $telefono, $correo, $direccion);
-
-                $mensaje = $resultado['success']
-                    ? "<div class='alert alert-success'>{$resultado['mensaje']}</div>"
-                    : "<div class='alert alert-danger'>Error: {$resultado['mensaje']}</div>";
-            } else {
-                $mensaje = "<div class='alert alert-danger'>Campos obligatorios vacíos.</div>";
-            }
-        }
-
-        include_once __DIR__ . "/../../Vista/Inventario/Proveedor/ProveedorAgregarVista.php";
-    }
-
-    public function editarEliminarProveedor() {
-        $mensaje = "";
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $accion     = $_POST['accion'] ?? "";
-            $idProveedor= trim($_POST['id_Proveedor'] ?? "");
-            $empresa    = trim($_POST['Nombre_Empresa'] ?? "");
-            $contacto   = trim($_POST['Contacto'] ?? "");
-            $telefono   = trim($_POST['Telefono'] ?? "");
-            $correo     = trim($_POST['Correo'] ?? "");
-            $direccion  = trim($_POST['Direccion'] ?? "");
-
-            if ($accion === "actualizar" && $idProveedor && $empresa && $contacto && $telefono && $correo && $direccion) {
-                $resultado = $this->proveedorService->actualizarProveedor($idProveedor, $empresa, $contacto, $telefono, $correo, $direccion);
-                $mensaje = $resultado['success']
-                    ? "<div class='alert alert-success'>Proveedor actualizado correctamente.</div>"
-                    : "<div class='alert alert-danger'>Error: {$resultado['mensaje']}</div>";
-            }
-
-            if ($accion === "eliminar" && $idProveedor) {
-                $resultado = $this->proveedorService->eliminarProveedor($idProveedor);
-                $mensaje = $resultado['success']
-                    ? "<div class='alert alert-success'>Proveedor eliminado correctamente.</div>"
-                    : "<div class='alert alert-danger'>Error: {$resultado['mensaje']}</div>";
-            }
-        }
-        include_once __DIR__ . "/../../Vista/Inventario/Proveedor/ProveedorActualizarEliminarVista.php";
     }
 
 }
