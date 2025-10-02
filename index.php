@@ -68,23 +68,10 @@ switch ($nombreController) {
     case 'productos':
         require_once './Inicio/Controlador/inicioController.php';
         $controlador = new InicioController();
-
-    
-    case 'cupon':
-        require_once './Inicio/Controlador/Inventario/InventarioController.php';
-        $controlador = new InventarioController();
-        break;
     
     case 'ingresocompra':
         require_once './Inicio/Controlador/Inventario/InventarioController.php';
         $controlador = new InventarioController();
-        break;
-
-
-
-    case 'productos':
-        require_once './Inicio/Controlador/inicioController.php';
-        $controlador = new InicioController();
         break;
 
 }
