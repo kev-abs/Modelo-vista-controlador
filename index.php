@@ -55,9 +55,9 @@ switch ($nombreController) {
 
     
     case 'cupon':
-    require_once './Inicio/Controlador/Inventario/CuponController.php';
-    $controlador = new CuponController();
-    break;
+        require_once './Inicio/Controlador/Inventario/InventarioController.php';
+        $controlador = new InventarioController();
+        break;
 
 
     case 'productos':
@@ -66,21 +66,31 @@ switch ($nombreController) {
 
     
     case 'cupon':
-        require_once './Inicio/Controlador/Inventario/CuponController.php';
-        $controlador = new CuponController();
+        require_once './Inicio/Controlador/Inventario/InventarioController.php';
+        $controlador = new InventarioController();
         break;
 
     
     case 'ingresocompra':
-        require_once './Inicio/Controlador/Inventario/IngresoCompraController.php';
-        $controlador = new IngresoCompraController();
+        require_once './Inicio/Controlador/Inventario/InventarioController.php';
+        $controlador = new InventarioController();
         break;
 
 
     case 'productos':
-    require_once './Inicio/Controlador/inicioController.php';
-    $controlador = new InicioController();
-    break;
+        require_once './Inicio/Controlador/inicioController.php';
+        $controlador = new InicioController();
+        break;
+    
+    case 'proveedor':
+        require_once './Inicio/Controlador/Inventario/InventarioController.php';
+        $controlador = new InventarioController();
+        break;
+
+    case 'proveedores':
+        require_once './Inicio/Controlador/Inventario/InventarioController.php';
+        $controlador = new InventarioController();
+        break;
 
 }
 

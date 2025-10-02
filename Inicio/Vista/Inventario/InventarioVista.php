@@ -74,13 +74,37 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Card Proveedores -->
+            <div class="col-md-6">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        <i class="bi bi-truck fs-1 text-primary mb-3"></i>
+                        <h4 class="fw-bold">Gestión de Proveedores</h4>
+                        <p class="text-muted">Consultar, agregar, actualizar o eliminar proveedores.</p>
+                        <div class="d-flex justify-content-center gap-2">
+                            <a href="index.php?Controller=inventario&action=consultarProveedores" class="btn btn-outline-dark">
+                                <i class="bi bi-search"></i> Consultar
+                            </a>
+                            <a href="index.php?Controller=inventario&action=agregarProveedor" class="btn btn-outline-dark">
+                                <i class="bi bi-plus-circle"></i> Agregar
+                            </a>
+                            <a href="index.php?Controller=inventario&action=editarEliminarProveedor" class="btn btn-outline-dark">
+                                <i class="bi bi-pencil-square"></i> Actualizar / Eliminar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-            <div class="text-center mt-4">
-                <a href="../ModeloVistaControlador/Inicio/Vista/Usuarios/Paneles/panelAdmin.php" class="btn btn-secondary">
-                  <i class="bi bi-arrow-left"></i> Volver al Panel
-                </a>
-            </div>
+    
+            <!-- Botón Volver -->
+    <div class="text-center mt-4">
+        <a href="../ModeloVistaControlador/Inicio/Vista/Usuarios/Paneles/panelAdmin.php" class="btn btn-outline-secondary btn-lg w-30">
+            <i class="bi bi-arrow-left me-2"></i> <-Volver 
+        </a>
+    </div>
 
  <!-- FOOTER -->
     <footer class="bg-dark text-white text-center py-4 mt-auto">

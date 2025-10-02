@@ -45,11 +45,12 @@
     <?php endif; ?>
     </div>
 
+    <!-- Botón Volver -->
     <div class="text-center mt-4">
-        <a href="../ModeloVistaControlador/index.php?Controller=inventario" class="btn btn-secondary">
-            <i class="bi bi-arrow-left"></i> Volver al Panel
+        <a href="../ModeloVistaControlador/index.php?Controller=proveedor" class="btn btn-outline-secondary btn-lg w-50">
+            <i class="bi bi-arrow-left me-2"></i> Volver al Panel
         </a>
-     </div>
+    </div>
 
  <!-- FOOTER -->
     <footer class="bg-dark text-white text-center py-4 mt-auto">
