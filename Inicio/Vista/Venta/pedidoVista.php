@@ -213,71 +213,87 @@
     <div class="alert alert-danger">Error al obtener los pedidos.</div>
   <?php endif; ?>
 
-  <!-- Formulario Agregar -->
-  <div class="card mt-5">
-    <div class="card-header bg-success text-white">Agregar Pedido</div>
-    <div class="card-body">
-      <form method="POST" class="row g-3">
-        <input type="hidden" name="accion" value="agregar">
+<div class="row mt-5">
 
-        <div class="col-md-6">
-          <label for="id_Cliente" class="form-label">ID Cliente</label>
-          <input type="number" class="form-control" name="id_Cliente" id="id_Cliente" required>
-        </div>
-        <div class="col-md-6">
-          <label for="fecha_Pedido" class="form-label">Fecha</label>
-          <input type="date" class="form-control" name="fecha_Pedido" id="fecha_Pedido" required>
-        </div>
-        <div class="col-md-6">
-          <label for="estado" class="form-label">Estado</label>
-          <input type="text" class="form-control" name="estado" id="estado" required>
-        </div>
-        <div class="col-md-6">
-          <label for="total" class="form-label">Total</label>
-          <input type="number" class="form-control" name="total" id="total" required>
-        </div>
+    <!-- Formulario Agregar -->
+    <div class="col-md-6">
+        <div class="card h-100">
+            <div class="card-header bg-success text-white">Agregar Pedido</div>
+            <div class="card-body">
+                <form method="POST" class="row g-3">
+                    <input type="hidden" name="accion" value="agregar">
 
-        <div class="col-12">
-          <button type="submit" class="btn btn-success">Agregar</button>
+                    <div class="col-md-6">
+                        <label for="id_Cliente" class="form-label">ID Cliente</label>
+                        <input type="number" class="form-control" name="id_Cliente" id="id_Cliente" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="fecha_Pedido" class="form-label">Fecha</label>
+                        <input type="date" class="form-control" name="fecha_Pedido" id="fecha_Pedido" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="estado" class="form-label">Estado</label>
+                        <input type="text" class="form-control" name="estado" id="estado" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="total" class="form-label">Total</label>
+                        <input type="number" class="form-control" name="total" id="total" required>
+                    </div>
+
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-success w-100">Agregar</button>
+                    </div>
+                </form>
+            </div>
         </div>
-      </form>
     </div>
-  </div>
 
-  <!-- Formulario Actualizar -->
-  <div class="card mt-4">
-    <div class="card-header bg-warning">Actualizar Pedido</div>
-    <div class="card-body">
-      <form method="POST" class="row g-3">
-        <input type="hidden" name="accion" value="actualizar">
+    <!-- Formulario Actualizar -->
+    <div class="col-md-6">
+        <div class="card h-100">
+            <div class="card-header bg-primary text-white">Actualizar Pedido</div>
+            <div class="card-body">
+                <form method="POST" class="row g-3">
+                    <input type="hidden" name="accion" value="actualizar">
 
-        <div class="col-md-4">
-          <label for="id_Pedido" class="form-label">ID Pedido</label>
-          <input type="number" class="form-control" name="id_Pedido" id="id_Pedido" required>
-        </div>
-        <div class="col-md-4">
-          <label for="id_Cliente" class="form-label">ID Cliente</label>
-          <input type="number" class="form-control" name="id_Cliente" id="id_Cliente" required>
-        </div>
-        <div class="col-md-4">
-          <label for="fecha_Pedido" class="form-label">Fecha</label>
-          <input type="date" class="form-control" name="fecha_Pedido" id="fecha_Pedido" required>
-        </div>
-        <div class="col-md-6">
-          <label for="estado" class="form-label">Estado</label>
-          <input type="text" class="form-control" name="estado" id="estado" required>
-        </div>
-        <div class="col-md-6">
-          <label for="total" class="form-label">Total</label>
-          <input type="number" class="form-control" name="total" id="total" required>
-        </div>
+                    <div class="col-md-4">
+                        <label for="id_Pedido" class="form-label">ID Pedido</label>
+                        <input type="number" class="form-control" name="id_Pedido" id="id_Pedido" required>
+                    </div>
 
-        <div class="col-12">
-          <button type="submit" class="btn btn-warning">Actualizar</button>
+                    <div class="col-md-4">
+                        <label for="id_Cliente" class="form-label">ID Cliente</label>
+                        <input type="number" class="form-control" name="id_Cliente" id="id_Cliente" required>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="fecha_Pedido" class="form-label">Fecha</label>
+                        <input type="date" class="form-control" name="fecha_Pedido" id="fecha_Pedido" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="estado" class="form-label">Estado</label>
+                        <input type="text" class="form-control" name="estado" id="estado" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="total" class="form-label">Total</label>
+                        <input type="number" class="form-control" name="total" id="total" required>
+                    </div>
+
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary w-100">Actualizar</button>
+                    </div>
+                </form>
+            </div>
         </div>
-      </form>
     </div>
-  </div>
+
+</div>
+
 </main>
 
 <footer class="bg-dark text-white text-center py-4 mt-auto">
