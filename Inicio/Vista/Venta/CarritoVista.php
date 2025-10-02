@@ -28,7 +28,7 @@
       <a href="index.php?Controller=productos&action=verProductos" class="nav-link text-dark">Productos</a>
       <a href="./servicios.php" class="nav-link text-dark">Servicios</a>
       <!-- CARRITO -->
-      <a href="/ModeloVistaControlador/Inicio/Vista/Venta/CarritoVista.php" class="btn btn-outline-dark border-0">
+      <a href="#" class="btn btn-outline-dark border-0">
         <i class="bi bi-cart-fill"></i>
       </a>
 
