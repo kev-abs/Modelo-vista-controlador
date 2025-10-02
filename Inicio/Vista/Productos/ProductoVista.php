@@ -11,15 +11,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body class="bg-light d-flex flex-column min-vh-100">
-
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm sticky-top">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="/ModeloVistaControlador/index.php?Controller=panel&action=manejarPeticion">
-                <img src="/ModeloVistaControlador/Inicio/Public/Imagenes/logo_kshopsinfondo.png" alt="K-Shop" width="60" class="me-2">
-                K-SHOP | Admin
-            </a>
-
             <form class="d-none d-md-flex mx-auto w-50" role="search">
                 <input class="form-control" type="search" placeholder="Buscar en productos..." aria-label="Buscar">
             </form>
@@ -67,17 +58,6 @@
                 </div>
             </div>
 
-    <!-- FOOTER -->
-    <footer class="bg-dark text-white text-center py-4 mt-auto">
-        <div class="container">
-            <div class="mb-3">
-                <a href="#" class="text-white me-3">Términos</a>
-                <a href="#" class="text-white me-3">Privacidad</a>
-                <a href="#" class="text-white">Ayuda</a>
-            </div>
-            <p class="mb-0">&copy; 2025 Tienda K-Shop - Todos los derechos reservados</p>
-        </div>
-    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

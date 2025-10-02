@@ -7,8 +7,20 @@ class ClienteService {
         $this->apiUrl = $urlCliente;
     }
 
+    private $jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1OTI2OTA4MywiZXhwIjoxNzU5MjcyNjgzfQ.lceubp1ut5mqgxP0uW1KnoHtUTLzoM9m5GE2SgX44H4";
+
 
     public function obtenerClientes() {
+        $headers =[
+            "Authorization: Bearer {$this->jwtToken}"
+        ];
+
+        $context = stream_context_create([
+            "http" => [
+                "method" => "GET",
+                "header" => implode("\r\n", $headers)
+            ]
+        ]);
         $respuesta = file_get_contents($this->apiUrl);
         if ($respuesta === FALSE) return [];
 
@@ -50,28 +62,43 @@ class ClienteService {
         return $this->enviarPeticion("DELETE", $this->apiUrl . "/$id");
     }
 
-private function enviarPeticion($metodo, $url, $datos = null) {
+    private function enviarPeticion($metodo, $url, $datos = null) {
         $proceso = curl_init($url);
         curl_setopt($proceso, CURLOPT_CUSTOMREQUEST, $metodo);
+        curl_setopt($proceso, CURLOPT_RETURNTRANSFER, true);
+
+        $headers = [
+            "Content-Type: application/json",
+            "Authorization: Bearer {$this->jwtToken}"
+        ];
 
         if ($datos) {
-            curl_setopt($proceso, CURLOPT_POSTFIELDS, json_encode($datos));
+            $jsonData = json_encode($datos);
+            curl_setopt($proceso, CURLOPT_POSTFIELDS, $jsonData);
+            $headers[] = 'Content-Length: ' . strlen($jsonData);
         }
 
-        curl_setopt($proceso, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($proceso, CURLOPT_HTTPHEADER, ["Content-Type: application/json"]);
+        curl_setopt($proceso, CURLOPT_HTTPHEADER, $headers);
 
         $res = curl_exec($proceso);
         $http_code = curl_getinfo($proceso, CURLINFO_HTTP_CODE);
+
+        if ($res === false) {
+            $error = curl_error($proceso);
+            curl_close($proceso);
+            return [
+                "success" => false,
+                "error"   => "cURL error: $error",
+                "response"=> null
+            ];
+        }
+
         curl_close($proceso);
 
-        // Decodificar la respuesta de la API
-        $json = json_decode($res, true);
-
         return [
-            "success"  => ($http_code >= 200 && $http_code < 300),
-            "error"    => ($http_code >= 200 && $http_code < 300) ? null : "HTTP $http_code",
-            "response" => $json ?: $res
+            "success" => ($http_code >= 200 && $http_code < 300),
+            "error"   => ($http_code >= 200 && $http_code < 300) ? null : "HTTP $http_code",
+            "response"=> $res
         ];
     }
 }

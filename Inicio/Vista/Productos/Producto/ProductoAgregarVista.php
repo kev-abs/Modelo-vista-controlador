@@ -26,6 +26,11 @@
         <h2 class="fw-bold">Agregar Producto</h2>
         <p class="text-muted">Completa el formulario para registrar un nuevo producto en el sistema.</p>
     </div>
+     <?php if (!empty($mensaje)): ?>
+        <div class="mb-3">
+            <?=$mensaje; ?>
+        </div>
+    <?php endif; ?>
 
     <div class="col-md-8 mx-auto">
         <div class="card shadow-sm border-0">
@@ -85,7 +90,7 @@
         </div>
 
         <div class="text-center mt-4">
-            <a href="/ModeloVistaControlador/index.php?Controller=panel" class="btn btn-outline-secondary btn-lg w-50">
+            <a href="/ModeloVistaControlador/index.php?Controller=producto" class="btn btn-outline-secondary btn-lg w-50">
                 <i class="bi bi-arrow-left me-2"></i>Volver
             </a>
         </div>
@@ -97,3 +102,4 @@
 </footer>
 </body>
 </html>
+
