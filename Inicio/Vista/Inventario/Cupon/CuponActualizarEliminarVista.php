@@ -9,6 +9,12 @@
 
 <div class="container py-5  flex-grow-1">
   <h1 class="mb-4 text-center">Actualizar / Eliminar Cupón</h1>
+  <!-- Mensajes -->
+  <?php if (!empty($mensaje)): ?>
+    <div class="mb-3">
+      <?= $mensaje ?>
+    </div>
+  <?php endif; ?>
 
   <!-- Actualizar -->
   <h2 class="mb-4 text-center">Actualizar Cupón</h2>

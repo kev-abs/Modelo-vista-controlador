@@ -1,12 +1,24 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Consultar Cupones</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Consultar Cupones</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body class="bg-light d-flex flex-column min-vh-100">
+    
+    <header class="bg-white sticky-top py-3 border-bottom shadow-sm">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center" href="/ModeloVistaControlador/index.php?Controller=panel&action=manejarPeticion">
+                <img src="Inicio/Public/Imagenes/logo_kshopsinfondo.png" alt="Logo K-Shop" width="83" class="me-2">
+                <span class="fw-bold text-dark">K-SHOP | Cupon</span>
+            </div>
+            <nav>
+                <a href="Inicio/Controlador/Logueo/CerrarSesion.php" class="btn btn-outline-dark">Cerrar Sesión</a>
+            </nav>
+        </div>
+    </header>
 
     <div class="container py-5 flex-grow-1">
     <h1 class="mb-4 text-center">Consultar Cupones</h1>
