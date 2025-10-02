@@ -9,7 +9,12 @@ class ProductoService {
 
 
 
+<<<<<<< HEAD
     private $jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1OTQxOTkwOSwiZXhwIjoxNzU5NDIzNTA5fQ.BF2OLVKKCjm2W8M5PrlaZ9wVSglIvEnn40ZcuZ4vG3A";
+=======
+    private $jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1OTM3MzE0NiwiZXhwIjoxNzU5NDU5NTQ2fQ.zYpTFWgsukxyEagLCKPYtMMRMpWuyOQLBgAizM88670";
+
+>>>>>>> origin/main
 
     /* -------------------- GET -------------------- */
     public function obtenerProductos(){
