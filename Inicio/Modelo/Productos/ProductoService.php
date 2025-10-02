@@ -9,7 +9,7 @@ class ProductoService {
 
 
 
-    private $jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1OTM3MzE0NiwiZXhwIjoxNzU5NDU5NTQ2fQ.zYpTFWgsukxyEagLCKPYtMMRMpWuyOQLBgAizM88670";
+    private $jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1OTQyNDYwOCwiZXhwIjoxNzU5NDI4MjA4fQ.S_BxpxMeLqa8qcFlFhT3VJxM7y8bo0WFhHgvANBrsNE";
 
 
     /* -------------------- GET -------------------- */

@@ -27,6 +27,22 @@ class ProductoController {
 
         require __DIR__ . "/../../Vista/Productos/Producto/ProductoConsultarVista.php";
     }
+    // ================= VER PRODUCTOS (catálogo para el cliente) =================
+public function verProductos() {
+    $mensaje = "";
+    $productos = [];
+
+    $resultado = $this->productoService->obtenerProductos();
+    if ($resultado["success"]) {
+        $productos = $resultado["data"];
+    } else {
+        $mensaje = "<div class='alert alert-danger'>Error: " . htmlspecialchars($resultado["error"]) . "</div>";
+    }
+
+    // Aquí cargas la vista del catálogo (Bootstrap con cards)
+    require __DIR__ . "/../../Vista/Productos/Producto/NuestrosProductos.php";
+}
+
 
     // ================= AGREGAR PRODUCTO =================
     public function agregarProducto() {
@@ -101,7 +117,9 @@ class ProductoController {
             } else {
                 $mensaje = "<div class='alert alert-danger'>Todos los campos son obligatorios para actualizar.</div>";
             }
+            
         }
+        
 
         require __DIR__ . "/../../Vista/Productos/Producto/ProductoActualizarVista.php";
     }
