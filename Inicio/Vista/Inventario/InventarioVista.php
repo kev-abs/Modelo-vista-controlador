@@ -76,11 +76,13 @@
             </div>
         </div>
     </div>
-            <div class="text-center mt-4">
-                <a href="../ModeloVistaControlador/Inicio/Vista/Usuarios/Paneles/panelAdmin.php" class="btn btn-secondary">
-                  <i class="bi bi-arrow-left"></i> Volver al Panel
-                </a>
-            </div>
+    
+            <!-- Botón Volver -->
+    <div class="text-center mt-4">
+        <a href="../ModeloVistaControlador/Inicio/Vista/Usuarios/Paneles/panelAdmin.php" class="btn btn-outline-secondary btn-lg w-30">
+            <i class="bi bi-arrow-left me-2"></i> <-Volver 
+        </a>
+    </div>
 
  <!-- FOOTER -->
     <footer class="bg-dark text-white text-center py-4 mt-auto">
