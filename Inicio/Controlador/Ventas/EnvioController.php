@@ -60,7 +60,7 @@ class EnvioController {
                 }
             }
 
-            header("Location: index.php?Controller=envios&msg=" . urlencode($mensaje));
+            header("Location: index.php?Controller=ventas&action=Envio&msg=" . urlencode($mensaje));
             exit();
         }
     include __DIR__ . '/../../Vista/Venta/EnvioVista.php';
