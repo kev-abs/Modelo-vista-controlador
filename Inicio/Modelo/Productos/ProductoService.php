@@ -8,7 +8,8 @@ class ProductoService {
     }
 
 
-    private $jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1OTM3MzgxNywiZXhwIjoxNzU5Mzc3NDE3fQ.kV1Qj2B9E72zp1gQDAgX6qXIk-GGyiJvsXD4M0rv_nU";
+
+    private $jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1OTQxOTkwOSwiZXhwIjoxNzU5NDIzNTA5fQ.BF2OLVKKCjm2W8M5PrlaZ9wVSglIvEnn40ZcuZ4vG3A";
 
     /* -------------------- GET -------------------- */
     public function obtenerProductos(){
