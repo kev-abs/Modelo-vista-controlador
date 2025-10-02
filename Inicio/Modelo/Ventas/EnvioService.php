@@ -59,7 +59,7 @@ class EnvioService {
     public function actualizarEnvios($id_Envio, $id_Pedido, $direccionEnvio, $fechaEnvio, $metodoEnvio, $estadoEnvio) {
         $data_json = json_encode([
             "id_Pedido" => $id_Pedido,
-            "direccion_Envio" => $direccionEnvio,
+            "direccionEnvio" => $direccionEnvio,
             "fechaEnvio" => $fechaEnvio,
             "metodoEnvio" => $metodoEnvio,
             "estadoEnvio" => $estadoEnvio

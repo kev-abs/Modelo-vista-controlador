@@ -29,14 +29,10 @@ switch ($nombreController) {
         break;
 
     case 'ventas':
-        require_once './Inicio/Controlador/Ventas/PedidoController.php';
-        $controlador = new PedidoController();
-        break;
-
-    case 'envios':
-        require_once './Inicio/Controlador/Ventas/EnvioController.php';
-        $controlador = new EnvioController();
-        break;
+        require_once './Inicio/Controlador/Ventas/VentasController.php';
+        $controlador = new VentasController();
+        $controlador->manejarPeticion($action, $id);
+        return;
     
     case 'carrito':
         require_once './Inicio/Controlador/Ventas/CarritoController.php';
