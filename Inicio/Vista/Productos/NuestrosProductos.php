@@ -64,7 +64,7 @@
       <a href="index.php?Controller=productos&action=verProductos" class="nav-link text-dark">Productos</a>
       <a href="./servicios.php" class="nav-link text-dark">Servicios</a>
       <!-- CARRITO -->
-      <a href="./carrito.php" class="btn btn-outline-dark border-0">
+      <a href="index.php?Controller=carrito&action=index" class="btn btn-outline-dark border-0">
         <i class="bi bi-cart-fill"></i>
       </a>
 
@@ -97,7 +97,7 @@
                     <h5 class="card-title fw-bold"><?= htmlspecialchars($p['nombre']) ?></h5>
                     <p class="card-text text-muted small"><?= htmlspecialchars($p['descripcion']) ?></p>
                     <p class="fw-bold h6">$<?= htmlspecialchars($p['precio']) ?></p>
-                    <a href="#" class="btn btn-primary mt-auto btn-hover">
+                    <a href="index.php?Controller=carrito&action=agregar&id=<?= $p['id_Producto'] ?>" class="btn btn-primary mt-auto btn-hover">
                         <i class="bi bi-cart-plus me-1"></i>Agregar al carrito
                     </a>
                 </div>
