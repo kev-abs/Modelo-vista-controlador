@@ -7,9 +7,22 @@ class ProductoService {
         $this->apiUrl = $urlProducto;
     }
 
+
+    private $jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1OTM3NTE5OSwiZXhwIjoxNzU5Mzc4Nzk5fQ.p3zQJxRULaFR6JIIpEW_DEmcerDSC9zfKG8ADOcuC2k";
+
     /* -------------------- GET -------------------- */
     public function obtenerProductos(){
-        $response = file_get_contents($this->apiUrl);
+        $headers =[
+            "Authorization: Bearer {$this->jwtToken}"
+        ];
+        $context = stream_context_create([
+            "http" => [
+                "method" => "GET",
+                "header" => implode("\r\n", $headers)
+            ]
+        ]);
+
+        $response = file_get_contents($this->apiUrl, false, $context);
         $decoded = json_decode($response, true);
 
         $resultado = [];
@@ -54,7 +67,8 @@ class ProductoService {
         curl_setopt($proceso, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($proceso, CURLOPT_HTTPHEADER, [
             'Content-Type: application/json',
-            'Content-Length: ' . strlen($data_json)
+            'Content-Length: ' . strlen($data_json),
+            "Authorization: Bearer {$this->jwtToken}"
         ]);
 
         $respuestaPet = curl_exec($proceso);
@@ -95,7 +109,8 @@ class ProductoService {
         curl_setopt($proceso, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($proceso, CURLOPT_HTTPHEADER, [
             'Content-Type: application/json',
-            'Content-Length: ' . strlen($data_json)
+            'Content-Length: ' . strlen($data_json),
+            "Authorization: Bearer {$this->jwtToken}"
         ]);
 
     $respuestaPet = curl_exec($proceso);

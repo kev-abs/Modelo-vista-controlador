@@ -33,9 +33,14 @@ switch ($nombreController) {
         $controlador = new PedidoController();
         break;
 
-    case 'envios':  
+    case 'envios':
         require_once './Inicio/Controlador/Ventas/EnvioController.php';
         $controlador = new EnvioController();
+        break;
+    
+    case 'carrito':
+        require_once './Inicio/Controlador/Ventas/CarritoController.php';
+        $controlador = new CarritoController();
         break;
     
     case 'producto':
@@ -69,12 +74,12 @@ switch ($nombreController) {
         require_once './Inicio/Controlador/Inventario/InventarioController.php';
         $controlador = new InventarioController();
         break;
-
     
     case 'ingresocompra':
         require_once './Inicio/Controlador/Inventario/InventarioController.php';
         $controlador = new InventarioController();
         break;
+
 
 
     case 'productos':

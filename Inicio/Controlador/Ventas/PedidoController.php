@@ -1,15 +1,18 @@
 <?php
 require_once __DIR__ . '/../../Modelo/Ventas/PedidoService.php';
+require_once __DIR__ . '/../../Modelo/Ventas/CarritoService.php';
 require_once __DIR__ . '/../../Confi/Confi.php';
 
 
 class PedidoController {
 
     private $pedidoService;
+    private $carritoService;
 
     public function __construct()
     {
         $this->pedidoService = new PedidoService();
+        $this->carritoService = new CarritoService();
     }
 
     public function manejarPeticion() {
