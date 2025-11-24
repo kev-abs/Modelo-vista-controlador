@@ -9,7 +9,10 @@ class ProductoService {
 
 
 
-    private $jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1OTQxOTkwOSwiZXhwIjoxNzU5NDIzNTA5fQ.BF2OLVKKCjm2W8M5PrlaZ9wVSglIvEnn40ZcuZ4vG3A";
+
+    private $jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1OTQyNDQwNiwiZXhwIjoxNzU5NTEwODA2fQ.Rz7_kcunB46k67BTNoVu_h-cp3jcconErejXMXV8Ync";
+
+
 
     /* -------------------- GET -------------------- */
     public function obtenerProductos(){
@@ -24,28 +27,29 @@ class ProductoService {
         ]);
 
         $response = file_get_contents($this->apiUrl, false, $context);
-$decoded = json_decode($response, true);
+        $decoded = json_decode($response, true);
 
-$resultado = [];
+        $resultado = [];
 
-if (is_array($decoded)) {
-    foreach ($decoded as $fila) {
+        if (is_array($decoded)){
+            foreach ($decoded as $fila){
 
-        // $fila ya es un array con keys, NO un string
-        $resultado[] = [
-            'id_Producto' => $fila['id_Producto'] ?? null,
-            'nombre'      => $fila['nombre'] ?? null,
-            'descripcion' => $fila['descripcion'] ?? null,
-            'precio'      => $fila['precio'] ?? null,
-            'stock'       => $fila['stock'] ?? null,
-            'id_Proveedor'=> $fila['id_Proveedor'] ?? null,
-            'imagen'      => $fila['imagen'] ?? null,
-            'estado'      => $fila['estado'] ?? null,
-        ];
-    }
-}
-
-return ["success" => true, "data" => $resultado];
+                $partes = array_map('trim', explode('|', $fila));
+                if (count($partes) >= 7) {
+                    $resultado[] = [
+                        'id_Producto' => $partes[0],
+                        'nombre'      => $partes[1],
+                        'descripcion' => $partes[2],
+                        'precio'      => $partes[3],
+                        'stock'       => $partes[4],
+                        'id_Proveedor'=> $partes[5],
+                        'imagen'      => $partes[6],
+                        'estado'      => $partes[7]
+                    ];
+                }
+            }
+        }
+        return ["success" => true, "data" => $resultado];
     }
 
     /* -------------------- POST -------------------- */
