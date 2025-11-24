@@ -39,13 +39,13 @@
                         <h4 class="fw-bold">Gestión de Ingresos de Compra</h4>
                         <p class="text-muted">Consultar, agregar, actualizar o eliminar ingresos de compra.</p>
                         <div class="d-flex justify-content-center gap-2">
-                            <a href="index.php?Controller=inventario&action=consultarIngresoCompra" class="btn btn-outline-dark">
+                            <a href="/ModeloVistaControlador/index.php?Controller=inventario&action=consultarIngresoCompra" class="btn btn-outline-dark">
                                 <i class="bi bi-search"></i> Consultar
                             </a>
-                            <a href="index.php?Controller=inventario&action=agregarIngresoCompra" class="btn btn-outline-dark">
+                            <a href="/ModeloVistaControlador/index.php?Controller=inventario&action=agregarIngresoCompra" class="btn btn-outline-dark">
                                 <i class="bi bi-plus-circle"></i> Agregar
                             </a>
-                            <a href="index.php?Controller=inventario&action=editarEliminarIngresoCompra" class="btn btn-outline-dark">
+                            <a href="/ModeloVistaControlador/index.php?Controller=inventario&action=editarEliminarIngresoCompra" class="btn btn-outline-dark">
                                 <i class="bi bi-pencil-square"></i> Actualizar / Eliminar
                             </a>
                         </div>
@@ -61,13 +61,13 @@
                         <h4 class="fw-bold">Gestión de Cupones</h4>
                         <p class="text-muted">Consultar, agregar, actualizar o eliminar cupones.</p>
                         <div class="d-flex justify-content-center gap-2">
-                            <a href="index.php?Controller=inventario&action=consultarCupones" class="btn btn-outline-dark">
+                            <a href="/ModeloVistaControlador/index.php?Controller=inventario&action=consultarCupones" class="btn btn-outline-dark">
                                 <i class="bi bi-search"></i> Consultar
                             </a>
-                            <a href="index.php?Controller=inventario&action=agregarCupon" class="btn btn-outline-dark">
+                            <a href="/ModeloVistaControlador/index.php?Controller=inventario&action=agregarCupon" class="btn btn-outline-dark">
                                 <i class="bi bi-plus-circle"></i> Agregar
                             </a>
-                            <a href="index.php?Controller=inventario&action=editarEliminarCupon" class="btn btn-outline-dark">
+                            <a href="/ModeloVistaControlador/index.php?Controller=inventario&action=editarEliminarCupon" class="btn btn-outline-dark">
                                 <i class="bi bi-pencil-square"></i> Actualizar / Eliminar
                             </a>
                         </div>
