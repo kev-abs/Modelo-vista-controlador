@@ -7,18 +7,13 @@ class EmpleadoService {
         $this->apiUrl = $urlEmpleado;
     }
 
-    private $jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1OTQyNDQwNiwiZXhwIjoxNzU5NTEwODA2fQ.Rz7_kcunB46k67BTNoVu_h-cp3jcconErejXMXV8Ync";
 
     public function obtenerEmpleados() {
-
-        $headers =[
-            "Authorization: Bearer {$this->jwtToken}"
-        ];
 
         $context = stream_context_create([
             "http" => [
                 "method" => "GET",
-                "header" => implode("\r\n", $headers)
+                "header" => "Content-Type: application/json"
             ]
         ]);
 
@@ -30,21 +25,19 @@ class EmpleadoService {
 
         $empleados = [];
         foreach ($lineas as $linea) {
-            $datos = array_map('trim', explode("|", $linea));
-            if (count($datos) >= 6) {
                 $empleados[] = [
-                    "ID_Empleado"       => $datos[0],
-                    "Nombre"            => $datos[1],
-                    "Cargo"             => $datos[2],
-                    "Correo"            => $datos[3],
-                    "Contrasena"        => $datos[4],
-                    "Estado"            => $datos[5],
-                    "Fecha_Contratacion"=> $datos[6] ?? null,
+                    "ID_Empleado"       => $linea["idEmpleado"]     ?? null,
+                    "Nombre"            => $linea["nombre"]     ?? null,
+                    "Cargo"             => $linea["cargo"]     ?? null,
+                    "Correo"            => $linea["correo"]     ?? null,
+                    "Contrasena"        => $linea["contrasena"]     ?? null,
+                    "Estado"            => $linea["estado"]     ?? null,
+                    "Fecha_Contratacion" => $linea["fechaContratacion"]     ?? null,
                 ];
             }
-        }
-        return $empleados;
+            return $empleados;
     }
+
 
     public function agregarEmpleado($nombre, $cargo, $correo, $contrasena, $estado) {
         
@@ -85,7 +78,7 @@ class EmpleadoService {
 
         $headers = [
             "Content-Type: application/json",
-            "Authorization: Bearer {$this->jwtToken}"
+            "header" => "Content-Type: application/json"
         ];
 
         if ($datos) {

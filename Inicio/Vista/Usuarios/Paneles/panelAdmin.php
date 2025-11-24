@@ -260,7 +260,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'administrador') {
 
       <!-- Nota motivacional -->
       <div class="alert alert-light mt-5 shadow-sm rounded-4 border-start border-5 border-success">
-        <h4 class="alert-heading fw-bold">💡 ¡Tu rol importa!</h4>
+        <h4 class="alert-heading fw-bold">¡Tu rol importa!</h4>
         <p class="mb-0 text-secondary">Como administrador, eres el motor que impulsa el crecimiento de K-SHOP. Cada decisión cuenta. ¡Haz que cada clic construya una mejor tienda!</p>
       </div>
     </div>
