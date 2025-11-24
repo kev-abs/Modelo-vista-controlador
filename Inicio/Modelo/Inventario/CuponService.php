@@ -23,14 +23,12 @@ class CuponService {
 
         $resultado = [];
         foreach ($decoded as $fila) {
-            // Separar cada string en partes
-            $partes = explode(" ", $fila);
 
             $resultado[] = [
-                "id_Cupon" => $partes[0] ?? null,
-                "codigo" => $partes[1] ?? "",
-                "descuento" => $partes[2] ?? 0,
-                "fecha_expiracion" => $partes[3] ?? ""
+                "id_Cupon" => $fila["id_Cupon"] ?? null,
+                "codigo"  => $fila["codigo"] ?? null,
+                "descuento"  => $fila["descuento"] ?? null,
+                "fecha_expiracion"  => $fila["fecha_Expiracion"] ?? null
             ];
         }
 
@@ -43,7 +41,7 @@ class CuponService {
         $nuevoCupon = [
             "codigo" => $codigo,
             "descuento" => (float)$descuento,
-            "fechaExpiracion" => $fechaExpiracion
+            "fecha_Expiracion" => $fechaExpiracion
         ];
 
         $data_json = json_encode($nuevoCupon);
@@ -72,8 +70,8 @@ class CuponService {
         $data_json = json_encode([
             "codigo" => $codigo,
             "descuento" => (float)$descuento,
-            "fechaExpiracion" => $fechaExpiracion
-        ]);
+            "fecha_Expiracion" => $fechaExpiracion
+        ]); 
 
         $ch = curl_init($this->apiUrl . "/" . $id);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
