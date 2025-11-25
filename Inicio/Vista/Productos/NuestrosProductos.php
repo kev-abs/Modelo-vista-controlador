@@ -85,7 +85,7 @@
         <div class="col-12 col-sm-6 col-md-4 col-lg-3 fade-in">
             <div class="card h-100 shadow-sm border-0 rounded-3 product-card">
                 <?php if(!empty($p['imagen'])): ?>
-                <img src="http://localhost/api/uploads/productos/<?= htmlspecialchars($p['imagen']) ?>" 
+                <img src="Inicio/Public/Imagenes_productos/<?= htmlspecialchars($p['imagen']) ?>" 
                      class="card-img-top img-fluid rounded-top" 
                      alt="<?= htmlspecialchars($p['nombre']) ?>">
                 <?php else: ?>

@@ -44,74 +44,48 @@
 
                     <div class="mb-3">
                         <label class="form-label">ID del Producto</label>
-                        <input type="number" name="id_Producto" class="form-control" 
-                        value="<?= $producto['id_Producto'] ?? '' ?>" readonly>
-
+                        <input type="number" name="id_Producto" class="form-control" required>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Nombre</label>
-                        <input type="text" name="nombre" class="form-control" 
-                        value="<?= $producto['nombre'] ?? '' ?>" required>
- 
+                        <input type="text" name="nombre" class="form-control" required>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Descripción</label>
-                        <textarea name="descripcion" class="form-control" rows="3" required>
-                            <?= $producto['descripcion'] ?? '' ?>
-                        </textarea>
+                        <textarea name="descripcion" class="form-control" rows="3" required></textarea>
                     </div>
 
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Precio</label>
-                            <input type="number" name="precio" class="form-control"
-                            value="<?= $producto['precio'] ?? '' ?>" required>
+                            <input type="number" name="precio" class="form-control" required>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Stock</label>
-                            <input type="number" name="stock" class="form-control"
-                            value="<?= $producto['stock'] ?? '' ?>" required>
+                            <input type="number" name="stock" class="form-control" required>
                         </div>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">ID Proveedor</label>
-                        <input type="number" name="idProveedor" class="form-control"
-                        value="<?= $producto['id_Proveedor'] ?? '' ?>" required>
+                        <input type="number" name="id_Proveedor" class="form-control" required>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Estado</label>
                         <select name="estado" class="form-select" required>
-                            <option <?= ($producto['estado'] ?? '') === 'Disponible' ? 'selected' : '' ?> value="Disponible">Disponible</option>
-                            <option <?= ($producto['estado'] ?? '') === 'Inactivo' ? 'selected' : '' ?> value="Inactivo">Inactivo</option>
+                            <option value="">Seleccione...</option>
+                            <option value="activo">Activo</option>
+                            <option value="inactivo">Inactivo</option>
                         </select>
-
                     </div>
 
-                    <!-- Mostrar imagen actual -->
-<?php if (!empty($producto['imagen'])): ?>
-    <div class="mb-3 text-center">
-        <label class="form-label fw-bold">Imagen actual:</label><br>
-        <img src="http://localhost/api/uploads/productos/<?= htmlspecialchars($producto['imagen']) ?>" 
-             alt="Imagen del producto" 
-             width="180" 
-             class="img-thumbnail border">
-    </div>
-<?php endif; ?>
-
-<!-- Input para seleccionar nueva imagen -->
-<div class="mb-3">
-    <label class="form-label">Seleccionar nueva imagen (opcional)</label>
-    <input type="file" name="imagen" class="form-control">
-</div>
-
-<!-- Guardar nombre de la imagen actual por si no se selecciona una nueva -->
-<input type="hidden" name="imagen_actual" value="<?= htmlspecialchars($producto['imagen'] ?? '') ?>">
-
-
+                    <div class="mb-3">
+                        <label class="form-label">Imagen (opcional)</label>
+                        <input type="file" name="imagen" class="form-control">
+                    </div>
 
                     <button type="submit" class="btn btn-primary w-100">Actualizar Producto</button>
                 </form>

@@ -71,7 +71,7 @@
                                 <td><?= htmlspecialchars($p['id_Proveedor'] ?? '') ?></td>
                                 <td>
                                     <?php if (!empty($p['imagen'])): ?>
-                                        <img src="http://localhost/api/uploads/productos/<?= htmlspecialchars($p['imagen']) ?>" width="80" alt="Producto">
+                                        <img src="Inicio/Public/Imagenes_productos/<?= htmlspecialchars($p['imagen']) ?>" width="80" alt="Producto">
                                     <?php else: ?>
                                         <span class="text-muted">Sin imagen</span>
                                     <?php endif; ?>

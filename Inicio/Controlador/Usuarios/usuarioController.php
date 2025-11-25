@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . "/../../Modelo/Usuarios/clienteService.php";
 require_once __DIR__ . "/../../Modelo/Usuarios/empleadoService.php";
 require_once __DIR__ . "/../../Confi/Confi.php";
 

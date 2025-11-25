@@ -2,37 +2,17 @@
 class ProductoService {
     private $apiUrl;
 
-public function __construct() {
-    $this->apiUrl = "http://localhost:8080/productos";
-}
+    public function __construct() {
+        global $urlProducto;
+        $this->apiUrl = $urlProducto;
+    }
+
+
+
 
     private $jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1OTQyNDQwNiwiZXhwIjoxNzU5NTEwODA2fQ.Rz7_kcunB46k67BTNoVu_h-cp3jcconErejXMXV8Ync";
 
 
-public function obtenerProductoPorId($id) {
-    $headers = [
-        "Authorization: Bearer {$this->jwtToken}"
-    ];
-
-    $context = stream_context_create([
-        "http" => [
-            "method" => "GET",
-            "header" => implode("\r\n", $headers)
-        ]
-    ]);
-
-    $url = $this->apiUrl . "/" . $id;
-
-    $response = file_get_contents($url, false, $context);
-
-    if ($response === false) {
-        return ["success" => false, "error" => "No se pudo obtener el producto"];
-    }
-
-    $decoded = json_decode($response, true);
-
-    return ["success" => true, "data" => $decoded];
-}
 
     /* -------------------- GET -------------------- */
     public function obtenerProductos(){
@@ -45,126 +25,115 @@ public function obtenerProductoPorId($id) {
                 "header" => implode("\r\n", $headers)
             ]
         ]);
-    
-    $response = file_get_contents($this->apiUrl, false, $context);
-    $decoded = json_decode($response, true);
 
-$resultado = [];
+        $response = file_get_contents($this->apiUrl, false, $context);
+        $decoded = json_decode($response, true);
 
-if (is_array($decoded)) {
-    foreach ($decoded as $fila) {
+        $resultado = [];
 
-        $resultado[] = [
-            'id_Producto' => $fila['id_Producto'] ?? null,
-            'nombre'      => $fila['nombre'] ?? null,
-            'descripcion' => $fila['descripcion'] ?? null,
-            'precio'      => $fila['precio'] ?? null,
-            'stock'       => $fila['stock'] ?? null,
-            'id_Proveedor'=> $fila['id_Proveedor'] ?? null,
-            'imagen'      => $fila['imagen'] ?? null,
-            'estado'      => $fila['estado'] ?? null,
-        ];
-    }
-}
+        if (is_array($decoded)){
+            foreach ($decoded as $fila){
 
-return ["success" => true, "data" => $resultado];
+                $partes = array_map('trim', explode('|', $fila));
+                if (count($partes) >= 7) {
+                    $resultado[] = [
+                        'id_Producto' => $partes[0],
+                        'nombre'      => $partes[1],
+                        'descripcion' => $partes[2],
+                        'precio'      => $partes[3],
+                        'stock'       => $partes[4],
+                        'id_Proveedor'=> $partes[5],
+                        'imagen'      => $partes[6],
+                        'estado'      => $partes[7]
+                    ];
+                }
+            }
+        }
+        return ["success" => true, "data" => $resultado];
     }
 
     /* -------------------- POST -------------------- */
     public function agregarProducto($nombre, $descripcion, $precio, $stock, $id_Proveedor, $imagen = null, $estado = null) {
-
-    $postFields = [
-        "nombre"      => $nombre,
-        "descripcion" => $descripcion,
-        "precio"      => $precio,
-        "stock"       => $stock,
-        "idProveedor" => $id_Proveedor,
-        "estado"      => $estado
-    ];
-
-    // Imagen
-    if ($imagen && $imagen["error"] === UPLOAD_ERR_OK) {
-        $postFields["imagen"] = new CURLFile(
-            $imagen["tmp_name"],
-            $imagen["type"],
-            $imagen["name"]
-        );
-    }
-
-    $curl = curl_init($this->apiUrl . "/insertar");
-
-    curl_setopt_array($curl, [
-        CURLOPT_POST => true,
-        CURLOPT_POSTFIELDS => $postFields,
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_HTTPHEADER => [
-            "Authorization: Bearer {$this->jwtToken}"
-        ]
-    ]);
-
-    $respuesta = curl_exec($curl);
-    $error = curl_error($curl);
-    curl_close($curl);
-
-    if ($error) {
-        return [
-            "success" => false,
-            "error" => $error
+        $datosPost = [
+            "nombre"      => $nombre,
+            "descripcion" => $descripcion,
+            "precio"      => $precio,
+            "stock"       => $stock,
+            "idProveedor" => $id_Proveedor,
+            "imagen"      => $imagen,
+            "estado"      => $estado
         ];
+        $data_json = json_encode($datosPost);
+
+        $proceso = curl_init($this->apiUrl);
+        curl_setopt($proceso, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($proceso, CURLOPT_POSTFIELDS, $data_json);
+        curl_setopt($proceso, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($proceso, CURLOPT_HTTPHEADER, [
+            'Content-Type: application/json',
+            'Content-Length: ' . strlen($data_json),
+            "Authorization: Bearer {$this->jwtToken}"
+        ]);
+
+        $respuestaPet = curl_exec($proceso);
+        $http_code = curl_getinfo($proceso, CURLINFO_HTTP_CODE);
+
+        if (curl_errno($proceso)) {
+            $error = curl_error($proceso);
+            curl_close($proceso);
+            return ["success" => false, "error" => $error];
+        }
+        curl_close($proceso);
+
+        if ($http_code >= 200 && $http_code < 300) {
+            return ["success" => true, "response" => json_decode($respuestaPet, true)];
+        } else {
+            return ["success" => false, "error" => "HTTP $http_code", "response" => $respuestaPet];
+        }
     }
 
-    return [
-        "success" => true,
-        "data" => json_decode($respuesta, true)
-    ];
-}
-
-    
     /* -------------------- PUT -------------------- */
-    public function actualizarProductos($id, $nombre, $descripcion, $precio, $stock, $idProveedor, $imagen, $estado) {
-
-    $url = "http://localhost:8080/productos/actualizar/$id";
-
-    $postFields = [
-        "nombre" => $nombre,
-        "descripcion" => $descripcion,
-        "precio" => $precio,
-        "stock" => $stock,
-        "idProveedor" => $idProveedor,
-        "estado" => $estado
-    ];
-
-    if (!empty($_FILES["imagen"]["name"])) {
-        $postFields["imagen"] = new CURLFile(
-            $_FILES["imagen"]["tmp_name"],
-            $_FILES["imagen"]["type"],
-            $_FILES["imagen"]["name"]
-        );
-    }
-
-    $curl = curl_init();
-    curl_setopt_array($curl, [
-        CURLOPT_URL => $url,
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_CUSTOMREQUEST => "PUT",
-        CURLOPT_POSTFIELDS => $postFields
+    public function actualizarProductos($id_Producto, $nombre, $descripcion, $precio, $stock, $id_Proveedor, $imagen = null, $estado = null) {
+        $data_json = json_encode([
+            "id_Producto" => $id_Producto,
+            "nombre"      => $nombre,
+            "descripcion" => $descripcion,
+            "precio"      => $precio,
+            "stock"       => $stock,
+            "idProveedor" => $id_Proveedor,
+            "imagen"      => $imagen,
+            "estado"      => $estado
     ]);
 
-    $response = curl_exec($curl);
-    $error = curl_error($curl);
-    curl_close($curl);
+    $url = $this->apiUrl . "/" . $id_Producto;
 
-    if ($error) {
-        return ["success" => false, "error" => $error];
+    $proceso = curl_init($url);
+        curl_setopt($proceso, CURLOPT_CUSTOMREQUEST, "PUT");
+        curl_setopt($proceso, CURLOPT_POSTFIELDS, $data_json);
+        curl_setopt($proceso, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($proceso, CURLOPT_HTTPHEADER, [
+            'Content-Type: application/json',
+            'Content-Length: ' . strlen($data_json),
+            "Authorization: Bearer {$this->jwtToken}"
+        ]);
+
+    $respuestaPet = curl_exec($proceso);
+        $http_code = curl_getinfo($proceso, CURLINFO_HTTP_CODE);
+
+        if (curl_errno($proceso)) {
+            $error = curl_error($proceso);
+            curl_close($proceso);
+            return ["success" => false, "error" => $error];
+        }
+        curl_close($proceso);
+
+        if ($http_code === 200) {
+            return ["success" => true];
+        } else {
+            return ["success" => false, "error" => "HTTP $http_code - $respuestaPet"];
+        }
     }
-
-    $decoded = json_decode($response, true);
-
-    return [
-        "success" => true,
-        "data" => $decoded
-    ];
-}
+    
 
 }
 
