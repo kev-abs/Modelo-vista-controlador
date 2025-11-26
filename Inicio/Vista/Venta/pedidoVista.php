@@ -25,27 +25,6 @@
   </div>
 </header>
 
-<!-- MENÚ LATERAL -->
-<div class="offcanvas offcanvas-start bg-dark text-white" tabindex="-1" id="menuModulos">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title">Módulos</h5>
-    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
-  </div>
-  <div class="offcanvas-body">
-    <div class="accordion accordion-flush" id="accordionModulos">
-      <!-- Aquí van tus menús -->
-    </div>
-  </div>
-</div>
-
-<div class="d-flex justify-content-start ps-3 py-2 border-bottom">
-  <button class="d-flex justify-content-start ps-3 py-2 border-bottom navbar-toggler navbar-dark border-0 bg-dark p-2 rounded"
-          type="button" data-bs-toggle="offcanvas" data-bs-target="#menuModulos"
-          aria-controls="menuModulos">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-</div>
-
 <main class="container my-5">
   <h1 class="mb-4 text-center fw-bold">Gestión de Pedidos</h1>
 
