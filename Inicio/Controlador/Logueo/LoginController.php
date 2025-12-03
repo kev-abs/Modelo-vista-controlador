@@ -41,7 +41,7 @@ class LoginController {
                 }
             } elseif ($cargo === "administrador") {
                 // Administrador → contraseña texto plano
-                if ($contrasena === $empleado["Contrasena"]) {
+                if (password_verify($contrasena, $empleado["Contrasena"])) {
                     $_SESSION["id_empleado"] = $empleado["ID_Empleado"];
                     $_SESSION["nombre"] = $empleado["Nombre"];
                     $_SESSION["rol"] = "administrador";
