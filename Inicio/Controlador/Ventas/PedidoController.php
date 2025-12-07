@@ -15,6 +15,11 @@ class PedidoController {
         $this->carritoService = new CarritoService();
     }
 
+    public function index() {
+    $this->manejarPeticion();
+    }
+
+
     public function manejarPeticion() {
     $mensaje = "";
     $Pedidos = $this->pedidoService->obtenerPedidos();
@@ -62,7 +67,7 @@ class PedidoController {
                 }
             }
 
-            header("Location: index.php?Controller=ventas&msg=" . urlencode($mensaje));
+            header("Location: index.php?Controller=ventas&action=Pedido&msg=" . urlencode($mensaje));
             exit();
         }
     include __DIR__ . '/../../Vista/Venta/PedidoVista.php';

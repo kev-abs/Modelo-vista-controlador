@@ -6,7 +6,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
-<body class="bg-light">
+<body class="bg-light d-flex flex-column min-vh-100">
 
   <!-- ENCABEZADO -->
 <header class="bg-white sticky-top py-3 border-bottom shadow-sm">
@@ -28,7 +28,7 @@
       <a href="index.php?Controller=productos&action=verProductos" class="nav-link text-dark">Productos</a>
       <a href="./servicios.php" class="nav-link text-dark">Servicios</a>
       <!-- CARRITO -->
-      <a href="#" class="btn btn-outline-dark border-0">
+      <a href="index.php?Controller=carrito&action=mostrar" class="btn btn-outline-dark border-0">
         <i class="bi bi-cart-fill"></i>
       </a>
 
@@ -41,7 +41,7 @@
 </header>
 
 <div class="container mt-5">
-    <h2 class="mb-4"><i class="bi bi-cart"></i> Tu Carrito</h2>
+    <h2 class="mb-4"><i class="bi bi-cart"></i>Tu Carrito</h2>
 
     <?php if (!empty($carrito)): ?>
         <div class="row g-4">
@@ -94,6 +94,17 @@
         </div>
     <?php endif; ?>
 </div>
+
+<footer class="bg-dark text-white text-center py-4 mt-auto">
+        <div class="container">
+            <div class="mb-3">
+                <a href="#" class="text-white me-3">Términos</a>
+                <a href="#" class="text-white me-3">Privacidad</a>
+                <a href="#" class="text-white">Ayuda</a>
+            </div>
+            <p class="mb-0">&copy; 2025 Tienda K-Shop - Todos los derechos reservados</p>
+        </div>
+</footer>
 
 </body>
 </html>

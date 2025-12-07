@@ -27,41 +27,6 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'administrador') {
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
-  <style>
-    html, body {
-      height: 100%;
-      background-color: #ffffff;
-      color: #000000;
-    }
-    body {
-      display: flex;
-      flex-direction: column;
-    }
-    main {
-      flex: 1;
-    }
-    .nav-link {
-      color: #000000 !important;
-      transition: background-color 0.3s, color 0.3s;
-    }
-    .nav-link:hover {
-      color: #ffffff !important;
-      background-color: #0d6efd;
-      border-radius: 0.375rem;
-    }
-    .nav-link.text-warning:hover {
-      background-color: #dc3545;
-    }
-    .logo-img {
-      height: 40px;
-      margin-right: 10px;
-    }
-    .carousel img {
-      object-fit: cover;
-      height: 500px;
-      filter: brightness(85%);
-    }
-  </style>
 </head>
 <body>
 
@@ -104,7 +69,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'administrador') {
         <h2 class="accordion-header">
           <button class="accordion-button collapsed bg-dark text-white" 
                   type="button" data-bs-toggle="collapse" data-bs-target="#modPerfil">
-            👤 Perfil
+            Perfil
           </button>
         </h2>
         <div id="modPerfil" class="accordion-collapse collapse" data-bs-parent="#accordionModulos">
@@ -121,7 +86,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'administrador') {
         <h2 class="accordion-header">
           <button class="accordion-button collapsed bg-dark text-white" 
                   type="button" data-bs-toggle="collapse" data-bs-target="#modUsuarios">
-            👥 Usuarios
+            Usuarios
           </button>
         </h2>
         <div id="modUsuarios" class="accordion-collapse collapse" data-bs-parent="#accordionModulos">
@@ -162,7 +127,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'administrador') {
         <h2 class="accordion-header">
           <button class="accordion-button collapsed bg-dark text-white" 
                   type="button" data-bs-toggle="collapse" data-bs-target="#modInventario">
-            📦 Inventario
+            Inventario
           </button>
         </h2>
         <div id="modInventario" class="accordion-collapse collapse" data-bs-parent="#accordionModulos">
@@ -183,7 +148,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'administrador') {
         <h2 class="accordion-header">
           <button class="accordion-button collapsed bg-dark text-white" 
                   type="button" data-bs-toggle="collapse" data-bs-target="#modVentas">
-            🛒 Ventas
+            Ventas
           </button>
         </h2>
         <div id="modVentas" class="accordion-collapse collapse" data-bs-parent="#accordionModulos">
@@ -201,7 +166,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'administrador') {
         <h2 class="accordion-header">
           <button class="accordion-button collapsed bg-dark text-white" 
                   type="button" data-bs-toggle="collapse" data-bs-target="#modReportes">
-            📊 Reportes
+            Reportes
           </button>
         </h2>
         <div id="modReportes" class="accordion-collapse collapse" data-bs-parent="#accordionModulos">
@@ -295,7 +260,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'administrador') {
 
       <!-- Nota motivacional -->
       <div class="alert alert-light mt-5 shadow-sm rounded-4 border-start border-5 border-success">
-        <h4 class="alert-heading fw-bold">💡 ¡Tu rol importa!</h4>
+        <h4 class="alert-heading fw-bold">¡Tu rol importa!</h4>
         <p class="mb-0 text-secondary">Como administrador, eres el motor que impulsa el crecimiento de K-SHOP. Cada decisión cuenta. ¡Haz que cada clic construya una mejor tienda!</p>
       </div>
     </div>

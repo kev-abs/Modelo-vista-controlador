@@ -3,7 +3,7 @@ class CuponService {
     private $apiUrl;
 
     public function __construct() {
-        global $urlCupon; // en Confi.php defines la URL de tu API REST para cupon
+        global $urlCupon;
         $this->apiUrl = $urlCupon;
     }
 
@@ -23,14 +23,12 @@ class CuponService {
 
         $resultado = [];
         foreach ($decoded as $fila) {
-            // Separar cada string en partes
-            $partes = explode(" ", $fila);
 
             $resultado[] = [
-                "id_Cupon" => $partes[0] ?? null,
-                "codigo" => $partes[1] ?? "",
-                "descuento" => $partes[2] ?? 0,
-                "fecha_expiracion" => $partes[3] ?? ""
+                "id_Cupon" => $fila["id_Cupon"] ?? null,
+                "codigo"  => $fila["codigo"] ?? null,
+                "descuento"  => $fila["descuento"] ?? null,
+                "fecha_expiracion"  => $fila["fecha_Expiracion"] ?? null
             ];
         }
 
@@ -41,11 +39,10 @@ class CuponService {
     // Crear cupón
     public function nuevoCupon($codigo, $descuento, $fechaExpiracion) {
         $nuevoCupon = [
-            "codigo" => $codigo, 
+            "codigo" => $codigo,
             "descuento" => (float)$descuento,
-            "fechaExpiracion" => $fechaExpiracion
+            "fecha_Expiracion" => $fechaExpiracion
         ];
-
 
         $data_json = json_encode($nuevoCupon);
 
@@ -71,11 +68,9 @@ class CuponService {
     // Actualizar cupón
     public function actualizarCupon($id, $codigo, $descuento, $fechaExpiracion) {
         $data_json = json_encode([
-            $nuevoCupon = [
-                "codigo" => $codigo, 
-                "descuento" => (float) $descuento,
-                "fechaExpiracion" => $fechaExpiracion
-            ]
+            "codigo" => $codigo,
+            "descuento" => (float)$descuento,
+            "fecha_Expiracion" => $fechaExpiracion
         ]); 
 
         $ch = curl_init($this->apiUrl . "/" . $id);
@@ -93,9 +88,10 @@ class CuponService {
 
         return [
             "success" => ($http_code >= 200 && $http_code < 300),
-            "mensaje" => "HTTP $http_code. Respuesta: " . $response . " " . ($error ?? "")
+            "mensaje" => "HTTP $http_code. Respuesta: " . $response
         ];
     }
+
 
     // Eliminar cupón
     public function eliminarCupon($id) {

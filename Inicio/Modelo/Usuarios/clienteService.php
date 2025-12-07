@@ -7,18 +7,12 @@ class ClienteService {
         $this->apiUrl = $urlCliente;
     }
 
-    private $jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1OTM3MzE0NiwiZXhwIjoxNzU5NDU5NTQ2fQ.zYpTFWgsukxyEagLCKPYtMMRMpWuyOQLBgAizM88670";
-
-
     public function obtenerClientes() {
-        $headers =[
-            "Authorization: Bearer {$this->jwtToken}"
-        ];
 
         $context = stream_context_create([
             "http" => [
                 "method" => "GET",
-                "header" => implode("\r\n", $headers)
+                "header" => "Content-Type: application/json"
             ]
         ]);
         $respuesta = file_get_contents($this->apiUrl, false, $context);
@@ -30,31 +24,49 @@ class ClienteService {
 
         $clientes = [];
         foreach ($lineas as $linea) {
-            $datos = array_map('trim', explode("|", $linea));
-            if (count($datos) >= 8) {
-                $clientes[] = [
-                    "ID_Cliente"     => $datos[0],
-                    "Nombre"         => $datos[1],
-                    "Correo"         => $datos[2],
-                    "Contrasena"     => $datos[3],
-                    "Fecha_Registro" => $datos[4],
-                    "Estado"         => $datos[5],
-                    "Documento"      => $datos[6],
-                    "Telefono"       => $datos[7],
+            $clientes[] = [
+                    "ID_Cliente"     => $linea["idCliente"]     ?? null,
+                    "Nombre"         => $linea["nombre"]        ?? null,
+                    "Correo"         => $linea["correo"]        ?? null,
+                    "Contrasena"     => $linea["contrasena"]    ?? null,
+                    "Fecha_Registro" => $linea["fechaRegistro"] ?? null,
+                    "Estado"         => $linea["estado"]        ?? null,
+                    "Documento"      => $linea["documento"]     ?? null,
+                    "Telefono"       => $linea["telefono"]      ?? null
                 ];
             }
+            return $clientes;
         }
-        return $clientes;
-    }
+        
 
 
     public function agregarCliente($nombre, $correo, $contrasena, $documento, $telefono, $estado) {
-        $datos = compact("nombre","correo","contrasena","documento","telefono","estado");
+
+        $hash = password_hash($contrasena, PASSWORD_BCRYPT);
+
+        $datos = [
+            "nombre"     => $nombre,
+            "correo"     => $correo,
+            "contrasena" => $hash,
+            "documento"  => $documento,
+            "telefono"   => $telefono,
+            "estado"     => $estado
+        ];
         return $this->enviarPeticion("POST", $this->apiUrl, $datos);
     }
 
     public function actualizarCliente($id, $nombre, $correo, $contrasena, $telefono, $documento, $estado) {
-        $datos = compact("nombre","correo","contrasena","telefono","documento","estado");
+
+        $hash = password_hash($contrasena, PASSWORD_BCRYPT);
+
+        $datos = [
+            "nombre"     => $nombre,
+            "correo"     => $correo,
+            "contrasena" => $hash,
+            "documento"  => $documento,
+            "telefono"   => $telefono,
+            "estado"     => $estado
+        ];
         return $this->enviarPeticion("PUT", $this->apiUrl . "/$id", $datos);
     }
 
@@ -69,7 +81,7 @@ class ClienteService {
 
         $headers = [
             "Content-Type: application/json",
-            "Authorization: Bearer {$this->jwtToken}"
+            "header" => "Content-Type: application/json"
         ];
 
         if ($datos) {
